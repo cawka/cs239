@@ -10,7 +10,6 @@
 \title{CS239 Project Proposal: Friends Detector}
 
 \author{Alexander~Afanasyev, Chuck Fleming, and Karthikeyan Natarajan \\
-% \small \{alexander.afanasyev, tilleyns\}@ucla.edu \\ \\
 \small Computer Science Department \\
 \small University of California, Los Angeles 
 }
@@ -21,7 +20,7 @@
 
 \section{Introduction}
 
-In our project we are going to implement and evaluate the application that detects the presence of human faces in a given image or video stream and identifies the faces based on a previously collected face database. On the high level, our system will consist of five basic components, three of which can be implemented locally or on a remote server (Figure~\ref{fig:basic blocks}): image importer, face database, face detection module, face identifier module, and visualizer. 
+In our project we are going to implement and evaluate the performance of the application that detects the presence of human faces in a given image or video stream and identifies the faces based on a previously collected face database. On the high level, our system will consist of five basic components, three of which can be implemented locally or on a remote server (Figure~\ref{fig:basic blocks}): image importer, face database, face detection module, face identifier module, and visualizer. 
 
 \begin{figure*}[htbp]
 	\centering
@@ -30,9 +29,9 @@ In our project we are going to implement and evaluate the application that detec
 	\label{fig:basic blocks}
 \end{figure*}
 
-To provide high fidelity results the image processing components of our system (the face detection and identification modules) require significant amounts of CPU power and memory.  At the same time, a lower fidelity results from the same components can be obtained using coarser granularity by using fewer filters, processing only every 20th image, scaling image before processing, etc.; or using simpler algorithms, for example Eigenfaces algorithm \cite{Turk:1991:Eigenfaces-for-recognition} instead of more complicated hybrid algorithms \cite{Zhao:2003:Face-recognition:}. 
+To provide high fidelity results the image processing components of our system (the face detection and identification modules) require significant CPU power and memory.  At the same time, a lower fidelity results from the same components can be obtained using coarser granularity by using fewer filters, processing only every 20th image, scaling image before processing, etc.; or using simpler algorithms, for example Eigenfaces algorithm \cite{Turk:1991:Eigenfaces-for-recognition} instead of more complicated hybrid algorithms \cite{Zhao:2003:Face-recognition:}. 
 
-In a mobile environment the dynamic nature of the available resources requires a similarly dynamic view for the class of applications that can provide variable fidelity answers. That is, an application should appropriately react when CPU and memory are constrained by the user or a low battery, network conditions change, etc. In other words, an application should maximize the fidelity of the answer given the resources currently available. In our case with the Friends Detector application, we will try to evaluate different combinations of local and remote face detection and recognition modules, investigate how well faces can be recognized, and what the network, CPU, memory, and battery life requirements are in each particular case.
+In a mobile environment the dynamic nature of the available resources requires a similarly dynamic view for the class of applications that can provide variable fidelity answers. That is, an application should appropriately react when CPU and memory are constrained by the user or a low battery, network conditions change, etc. In other words, an application should maximize the fidelity of the answer given the resources currently available. In our case with the Friends Detector application, we will try to evaluate different combinations of local and remote face detection and recognition modules, investigate how well faces can be recognized, and what the network, CPU, memory, and battery life requirements are in each case.
 
 \section{Expected application workflow}
 
@@ -54,9 +53,9 @@ Typical application workflow that we are going to implement:
 
 \section{Project timeline}
 
-Our project will be divided in two implementation and one evaluation stage. By the end of the first stage we expect to have a working application where we select static images on the mobile phone, process them remotely using simple algorithms, obtain processing result from the remote server, and visualize results on the phone. During the second phase we are going to implement light-weight versions of the image processing components and extend the number and quality of algorithms for remote processing.
+Our project will be divided into two implementation and one evaluation stage. By the end of the first stage we expect to have a working application where we select static images on the mobile phone, process them remotely using simple algorithms, obtain results from the remote server, and display results on the phone. During the second phase we will implement light-weight versions of the image processing components and extend the number and quality of algorithms for remote processing.
 
-There several optional components (Facebook plugin, PicasaWeb, and Android contact list photos support in face database) that we may implement if we have enough time.
+There are several optional components (Facebook plugin, PicasaWeb plugin, and Android contact list photos for the face database) that we may implement if we have enough time.
 
 \subsection{First stage}
 
@@ -122,6 +121,7 @@ Chuck:
 	\item Remote face detection
 	\item Remote face database
 	\item Remote face recognition (simple algorithm)
+	\item Remote RPC interfaces
 \end{itemize}
 
 Karthik:
@@ -150,12 +150,12 @@ Karthik:
 \begin{itemize}
 	\item Local image stream importer
 	\item Local image stream preprocessor
+	\item Facebook plugin (if time permits)
 \end{itemize}
 
 \subsection{Evaluation}
 
-Every member of our team is going to participate in application evaluation.
-
+Every member of our team will participate in application evaluation.
 
 \bibliographystyle{IEEEtran}
 \bibliography{papers}
