@@ -8,8 +8,8 @@
 	<ImageView 
 		android:id="@+id/row_image"
 		android:src="@drawable/row"
-		android:layout_width="wrap_content"
-        android:layout_height="fill_parent"
+		android:layout_width="49dip"
+        android:layout_height="64dip"
         android:layout_marginRight="6dip" />
 	
 	<LinearLayout

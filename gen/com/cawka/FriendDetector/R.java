@@ -23,14 +23,16 @@ public final class R {
     public static final class id {
         public static final int LinearLayout01=0x7f060000;
         public static final int TextView01=0x7f060001;
-        public static final int lower_linear=0x7f060005;
+        public static final int frame_layout=0x7f060004;
+        public static final int lower_linear=0x7f060007;
         public static final int main_view=0x7f060002;
-        public static final int names_list=0x7f060006;
-        public static final int picture=0x7f060004;
-        public static final int row_image=0x7f060008;
-        public static final int row_layout=0x7f060007;
-        public static final int row_text=0x7f06000a;
-        public static final int row_text_linear=0x7f060009;
+        public static final int names_list=0x7f060008;
+        public static final int picture=0x7f060005;
+        public static final int progress_bar_image=0x7f060006;
+        public static final int row_image=0x7f06000a;
+        public static final int row_layout=0x7f060009;
+        public static final int row_text=0x7f06000c;
+        public static final int row_text_linear=0x7f06000b;
         public static final int upper_linear=0x7f060003;
     }
     public static final class layout {
@@ -40,5 +42,6 @@ public final class R {
     }
     public static final class string {
         public static final int app_name=0x7f040000;
+        public static final int unknown_person=0x7f040001;
     }
 }

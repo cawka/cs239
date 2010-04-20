@@ -1,5 +1,8 @@
 package com.cawka.FriendDetector;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -7,12 +10,13 @@ import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
-import android.widget.Toast;
 
 public class ImageWithFaces extends View 
 {
 	private Bitmap _bmp=null;
+	private Bitmap _drawableBitmap=null;
 	private Paint  _paint;
 	private ListOfPeople _names_list;
 	
@@ -22,12 +26,18 @@ public class ImageWithFaces extends View
 	{
 		super( context, attrs );
 		
+//		int resource=attrs.getAttributeResourceValue("android", "src", android.R.drawable.btn_star );
+//		this.setBackgroundResource( resource );
+		
 		init();
 	}
 
 	public ImageWithFaces( Context context, AttributeSet attrs, int defStyle )
 	{
 		super( context, attrs, defStyle );
+		
+		int resource=attrs.getAttributeResourceValue("android", "src", android.R.drawable.btn_star );
+		this.setBackgroundResource( resource );
 
 		init();
 	}
@@ -56,11 +66,20 @@ public class ImageWithFaces extends View
 		_names_list=names_list;
 	}
 	
+	private float _ratio=1.0f;
+	private Rect  _srcRect;
+	private Rect  _dstRect;
+	private int   _offsetX;
+	private int   _offsetY;
+	
 	public Bitmap getBitmap( )
 	{
 		Bitmap bmp;
 		bmp=_bmp;
 		_bmp=null;
+		if( _drawableBitmap!=null ) _drawableBitmap.recycle( );
+		_drawableBitmap=null;
+		
 		return bmp;
 	}
 	
@@ -74,8 +93,26 @@ public class ImageWithFaces extends View
 	public void setBitmap( Bitmap bmp )
 	{
 		if( _bmp!=null ) _bmp.recycle( );
+		if( _drawableBitmap!=null ) _drawableBitmap.recycle( );
 		_bmp=bmp;
-		invalidate( ); //or postInvalidate. we'll see
+		_drawableBitmap=null;
+		
+		invalidate( );
+	}
+	
+	private void makeDrawableBitmap( )
+	{
+		Float [] ratio=new Float[1];
+		ratio[0]=1.0f;
+		_drawableBitmap=resizeBitmap( _bmp, getWidth(), getHeight(), ratio );
+		_ratio=ratio[0];
+		
+		_srcRect=new Rect( 0, 0, _drawableBitmap.getWidth(),    _drawableBitmap.getHeight() );
+		_dstRect=new Rect( _srcRect );
+		
+		_offsetX=(getWidth()-_drawableBitmap.getWidth())/2;
+		_offsetY=(getHeight()-_drawableBitmap.getHeight())/2;
+		_dstRect.offset( _offsetX, _offsetY );
 	}
 	
     public static Bitmap resizeBitmap( Bitmap input, int maxWidth, int maxHeight, Float[] ratio )
@@ -110,34 +147,20 @@ public class ImageWithFaces extends View
     	ratio[0]=1.0f;
     	return resizeBitmap( input, maxWidth, maxHeight, ratio );
     }
-
-    public static Bitmap resizeBitmap( Bitmap input, Rect rect, Float [] ratio )
-    {
-    	return resizeBitmap( input, rect.width(), rect.height(), ratio ); 
-    }
-	
-	public void draw( Canvas canvas )
+	    
+	protected void onDraw( Canvas canvas )
 	{
 		if( _bmp==null ) return;
 		
-		Float [] ratio=new Float[1];
-		ratio[0]=1.0f;
-		Bitmap out=resizeBitmap( _bmp, canvas.getClipBounds(), ratio );
+		if( _drawableBitmap==null ) makeDrawableBitmap( );
 		
-		Rect src=new Rect( 0, 0, out.getWidth(),    out.getHeight() );
-		Rect dst=new Rect( src );
-		
-		int offsetX=(canvas.getClipBounds().width()-out.getWidth())/2;
-		int offsetY=(canvas.getClipBounds().height()-out.getHeight())/2;
-		dst.offset( offsetX, offsetY );
-
-		canvas.drawBitmap( out, src, dst, null );
+		canvas.drawBitmap( _drawableBitmap, _srcRect, _dstRect, null );
 		
 		for( int i=0; i<_names_list.getAdapter().getCount(); i++ )
 		{
 			Person p=(Person)_names_list.getAdapter().getItem( i );
 			
-			p.draw( canvas, ratio[0], offsetX, offsetY ); // for optimization purposes
+			p.draw( canvas, _ratio, _offsetX, _offsetY ); // for optimization purposes
 		}
 	}
 }

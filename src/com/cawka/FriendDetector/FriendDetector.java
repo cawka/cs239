@@ -5,20 +5,18 @@ import com.cawka.FriendDetector.R;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.Matrix;
-import android.graphics.PointF;
-import android.hardware.Camera;
-import android.media.FaceDetector;
 import android.os.Bundle;
 import android.os.Handler;
 import android.provider.MediaStore.Images;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ListAdapter;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 public class FriendDetector extends Activity
@@ -39,8 +37,12 @@ public class FriendDetector extends Activity
     
     private FaceDetection _faceDetection;
     
-    private ProgressDialog _progress=null;
-
+//    private ProgressDialog _progress=null;
+    private ProgressBar    _progress2;
+    private Object _progress_lock=new Object();
+    
+    ////////////////////////////////////////////////////////////////////
+    
 	public void onCreate(Bundle savedInstanceState) 
     {
         super.onCreate( savedInstanceState );
@@ -60,9 +62,7 @@ public class FriendDetector extends Activity
 				}
         	} );
     }
-	
-	static int stuff=1;
-	
+		
 	protected void onStart( )
 	{
 		super.onStart( );
@@ -70,7 +70,7 @@ public class FriendDetector extends Activity
         SavedState state=(SavedState)getLastNonConfigurationInstance( );
         if( state!=null )
         {
-        	if( state._bitmap!=null && !state._bitmap.isRecycled())
+        	if( state._bitmap!=null && !state._bitmap.isRecycled() )
         	{
     			_picture.setBitmap( state._bitmap );
             	_names_list.setAdapter( state._adapter );
@@ -79,10 +79,6 @@ public class FriendDetector extends Activity
         	state=null;
         	System.gc( );
         }
-        
-		stuff++;
-		//		android.util.Log.
-//		Log.i( "info", "WHER ARE YOU???");
 	}
 	
 	private class SavedState
@@ -100,6 +96,7 @@ public class FriendDetector extends Activity
 	protected void onDestroy()
 	{
 		super.onDestroy( );
+
 		try
 		{
 			if( _thread!=null ) _thread.join( );
@@ -116,32 +113,27 @@ public class FriendDetector extends Activity
 		return new SavedState( );
 	}
 	
+	protected void onResume( )
+	{
+		super.onResume( );
+	}
+	
 	protected void onPause( )
 	{
-		if( _progress!=null ) { _progress.dismiss( ); _progress=null; }
+		synchronized( _progress_lock ) 
+		{
+			_progress2=null;
+		}
+		
 		super.onPause( );
 	}
 	
-//	public void onSaveInstanceState( Bundle outState ) 
-//    {
-////		_stop=true;
-////		try { if( _thread!=null ) _thread.join( ); } catch (InterruptedException e) { } //have to wait till thread finished
-//		
-//        super.onSaveInstanceState( outState ); 
-//    }
-//
-//	public void onRestoreInstanceState( Bundle inState )
-//	{
-//		
-//	}
-
-//	public void onConfigurationChanged( Configuration configuration )
-//	{
-//	
-//	}
+	///////////////////////////////////////////////////////////////////////
 	
     public boolean onCreateOptionsMenu( Menu menu )
     {
+    	if( _thread!=null ) return false;
+    	
         menu.add(0, MENU_SELECT, 0, "Select")
         	.setIcon( android.R.drawable.ic_menu_search );
         
@@ -156,6 +148,8 @@ public class FriendDetector extends Activity
 
     public boolean onOptionsItemSelected( MenuItem item )
     {
+    	if( _thread!=null ) return false;
+    	
     	switch( item.getItemId() ) 
     	{
 	        case MENU_SELECT:
@@ -183,11 +177,22 @@ public class FriendDetector extends Activity
     
     private void processBitmap( Bitmap bitmap )
     {
-    	_picture.setBitmap( bitmap );
+    	if( _thread!=null ) return;
     	
-		_progress=ProgressDialog.show(this, "Working...", "Detecting faces", true, false);
+    	_picture.setBitmap( bitmap );
+
+    	if( _progress2==null )
+    	{
+    		_progress2 =(ProgressBar) findViewById( R.id.progress_bar_image );
+    	}
+    	_progress2.setVisibility( View.VISIBLE );
+    	
+//    	synchronized( _progress_lock )
+//    	{
+//    		_progress=ProgressDialog.show(this, "Working...", "Detecting faces", true, false);
+//    	}
 		
-		_faceDetection=new FaceDetection( _handler, bitmap );
+		_faceDetection=new FaceDetection( bitmap );
 		_thread=new Thread( _faceDetection );
 		_thread.start( );   	
     }
@@ -213,6 +218,7 @@ public class FriendDetector extends Activity
     				{
     					
     					bmp=Images.Media.getBitmap( this.getContentResolver(), data.getData() );
+//    					Log.v( "test", data.getDataString() );
     				}
     				
 				} 
@@ -223,7 +229,6 @@ public class FriendDetector extends Activity
 				}
 				
 				Bitmap resized_bmp=ImageWithFaces.resizeBitmap( bmp, MAX_WIDTH, MAX_HEIGHT );
-    			Toast.makeText( this, Integer.toString(resized_bmp.getWidth()), Toast.LENGTH_LONG ).show( );
 				
 //				Bitmap resized_bmp=Bitmap.createBitmap( bmp ); //resizing doesn't work :(
 				bmp=null;
@@ -237,6 +242,8 @@ public class FriendDetector extends Activity
     
     private void selectImage( )
     {
+    	if( _thread!=null ) return;
+    	
     	Intent i=new Intent( Intent.ACTION_PICK );
     	i.setType( "image/*" );
 
@@ -244,46 +251,38 @@ public class FriendDetector extends Activity
     }
     
     
-    boolean _stop=false;
-    
     private class FaceDetection implements Runnable
     {
     	private Bitmap _bitmap;
-        private FaceDetector   _detector;
-        private Handler __handler;
     	
-    	public FaceDetection( Handler handler, Bitmap bitmap )
+    	public FaceDetection( Bitmap bitmap )
     	{
     		_bitmap=bitmap;
-    		__handler=handler;
     	}
-    	
-    	public void setHandler( Handler handler ) { _handler=handler; }
     	
 		public void run( ) 
 		{
-			_detector=new FaceDetector( _bitmap.getWidth(), _bitmap.getHeight(), 5 );
+			Person.resetColors( );
+			final FaceDetector detector=new FaceDetector( _bitmap );
 			
-			final FaceDetector.Face faces[]=new FaceDetector.Face[ 5 ];
-			final int count=_detector.findFaces( _bitmap, faces );
-			
-			if( _progress!=null ) { _progress.dismiss( ); _progress=null; }
-
-			__handler.post( new Runnable()
+			_handler.post( new Runnable()
 				{
 					public void run() 
 					{
-						for( int i=0; i<count; i++ )
+						synchronized( _progress_lock ) 
+//						 to handle the case when onPause is called almost simultaneously
+//						 with thread termination
 						{
-							PointF midpoint=new PointF();
-							faces[i].getMidPoint( midpoint );
-
-							Person person=new Person( "Unknown person #"+Integer.toString(i+1) );
-							person.setFace( midpoint, faces[i].eyesDistance(), _bitmap );
-							
-							_names_list.add( person ); //add info in ListView		
-							_thread=null;
+							if( _progress2!=null ) {  _progress2.setVisibility( View.INVISIBLE ); }
 						}
+						
+						for( Person person : detector.getFaces() )
+						{
+							person.setName( FriendDetector.this.getResources().getString(R.string.unknown_person) );
+							_names_list.add( person );
+						}
+						
+						_thread=null;
 					} 
 				} );
 		}
