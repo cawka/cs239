@@ -1,0 +1,38 @@
+<LinearLayout 
+	android:id="@+id/main_view" 
+	android:orientation="horizontal"
+	android:layout_width="fill_parent" 
+	android:layout_height="fill_parent" 
+	android:layout_weight="0"
+	xmlns:android="http://schemas.android.com/apk/res/android">
+	
+	<LinearLayout
+		android:id="@+id/upper_linear"
+		android:gravity="center_vertical|center_horizontal"
+		android:layout_width="fill_parent"
+		android:layout_height="fill_parent"
+		android:layout_weight="1"
+		>
+		
+		<com.cawka.FriendDetector.ImageWithFaces 
+			android:id="@+id/picture"
+			android:layout_width="wrap_content" 
+			android:layout_height="wrap_content" />
+			
+	</LinearLayout>
+
+	<LinearLayout
+		android:id="@+id/lower_linear"
+		android:layout_width="fill_parent"
+		android:layout_height="fill_parent"
+		android:layout_weight="1"
+		>
+		
+		<com.cawka.FriendDetector.ListOfPeople 
+			android:id="@+id/names_list" 
+			android:layout_width="fill_parent" 
+			android:layout_height="fill_parent"
+			android:choiceMode="singleChoice" />
+		
+	</LinearLayout>
+</LinearLayout>
