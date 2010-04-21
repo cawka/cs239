@@ -1,11 +1,17 @@
 package com.cawka.FriendDetector;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.util.AttributeSet;
+import android.util.Log;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ContextMenu.ContextMenuInfo;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
@@ -14,6 +20,7 @@ import android.widget.Toast;
 
 public class ListOfPeople extends ListView 
 {
+	protected static final int CONTEXTMENU_DELETEITEM = 0;
 	private PeopleAdapter _adapter;
 	private ImageWithFaces _picture;
 	
@@ -44,8 +51,71 @@ public class ListOfPeople extends ListView
 	
 	private void init( )
 	{
-		_adapter=new PeopleAdapter( this.getContext(), R.layout.row );
+		_adapter=new PeopleAdapter( getContext(), R.layout.row );
 		setAdapter( _adapter );
+		
+////		setLongClickable( true );
+//		setOnCreateContextMenuListener( new OnCreateContextMenuListener()
+//			{
+//				public void onCreateContextMenu( ContextMenu menu, View v,
+//						ContextMenuInfo menuInfo ) 
+//				{
+//					super.onCreateContextMenu( menu, v, menuInfo );
+//					  menu.add(0, EDIT_ID, 0, "Edit");
+//					  menu.add(0, DELETE_ID, 0,  "Delete");
+//
+////					Toast.makeText( getContext(), "Stuff2", Toast.LENGTH_SHORT ).show( );
+//					menu.setHeaderTitle("ContextMenu");
+//	                menu.add(0, CONTEXTMENU_DELETEITEM,0, "Delete this favorite!"); 
+//				}
+//				
+//			} );
+//		
+//		this.setOnLongClickListener( new OnLongClickListener()
+//			{
+//				public boolean onLongClick( View v ) 
+//				{
+//					Toast.makeText( getContext(), "Stuff", Toast.LENGTH_SHORT ).show( );
+//					return false;
+//				}
+//			} );
+	}
+	
+	public void onCreateContextMenu( final int position )
+	{
+		AlertDialog.Builder alert = new AlertDialog.Builder( getContext() );  
+		  
+		alert.setTitle( R.string.enter_name_of_the_person );  
+		  
+		final EditText input = new EditText( getContext() );  
+		alert.setView( input );
+		
+		if( _adapter.getItem(position).hasName() )
+			input.setText( _adapter.getItem(position).getName() );
+
+		alert.setPositiveButton( "Save", new DialogInterface.OnClickListener() 
+			{   
+				public void onClick( DialogInterface dialog, int whichButton )
+				{  
+					String value=input.getText().toString();
+					
+					if( !value.equals("") ) 
+					{
+						_adapter.getItem( position ).setName( value );
+						_adapter.notifyDataSetChanged( );
+					}
+				}  
+			} );  
+		  
+		alert.setNegativeButton( "Cancel", new DialogInterface.OnClickListener() 
+			{  
+				public void onClick( DialogInterface dialog, int whichButton ) 
+				{
+					// just do nothing  
+				}  
+			} );  
+		  
+		alert.show();		
 	}
 	
 	public void clear( )
@@ -71,6 +141,8 @@ public class ListOfPeople extends ListView
 		super.setAdapter( adapter );
 		_adapter=(PeopleAdapter)adapter;
 	}
+	
+	
 	
 	//////////////////////////////////////////////////////////////////////
 	//////////////////////////////////////////////////////////////////////

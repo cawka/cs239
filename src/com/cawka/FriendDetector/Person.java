@@ -9,6 +9,7 @@ import android.graphics.Rect;
 
 public class Person 
 {
+	private boolean _hasName=false;
 	private String _name;
 	private Bitmap _face;
 	private Rect   _faceRect;
@@ -61,8 +62,11 @@ public class Person
 	}
 	
 	
-	public void   setName( String name ) { _name=name; }
+	public void   setDefaultName( String name ) { _name=name; }
+	public void   setName( String name ) { _name=name; _hasName=true; }
 	public String getName( )             { return _name; }
+	
+	public boolean hasName( ) { return _hasName; }
 	
 	public void   setFace( Bitmap face ) { _face=face; }
 	public Bitmap getFace( ) //there should be something compressed somewhere

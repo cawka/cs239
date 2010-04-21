@@ -42,6 +42,7 @@ public final class R {
     }
     public static final class string {
         public static final int app_name=0x7f040000;
+        public static final int enter_name_of_the_person=0x7f040002;
         public static final int unknown_person=0x7f040001;
     }
 }

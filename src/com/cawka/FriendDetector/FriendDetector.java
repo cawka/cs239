@@ -11,13 +11,16 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.provider.MediaStore.Images;
 import android.util.Log;
+import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ContextMenu.ContextMenuInfo;
 import android.view.View.OnClickListener;
 import android.widget.ListAdapter;
 import android.widget.ProgressBar;
 import android.widget.Toast;
+import android.widget.AdapterView.AdapterContextMenuInfo;
 
 public class FriendDetector extends Activity
 {
@@ -51,6 +54,8 @@ public class FriendDetector extends Activity
         _picture=   (ImageWithFaces)findViewById( R.id.picture );
         _names_list=(ListOfPeople)  findViewById( R.id.names_list );
         
+        registerForContextMenu( _names_list );
+        
         _names_list.setImageWithFaces( _picture );
         _picture   .setListOfPeople( _names_list );
         
@@ -62,6 +67,15 @@ public class FriendDetector extends Activity
 				}
         	} );
     }
+	
+	public void onCreateContextMenu( ContextMenu menu, View v,
+            ContextMenuInfo menuInfo )
+	{
+//		super.onCreateContextMenu(menu, v, menuInfo);
+//		  menu.add(0, 0, 0, "Edit");
+//		  menu.add(0, 1, 0,  "Delete");
+		if( v==_names_list ) _names_list.onCreateContextMenu( ((AdapterContextMenuInfo)menuInfo).position );
+	}
 		
 	protected void onStart( )
 	{
@@ -278,7 +292,7 @@ public class FriendDetector extends Activity
 						
 						for( Person person : detector.getFaces() )
 						{
-							person.setName( FriendDetector.this.getResources().getString(R.string.unknown_person) );
+							person.setDefaultName( FriendDetector.this.getResources().getString(R.string.unknown_person) );
 							_names_list.add( person );
 						}
 						
