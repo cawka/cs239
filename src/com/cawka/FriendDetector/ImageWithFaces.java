@@ -1,14 +1,12 @@
 package com.cawka.FriendDetector;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
-
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Rect;
+import android.media.ExifInterface;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
@@ -19,6 +17,12 @@ public class ImageWithFaces extends View
 	private Bitmap _drawableBitmap=null;
 	private Paint  _paint;
 	private ListOfPeople _names_list;
+	
+	private float _ratio=1.0f;
+	private Rect  _srcRect;
+	private Rect  _dstRect;
+	private int   _offsetX;
+	private int   _offsetY;
 	
 	///////////////////////////////////////////////////////////////////////
 
@@ -55,22 +59,10 @@ public class ImageWithFaces extends View
 		_paint.setColor( 0xFF00FF00 );
 	}
 	
-//	protected void finalize( )
-//	{
-//		if( _bmp!=null ) _bmp.recycle( );
-//		_bmp=null;
-//	}
-	
 	public void setListOfPeople( ListOfPeople names_list )
 	{
 		_names_list=names_list;
 	}
-	
-	private float _ratio=1.0f;
-	private Rect  _srcRect;
-	private Rect  _dstRect;
-	private int   _offsetX;
-	private int   _offsetY;
 	
 	public Bitmap getBitmap( )
 	{
@@ -102,10 +94,8 @@ public class ImageWithFaces extends View
 	
 	private void makeDrawableBitmap( )
 	{
-		Float [] ratio=new Float[1];
-		ratio[0]=1.0f;
-		_drawableBitmap=resizeBitmap( _bmp, getWidth(), getHeight(), ratio );
-		_ratio=ratio[0];
+		_ratio=calculateResizeRatio( _bmp, getWidth(), getHeight() );
+		_drawableBitmap=resizeBitmap( _bmp, _ratio );
 		
 		_srcRect=new Rect( 0, 0, _drawableBitmap.getWidth(),    _drawableBitmap.getHeight() );
 		_dstRect=new Rect( _srcRect );
@@ -115,37 +105,63 @@ public class ImageWithFaces extends View
 		_dstRect.offset( _offsetX, _offsetY );
 	}
 	
-    public static Bitmap resizeBitmap( Bitmap input, int maxWidth, int maxHeight, Float[] ratio )
-    {
-		int width= input.getWidth();
-		int height=input.getHeight();
+	public static float calculateResizeRatio( Bitmap input, int maxWidth, int maxHeight )
+	{
+		float ratio=1.0f;
 		
-		if( width>maxWidth ) 
-			ratio[0]=ratio[0]*maxWidth/width;
+		if( input.getWidth()>maxWidth ) 
+			ratio=1.0f*maxWidth/input.getWidth();
 
-		width=(int)(ratio[0]*input.getWidth());
-		height=(int)(ratio[0]*input.getHeight());
-		
-		if( height>maxHeight )
-			ratio[0]=ratio[0]*maxHeight/height;
-		
-		width=(int)(ratio[0]*input.getWidth());
-		height=(int)(ratio[0]*input.getHeight());
-		
+		if( ratio*input.getHeight()>maxHeight )
+			ratio=1.0f*maxHeight/input.getHeight();
+
+		return ratio;
+	}
+	
+    public static Bitmap resizeBitmap( Bitmap input, float ratio )
+    {
 		// create a matrix for the manipulation
         Matrix matrix = new Matrix();
         // resize the bit map
-        matrix.postScale( ratio[0], ratio[0] );
+        matrix.postScale( ratio, ratio );
         
 		Bitmap output=Bitmap.createBitmap( input, 0, 0, input.getWidth(), input.getHeight(), matrix, true );
 		return output;
     }
     
-    public static Bitmap resizeBitmap( Bitmap input, int maxWidth, int maxHeight )
+    public static Bitmap processBitmap( Bitmap input, int maxSize, int orientation )
     {
-    	Float [] ratio=new Float[1];
-    	ratio[0]=1.0f;
-    	return resizeBitmap( input, maxWidth, maxHeight, ratio );
+		// create a matrix for the manipulation
+        Matrix matrix = new Matrix();
+        // resize the bit map
+        float ratio=calculateResizeRatio( input, maxSize, maxSize );
+        matrix.postScale( ratio, ratio );
+        
+        switch( orientation )
+        {
+        case ExifInterface.ORIENTATION_ROTATE_180:
+        	matrix.postRotate( 180 );
+        	break;
+        case ExifInterface.ORIENTATION_ROTATE_270:
+        	matrix.postRotate( 270 );
+        	break;
+        case ExifInterface.ORIENTATION_ROTATE_90:
+        	matrix.postRotate( 90 );
+        	break;
+        case ExifInterface.ORIENTATION_NORMAL:
+        case ExifInterface.ORIENTATION_UNDEFINED:
+        	// ok
+        	break;
+        case ExifInterface.ORIENTATION_TRANSPOSE:
+        case ExifInterface.ORIENTATION_TRANSVERSE:
+        case ExifInterface.ORIENTATION_FLIP_HORIZONTAL:
+        case ExifInterface.ORIENTATION_FLIP_VERTICAL:
+        	// Hope that these cases are not common
+        	break;
+        }
+        
+		Bitmap output=Bitmap.createBitmap( input, 0, 0, input.getWidth(), input.getHeight(), matrix, true );
+		return output;
     }
 	    
 	protected void onDraw( Canvas canvas )

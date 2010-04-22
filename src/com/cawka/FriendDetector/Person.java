@@ -1,5 +1,11 @@
 package com.cawka.FriendDetector;
 
+import java.io.ByteArrayOutputStream;
+
+import org.apache.commons.codec.binary.Base64;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Matrix;
@@ -86,5 +92,72 @@ public class Person
 		r.offset( offsetX, offsetY );
 
 		canvas.drawRect( r, _paint );
+	}
+	
+	public void appendWithRequest( StringBuilder request )
+	{
+		/*
+		<face id="relative_numeric_id">
+			<data><![CDATA[....base64...]]></data>
+		</face>
+		 */
+		ByteArrayOutputStream os=new ByteArrayOutputStream( );
+		_face.compress( Bitmap.CompressFormat.JPEG, 100, os );
+		byte[] out=Base64.encodeBase64( os.toByteArray() );
+//		encodeBase64( );
+
+		request.append( "\t<face id=\""+Integer.toString(_index)+"\">\n" );
+			request.append( "\t\t<data><!CDATA[" );
+			request.append( new String(out) );
+			request.append( "]]></data>\n" );
+		request.append( "\t</face>\n" );
+		
+//		Element face=doc.createElement( "face" );
+//		face.setAttribute( "id", Integer.toString(_index) );
+//		
+//		Element data=doc.createElement( "data" );
+//		data.appendChild( doc.createTextNode(out.toString()) );
+//		
+//		face.appendChild( data );
+//		root.appendChild( face );
+	}
+	
+	public void appendWithLearningRequest( StringBuilder request )
+	{
+		/*
+		<face id="relative_numeric_id">
+			<data><![CDATA[....base64....]]></data>
+			<name><![CDATA[....suggested name....]]></name>
+		</face>
+		 */
+		if( !_hasName ) return;
+		
+		ByteArrayOutputStream os=new ByteArrayOutputStream( );
+		_face.compress( Bitmap.CompressFormat.JPEG, 100, os );
+		byte[] out=Base64.encodeBase64( os.toByteArray() );
+//		encodeBase64( );
+
+		request.append( "\t<face id=\""+Integer.toString(_index)+"\">\n" );
+			request.append( "\t\t<data><![CDATA[" );
+			request.append( new String(out) );
+			request.append( "]]></data>\n" );
+			
+			request.append( "\t\t<name><![CDATA["+_name+"]]></name>" );
+		request.append( "\t</face>\n" );
+		
+//		ByteArrayOutputStream os=new ByteArrayOutputStream( );
+//		_face.compress( Bitmap.CompressFormat.JPEG, 100, os );
+//		byte[] out=Base64.encodeBase64( os.toByteArray() );
+//
+//		Element face=doc.createElement( "face" );
+//		face.setAttribute( "id", Integer.toString(_index) );
+//
+//		Element data=doc.createElement( "data" );
+//		data.appendChild( doc.createTextNode(out.toString()) );
+//
+//		Element name=doc.createElement( "name" );
+//		name.appendChild( doc.createTextNode(_name) );
+//		
+//		face.appendChild( name );
 	}
 }

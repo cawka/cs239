@@ -1,12 +1,24 @@
 package com.cawka.FriendDetector;
 
+import java.io.IOException;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+
 import com.cawka.FriendDetector.R;
 
 import android.app.Activity;
-import android.app.ProgressDialog;
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
+import android.media.ExifInterface;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.provider.MediaStore.Images;
@@ -24,13 +36,16 @@ import android.widget.AdapterView.AdapterContextMenuInfo;
 
 public class FriendDetector extends Activity
 {
+	private static final String TAG="FriendDetector";
+	
     private static final int MENU_SELECT = 1;
 	private static final int MENU_ROTATE = 2;
+	private static final int MENU_XML    = 3;
 
 	private static final int SELECT_IMAGE = 1;
 	
-	private static final int MAX_WIDTH = 800;
-	private static final int MAX_HEIGHT = 800;
+	private static final int MAX_SIZE = 800;
+
     
     private ImageWithFaces _picture;
     private ListOfPeople   _names_list;
@@ -40,13 +55,12 @@ public class FriendDetector extends Activity
     
     private FaceDetection _faceDetection;
     
-//    private ProgressDialog _progress=null;
     private ProgressBar    _progress2;
     private Object _progress_lock=new Object();
     
     ////////////////////////////////////////////////////////////////////
     
-	public void onCreate(Bundle savedInstanceState) 
+	public void onCreate( Bundle savedInstanceState ) 
     {
         super.onCreate( savedInstanceState );
         setContentView( R.layout.main );
@@ -71,9 +85,6 @@ public class FriendDetector extends Activity
 	public void onCreateContextMenu( ContextMenu menu, View v,
             ContextMenuInfo menuInfo )
 	{
-//		super.onCreateContextMenu(menu, v, menuInfo);
-//		  menu.add(0, 0, 0, "Edit");
-//		  menu.add(0, 1, 0,  "Delete");
 		if( v==_names_list ) _names_list.onCreateContextMenu( ((AdapterContextMenuInfo)menuInfo).position );
 	}
 		
@@ -156,6 +167,12 @@ public class FriendDetector extends Activity
 	        menu.add(0, MENU_ROTATE, 0, "Rotate")
 	        	.setIcon( android.R.drawable.ic_menu_rotate );
         }
+        
+        if( _names_list.getAdapter().getCount()>0 )
+        {
+        	menu.add(0, MENU_XML, 0, "XML" )
+        		.setIcon( android.R.drawable.ic_menu_info_details );
+        }
 
     	return true;
     }
@@ -184,11 +201,31 @@ public class FriendDetector extends Activity
 
 				processBitmap( rotated_bitmap );
     			return true;
+    		case MENU_XML:
+    			try
+    			{
+//    				StringBuilder request=new StringBuilder();
+//    				request.append( "<FriendDetector>\n" );
+//    				for( int i=0; i<_names_list.getAdapter().getCount(); i++ )
+//    				{
+//    					Person person=(Person)_names_list.getAdapter().getItem( i );
+//    					person.appendWithRequest( request );
+//    				}
+//    				request.append( "</FriendDetector>\n" );
+
+//    				Log.v( TAG, request.toString() );
+    			}
+    			catch( Exception ex )
+    			{
+    				//
+    			}
+
+    			return true;
         }
 
     	return false;
     }
-    
+     
     private void processBitmap( Bitmap bitmap )
     {
     	if( _thread!=null ) return;
@@ -201,15 +238,25 @@ public class FriendDetector extends Activity
     	}
     	_progress2.setVisibility( View.VISIBLE );
     	
-//    	synchronized( _progress_lock )
-//    	{
-//    		_progress=ProgressDialog.show(this, "Working...", "Detecting faces", true, false);
-//    	}
-		
 		_faceDetection=new FaceDetection( bitmap );
 		_thread=new Thread( _faceDetection );
 		_thread.start( );   	
     }
+    
+    protected String getRealPathFromURI( Uri contentUri ) 
+    {
+    	// can post image  
+    	String [] proj={ Images.Media.DATA };
+    	Cursor cursor = managedQuery( contentUri,  
+    	        proj, // Which columns to return  
+    	        null,       // WHERE clause; which rows to return (all rows)  
+    	        null,       // WHERE clause selection arguments (none)  
+    	        null); // Order-by clause (ascending by name)  
+    	int column_index = cursor.getColumnIndexOrThrow( Images.Media.DATA );  	
+		cursor.moveToFirst();  
+
+		return cursor.getString(column_index);  
+    }  
     
     protected void onActivityResult( int requestCode, int resultCode, Intent data )
     {
@@ -222,6 +269,7 @@ public class FriendDetector extends Activity
 				_picture.setBitmap( null ); //recycle the bitmap
     			
     			Bitmap bmp=null;
+    			int orientation=-1;//ExifInterface.ORIENTATION_UNDEFINED;
     			try 
     			{
     				if( data.getDataString().equals("") )
@@ -230,9 +278,21 @@ public class FriendDetector extends Activity
     				}
     				else
     				{
+    					String filename=getRealPathFromURI( data.getData() );
+    					bmp=BitmapFactory.decodeFile( filename );
     					
-    					bmp=Images.Media.getBitmap( this.getContentResolver(), data.getData() );
-//    					Log.v( "test", data.getDataString() );
+    					try
+    					{
+	    					ExifInterface exif=new ExifInterface( filename );
+	    					orientation=Integer.parseInt( exif.getAttribute(ExifInterface.TAG_ORIENTATION) );
+    					}
+    					catch( IOException ex )
+    					{
+    						//not a jpeg file
+    						Log.d( TAG, filename+" is a jpeg file or doesn't have exif information available" );
+    					}
+    					
+    					Log.v( TAG, Integer.toString(orientation) );
     				}
     				
 				} 
@@ -242,9 +302,7 @@ public class FriendDetector extends Activity
 					return; 
 				}
 				
-				Bitmap resized_bmp=ImageWithFaces.resizeBitmap( bmp, MAX_WIDTH, MAX_HEIGHT );
-				
-//				Bitmap resized_bmp=Bitmap.createBitmap( bmp ); //resizing doesn't work :(
+				Bitmap resized_bmp=ImageWithFaces.processBitmap( bmp, MAX_SIZE, orientation );				
 				bmp=null;
 
 				processBitmap( resized_bmp );
