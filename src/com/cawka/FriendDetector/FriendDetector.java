@@ -168,11 +168,11 @@ public class FriendDetector extends Activity
 	        	.setIcon( android.R.drawable.ic_menu_rotate );
         }
         
-        if( _names_list.getAdapter().getCount()>0 )
-        {
-        	menu.add(0, MENU_XML, 0, "XML" )
-        		.setIcon( android.R.drawable.ic_menu_info_details );
-        }
+//        if( _names_list.getAdapter().getCount()>0 )
+//        {
+//        	menu.add(0, MENU_XML, 0, "XML" )
+//        		.setIcon( android.R.drawable.ic_menu_info_details );
+//        }
 
     	return true;
     }
@@ -201,26 +201,26 @@ public class FriendDetector extends Activity
 
 				processBitmap( rotated_bitmap );
     			return true;
-    		case MENU_XML:
-    			try
-    			{
-//    				StringBuilder request=new StringBuilder();
-//    				request.append( "<FriendDetector>\n" );
-//    				for( int i=0; i<_names_list.getAdapter().getCount(); i++ )
-//    				{
-//    					Person person=(Person)_names_list.getAdapter().getItem( i );
-//    					person.appendWithRequest( request );
-//    				}
-//    				request.append( "</FriendDetector>\n" );
-
-//    				Log.v( TAG, request.toString() );
-    			}
-    			catch( Exception ex )
-    			{
-    				//
-    			}
-
-    			return true;
+//    		case MENU_XML:
+//    			try
+//    			{
+////    				StringBuilder request=new StringBuilder();
+////    				request.append( "<FriendDetector>\n" );
+////    				for( int i=0; i<_names_list.getAdapter().getCount(); i++ )
+////    				{
+////    					Person person=(Person)_names_list.getAdapter().getItem( i );
+////    					person.appendWithRequest( request );
+////    				}
+////    				request.append( "</FriendDetector>\n" );
+//
+////    				Log.v( TAG, request.toString() );
+//    			}
+//    			catch( Exception ex )
+//    			{
+//    				//
+//    			}
+//
+//    			return true;
         }
 
     	return false;
@@ -323,6 +323,35 @@ public class FriendDetector extends Activity
     }
     
     
+    private class updateUI implements Runnable
+    {
+    	private iFaceDetector _detector;
+    	
+    	public updateUI( iFaceDetector detector )
+    	{
+    		_detector=detector;
+    	}
+
+		public void run() 
+		{
+			synchronized( _progress_lock ) 
+//			 to handle the case when onPause is called almost simultaneously
+//			 with thread termination
+			{
+				if( _progress2!=null ) {  _progress2.setVisibility( View.INVISIBLE ); }
+			}
+			
+			for( Person person : _detector.getFaces() )
+			{
+				if( !person.hasName() )
+					person.setDefaultName( FriendDetector.this.getResources().getString(R.string.unknown_person) );
+				_names_list.add( person );
+			}
+			
+			_thread=null;
+		}
+    }
+    
     private class FaceDetection implements Runnable
     {
     	private Bitmap _bitmap;
@@ -335,29 +364,26 @@ public class FriendDetector extends Activity
 		public void run( ) 
 		{
 			Person.resetColors( );
-			final FaceDetector detector=new FaceDetector( _bitmap );
 			
-			_handler.post( new Runnable()
+			iFaceDetector detector=null;
+			// if a remote detector fails (e.g., network is unavailable or server is not running), run a local one
+			try
+			{
+				detector=new FaceDetectorRemote( _bitmap );
+			}
+			catch( iFaceDetector.DetectionError e )
+			{
+				try
 				{
-					public void run() 
-					{
-						synchronized( _progress_lock ) 
-//						 to handle the case when onPause is called almost simultaneously
-//						 with thread termination
-						{
-							if( _progress2!=null ) {  _progress2.setVisibility( View.INVISIBLE ); }
-						}
-						
-						for( Person person : detector.getFaces() )
-						{
-							if( !person.hasName() )
-								person.setDefaultName( FriendDetector.this.getResources().getString(R.string.unknown_person) );
-							_names_list.add( person );
-						}
-						
-						_thread=null;
-					} 
-				} );
+					detector=new FaceDetectorLocal( _bitmap );
+				}
+				catch( iFaceDetector.DetectionError e2 )
+				{
+					//cannot happen now
+				}
+			}
+			
+			_handler.post( new updateUI(detector) );
 		}
     }
 }
