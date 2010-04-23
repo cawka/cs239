@@ -2,10 +2,11 @@ package com.cawka.FriendDetector;
 
 import java.io.ByteArrayOutputStream;
 
-import org.apache.commons.codec.binary.Base64;
+//import org.apache.commons.codec.binary.Base64;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
+import FriendDetector.FacePosition;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Matrix;
@@ -28,6 +29,7 @@ public class Person
 	final private static int FACE_HEIGHT=80;
 	
 	private static final int [] COLORS={ 0xFFFF0000, 0xFF00FF00, 0xFF0000FF, 0xFFFFFF00, 0xFFFF00FF, 0xFF00FFFF, 0xFFFFFFFF };
+	private static Rect rect;
 	
 	/////////////////////////////////////////////////////////////
 	
@@ -59,6 +61,22 @@ public class Person
 					1.0f*FACE_HEIGHT/person._faceRect.height() );
 		person._face=Bitmap.createBitmap( picture, person._faceRect.left,    person._faceRect.top,
 												   person._faceRect.width(), person._faceRect.height(), x, true );
+		
+		return person;
+	}
+	
+	public static Person createPerson( Bitmap picture, FacePosition rect, String name )
+	{
+		Person person=new Person( );
+		person._faceRect=new Rect( rect.left, rect.top, rect.right, rect.bottom ); //should be corrected later
+		
+//		Matrix x=new Matrix();
+//		x.postScale( 1.0f*FACE_WIDTH/person._faceRect.width(),
+//					1.0f*FACE_HEIGHT/person._faceRect.height() );
+		person._face=Bitmap.createBitmap( picture, person._faceRect.left,    person._faceRect.top,
+												   person._faceRect.width(), person._faceRect.height() );//, x, true );
+		
+		if( !name.equals("") ) person.setName( name );
 		return person;
 	}
 	
@@ -101,16 +119,16 @@ public class Person
 			<data><![CDATA[....base64...]]></data>
 		</face>
 		 */
-		ByteArrayOutputStream os=new ByteArrayOutputStream( );
-		_face.compress( Bitmap.CompressFormat.JPEG, 100, os );
-		byte[] out=Base64.encodeBase64( os.toByteArray() );
-//		encodeBase64( );
-
-		request.append( "\t<face id=\""+Integer.toString(_index)+"\">\n" );
-			request.append( "\t\t<data><!CDATA[" );
-			request.append( new String(out) );
-			request.append( "]]></data>\n" );
-		request.append( "\t</face>\n" );
+//		ByteArrayOutputStream os=new ByteArrayOutputStream( );
+//		_face.compress( Bitmap.CompressFormat.JPEG, 100, os );
+//		byte[] out=Base64.encodeBase64( os.toByteArray() );
+////		encodeBase64( );
+//
+//		request.append( "\t<face id=\""+Integer.toString(_index)+"\">\n" );
+//			request.append( "\t\t<data><!CDATA[" );
+//			request.append( new String(out) );
+//			request.append( "]]></data>\n" );
+//		request.append( "\t</face>\n" );
 		
 //		Element face=doc.createElement( "face" );
 //		face.setAttribute( "id", Integer.toString(_index) );
@@ -132,18 +150,18 @@ public class Person
 		 */
 		if( !_hasName ) return;
 		
-		ByteArrayOutputStream os=new ByteArrayOutputStream( );
-		_face.compress( Bitmap.CompressFormat.JPEG, 100, os );
-		byte[] out=Base64.encodeBase64( os.toByteArray() );
-//		encodeBase64( );
-
-		request.append( "\t<face id=\""+Integer.toString(_index)+"\">\n" );
-			request.append( "\t\t<data><![CDATA[" );
-			request.append( new String(out) );
-			request.append( "]]></data>\n" );
-			
-			request.append( "\t\t<name><![CDATA["+_name+"]]></name>" );
-		request.append( "\t</face>\n" );
+//		ByteArrayOutputStream os=new ByteArrayOutputStream( );
+//		_face.compress( Bitmap.CompressFormat.JPEG, 100, os );
+//		byte[] out=Base64.encodeBase64( os.toByteArray() );
+////		encodeBase64( );
+//
+//		request.append( "\t<face id=\""+Integer.toString(_index)+"\">\n" );
+//			request.append( "\t\t<data><![CDATA[" );
+//			request.append( new String(out) );
+//			request.append( "]]></data>\n" );
+//			
+//			request.append( "\t\t<name><![CDATA["+_name+"]]></name>" );
+//		request.append( "\t</face>\n" );
 		
 //		ByteArrayOutputStream os=new ByteArrayOutputStream( );
 //		_face.compress( Bitmap.CompressFormat.JPEG, 100, os );

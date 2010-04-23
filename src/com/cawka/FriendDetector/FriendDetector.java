@@ -350,7 +350,8 @@ public class FriendDetector extends Activity
 						
 						for( Person person : detector.getFaces() )
 						{
-							person.setDefaultName( FriendDetector.this.getResources().getString(R.string.unknown_person) );
+							if( !person.hasName() )
+								person.setDefaultName( FriendDetector.this.getResources().getString(R.string.unknown_person) );
 							_names_list.add( person );
 						}
 						
@@ -360,3 +361,4 @@ public class FriendDetector extends Activity
 		}
     }
 }
+
