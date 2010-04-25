@@ -36,6 +36,7 @@ public class FriendDetector extends Activity
     private static final int MENU_SELECT = 1;
 	private static final int MENU_ROTATE = 2;
 	private static final int MENU_RETRY = 3;
+	private static final int MENU_SETTINGS = 4;
 
 	private static final int SELECT_IMAGE = 1;
 	
@@ -164,6 +165,9 @@ public class FriendDetector extends Activity
 	        menu.add(0, MENU_RETRY, 0, "Retry" )
 	        	.setIcon( R.drawable.ic_menu_refresh );
         }
+        
+        menu.add(0, MENU_SETTINGS, 0, "Settings" )
+        	.setIcon( android.R.drawable.ic_menu_edit );
 
     	return true;
     }
@@ -194,6 +198,12 @@ public class FriendDetector extends Activity
 				_names_list.clear( );
 
 				processBitmap( rotated_bitmap );
+    			return true;
+    		case MENU_SETTINGS:
+    			Intent i=new Intent( );
+    			i.setAction( "com.cawka.FriendDetector.SETTINGS" );
+    			startActivity( i );
+    			
     			return true;
         }
 
