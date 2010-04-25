@@ -8,6 +8,7 @@ import com.cawka.FriendDetector.R;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -16,6 +17,7 @@ import android.media.ExifInterface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.preference.PreferenceManager;
 import android.provider.MediaStore.Images;
 import android.util.Log;
 import android.view.ContextMenu;
@@ -39,8 +41,10 @@ public class FriendDetector extends Activity
 	private static final int MENU_SETTINGS = 4;
 
 	private static final int SELECT_IMAGE = 1;
+	private static final int CHANGE_SETTINGS = 2;
 	
 	private static final int MAX_SIZE = 800;
+
 
     
     private ImageWithFaces _picture;
@@ -54,15 +58,17 @@ public class FriendDetector extends Activity
     private ProgressBar    _progress2;
     private Object _progress_lock=new Object();
     
-    private iFaceDetector _detectors[] = { 
+    private List<iFaceDetector> _detectors;
+    private List<iFaceLearner>  _learners;
+//    = { 
 											//new FaceDetectorRemote( "cawka.homeip.net",20000 ), 
-    										new FaceDetectorRemote( "131.179.192.201",2000 ), 
-    										new FaceDetectorLocal( ) 
-    									 };
-    private iFaceLearner _learners[] = {
-								    		//new FaceDetectorRemote( "cawka.homeip.net",20000 )
-											new FaceDetectorRemote( "131.179.192.201",2000 ), 
-    								   };
+//    										new FaceDetectorRemote( "131.179.192.201",2000 ), 
+//    										new FaceDetectorLocal( ) 
+//    									 };
+//    private iFaceLearner _learners[] = {
+//								    		//new FaceDetectorRemote( "cawka.homeip.net",20000 )
+////											new FaceDetectorRemote( "131.179.192.201",2000 ), 
+//    								   };
     
     ////////////////////////////////////////////////////////////////////
     
@@ -87,7 +93,36 @@ public class FriendDetector extends Activity
 					selectImage( );
 				}
         	} );
+        
+		restoreSettings( );
     }
+	
+	protected void restoreSettings( )
+	{
+        Log.v( TAG, "restoreSettings" );
+        
+        _detectors=new LinkedList<iFaceDetector>( );
+        _learners =new LinkedList<iFaceLearner>( );
+
+        SharedPreferences prefs=PreferenceManager.getDefaultSharedPreferences( getBaseContext() );
+        if( prefs.getBoolean(Settings.KEY_REMOTE_ENABLED, false) )
+        {
+        	FaceDetectorRemote detector=new FaceDetectorRemote(
+        			prefs.getString(Settings.KEY_HOSTNAME, "127.0.0.1"),
+        			prefs.getString(Settings.KEY_PORT, "55436"),
+        			Integer.parseInt(prefs.getString( Settings.KEY_TIMEOUT, "2000" ))
+        			);
+        	_detectors.add( detector );
+        	_learners.add( detector );
+        }
+        
+        if( prefs.getBoolean(Settings.KEY_LOCAL_ENABLED, true) )
+        {
+        	_detectors.add( new FaceDetectorLocal( ) );
+        }
+        
+        System.gc( );
+	}
 	
 	public void onCreateContextMenu( ContextMenu menu, View v,
             ContextMenuInfo menuInfo )
@@ -130,6 +165,7 @@ public class FriendDetector extends Activity
 	
 	public Object onRetainNonConfigurationInstance( ) 
 	{
+		Log.v( TAG, "onRetainNonConfiguratioInstance" );
 		return new SavedState( );
 	}
 	
@@ -150,24 +186,37 @@ public class FriendDetector extends Activity
 	
 	///////////////////////////////////////////////////////////////////////
 	
+	public boolean onPrepareOptionsMenu( Menu menu )
+	{
+		if( _picture.isBitmap() )
+        {
+			if( menu.findItem(MENU_ROTATE)==null )
+			{
+		        menu.add(0, MENU_ROTATE, 0, "Rotate")
+		        	.setIcon( android.R.drawable.ic_menu_rotate );
+		        
+		        menu.add(0, MENU_RETRY, 0, "Retry" )
+		        	.setIcon( R.drawable.ic_menu_refresh );
+			}
+        }
+		else
+		{
+			menu.removeItem( MENU_ROTATE );
+			menu.removeItem( MENU_RETRY );
+		}
+		
+		return true;
+	}
+	
     public boolean onCreateOptionsMenu( Menu menu )
     {
     	if( _thread!=null ) return false;
     	
         menu.add(0, MENU_SELECT, 0, "Select")
         	.setIcon( android.R.drawable.ic_menu_search );
-        
-        if( _picture.isBitmap() )
-        {
-	        menu.add(0, MENU_ROTATE, 0, "Rotate")
-	        	.setIcon( android.R.drawable.ic_menu_rotate );
-	        
-	        menu.add(0, MENU_RETRY, 0, "Retry" )
-	        	.setIcon( R.drawable.ic_menu_refresh );
-        }
-        
+                
         menu.add(0, MENU_SETTINGS, 0, "Settings" )
-        	.setIcon( android.R.drawable.ic_menu_edit );
+        	.setIcon( android.R.drawable.ic_menu_preferences );
 
     	return true;
     }
@@ -202,7 +251,7 @@ public class FriendDetector extends Activity
     		case MENU_SETTINGS:
     			Intent i=new Intent( );
     			i.setAction( "com.cawka.FriendDetector.SETTINGS" );
-    			startActivity( i );
+    			startActivityForResult( i, CHANGE_SETTINGS );
     			
     			return true;
         }
@@ -222,6 +271,12 @@ public class FriendDetector extends Activity
     
     protected void onActivityResult( int requestCode, int resultCode, Intent data )
     {
+    	if( requestCode==CHANGE_SETTINGS )
+    	{
+    		restoreSettings( );
+    		return;
+    	}
+    	
     	if( resultCode==RESULT_OK )
     	{
     		switch( requestCode )
@@ -230,8 +285,8 @@ public class FriendDetector extends Activity
 				_names_list.clear( );
 				_picture.setBitmap( null ); //recycle the bitmap
 //				java.lang.MemoryUsage.
-				Log.v( TAG, Double.toString(Runtime.getRuntime().totalMemory()) );
-				Log.v( TAG, Double.toString(Runtime.getRuntime().freeMemory()) );
+				Log.v( TAG, "Total mem: "+Double.toString(Runtime.getRuntime().totalMemory()) );
+				Log.v( TAG, "Free mem: "+Double.toString(Runtime.getRuntime().freeMemory()) );
 
 				System.gc();
     			
@@ -258,8 +313,6 @@ public class FriendDetector extends Activity
     						//not a jpeg file
     						Log.d( TAG, filename+" is a jpeg file or doesn't have exif information available" );
     					}
-    					
-    					Log.v( TAG, Integer.toString(orientation) );
     				}
     				
 				} 
@@ -369,21 +422,12 @@ public class FriendDetector extends Activity
 
 		public void run() 
 		{
-			synchronized( _progress_lock ) 
-			// to handle the case when onPause is called almost simultaneously
-			// with thread termination
-			{
-				if( _progress2!=null ) {  _progress2.setVisibility( View.INVISIBLE ); }
-			}
-			
 			for( Person person : _detector.getFaces() )
 			{
 				if( !person.hasName() )
 					person.setDefaultName( FriendDetector.this.getResources().getString(R.string.unknown_person) );
 				_names_list.add( person );
 			}
-			
-			_thread=null;
 		}
     }
 	
@@ -438,6 +482,8 @@ public class FriendDetector extends Activity
 						} );
 				}
 			}
+			
+			_handler.post( new releaseUI() );
 		}
     }
 	

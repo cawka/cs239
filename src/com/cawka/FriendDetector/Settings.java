@@ -3,11 +3,27 @@ package com.cawka.FriendDetector;
 import com.cawka.FriendDetector.R;
 
 import android.os.Bundle;
+import android.preference.CheckBoxPreference;
+import android.preference.EditTextPreference;
+import android.preference.Preference;
 import android.preference.PreferenceActivity;
+import android.preference.PreferenceScreen;
+import android.preference.Preference.OnPreferenceChangeListener;
+import android.text.method.DigitsKeyListener;
 
 public class Settings extends PreferenceActivity
+	implements OnPreferenceChangeListener
 {
-//	private static final String KEY_TEST = "test";
+	public static final String KEY_LOCAL_ENABLED   = "local_enabled";
+	public static final String KEY_REMOTE_ENABLED  = "remote_enabled";
+	public static final String KEY_HOSTNAME = "remote_hostname";
+	public static final String KEY_PORT 	= "remote_port";
+	public static final String KEY_TIMEOUT  = "remote_timeout";
+	
+//	private CheckBoxPreference _enabled;
+	private EditTextPreference _hostname;
+	private EditTextPreference _port;
+	private EditTextPreference _timeout;
 	
     protected void onCreate( Bundle savedInstanceState ) 
     {
@@ -15,11 +31,45 @@ public class Settings extends PreferenceActivity
 
         addPreferencesFromResource( R.xml.settings );
 
+//        _enabled =(CheckBoxPreference)findPreference( KEY_ENABLED );
+        _hostname=(EditTextPreference)findPreference( KEY_HOSTNAME );
+        _port    =(EditTextPreference)findPreference( KEY_PORT );
+        _timeout =(EditTextPreference)findPreference( KEY_TIMEOUT );
+        
+        _hostname.setOnPreferenceChangeListener( this );
+        _port    .setOnPreferenceChangeListener( this );
+        _timeout .setOnPreferenceChangeListener( this );
+        
+        PreferenceScreen prefSet = getPreferenceScreen();
+        _hostname.setSummary( prefSet.getSharedPreferences().getString(KEY_HOSTNAME,"") );
+        _port    .setSummary( prefSet.getSharedPreferences().getString(KEY_PORT, "55436") );
+        _timeout .setSummary( prefSet.getSharedPreferences().getString(KEY_TIMEOUT,"2000") );
+        
+        _port    .getEditText().setKeyListener( DigitsKeyListener.getInstance(false,true) ); 
+        _timeout .getEditText().setKeyListener( DigitsKeyListener.getInstance(false,true) ); 
+        
 //        initToggles();
 ////        mAirplaneModePreference = (CheckBoxPreference) findPreference(KEY_TOGGLE_AIRPLANE);
 //        
 //        getPreferenceScreen().getSharedPreferences().registerOnSharedPreferenceChangeListener( this );
     }
+
+//    protected void updateEditTextSettings( EditTextPreference preference, String newValue )
+//    {
+//    
+//    }
+
+	public boolean onPreferenceChange( Preference preference, Object newValue ) 
+	{
+		if( preference==_hostname ||
+			preference==_port ||
+			preference==_timeout )
+		{
+			((EditTextPreference)preference).setSummary( (String)newValue );
+			return true;
+		}
+		return false;
+	}
     
     /**
      * Invoked on each preference click in this hierarchy, overrides

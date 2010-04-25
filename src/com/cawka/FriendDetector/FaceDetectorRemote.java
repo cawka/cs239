@@ -16,15 +16,17 @@ public class FaceDetectorRemote extends iFaceDetector implements iFaceLearner
 	private RecognizerPrx _recognizer=null;
 	
 	private String _proxy="131.179.192.201"; //test01 server in LASR lab
+	private String _port ="55436";
 	private int    _timeout=1000;
 	
 	////////////////////////////////////////////////////////////////////////////////
 	////////////////////////////////////////////////////////////////////////////////
 	////////////////////////////////////////////////////////////////////////////////
 	
-	public FaceDetectorRemote( String proxy, int ms_timeout )
+	public FaceDetectorRemote( String proxy, String port, int ms_timeout )
 	{
-		_proxy=proxy;
+		_proxy  =proxy;
+		_port   =port;
 		_timeout=ms_timeout; //timeout in milliseconds. Technically, it can be longer due to DNS and connection issues
 	}
 	
@@ -33,7 +35,7 @@ public class FaceDetectorRemote extends iFaceDetector implements iFaceLearner
 	{
 		Log.v( TAG, "tryConnect" );
 		
-		Ice.ObjectPrx base=_ic.stringToProxy( "FaceDetector:default -h "+_proxy+" -t "+Integer.toString(_timeout)+" -p 55436" );
+		Ice.ObjectPrx base=_ic.stringToProxy( "FaceDetector:default -h "+_proxy+" -t "+Integer.toString(_timeout)+" -p "+_port );
 		if( base==null ) throw new RuntimeException( "Remote server is not available" );
 		
 		_recognizer=RecognizerPrxHelper.checkedCast( base );
