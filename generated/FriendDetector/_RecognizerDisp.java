@@ -75,15 +75,15 @@ public abstract class _RecognizerDisp extends Ice.ObjectImpl implements Recogniz
     }
 
     public final void
-    learn(Face[] listOfFacesToLearn)
+    learn(byte[] jpegFileOfFace, String name)
     {
-        learn(listOfFacesToLearn, null);
+        learn(jpegFileOfFace, name, null);
     }
 
-    public final Face[]
-    recognizePeople(byte[][] listOfJpegFiles)
+    public final String
+    recognizeFace(byte[] jpegFileOfFace)
     {
-        return recognizePeople(listOfJpegFiles, null);
+        return recognizeFace(jpegFileOfFace, null);
     }
 
     public static Ice.DispatchStatus
@@ -102,17 +102,17 @@ public abstract class _RecognizerDisp extends Ice.ObjectImpl implements Recogniz
     }
 
     public static Ice.DispatchStatus
-    ___recognizePeople(Recognizer __obj, IceInternal.Incoming __inS, Ice.Current __current)
+    ___recognizeFace(Recognizer __obj, IceInternal.Incoming __inS, Ice.Current __current)
     {
         __checkMode(Ice.OperationMode.Normal, __current.mode);
         IceInternal.BasicStream __is = __inS.is();
         __is.startReadEncaps();
-        byte[][] listOfJpegFiles;
-        listOfJpegFiles = FilesHelper.read(__is);
+        byte[] jpegFileOfFace;
+        jpegFileOfFace = FileHelper.read(__is);
         __is.endReadEncaps();
         IceInternal.BasicStream __os = __inS.os();
-        Face[] __ret = __obj.recognizePeople(listOfJpegFiles, __current);
-        FacesHelper.write(__os, __ret);
+        String __ret = __obj.recognizeFace(jpegFileOfFace, __current);
+        __os.writeString(__ret);
         return Ice.DispatchStatus.DispatchOK;
     }
 
@@ -122,10 +122,12 @@ public abstract class _RecognizerDisp extends Ice.ObjectImpl implements Recogniz
         __checkMode(Ice.OperationMode.Normal, __current.mode);
         IceInternal.BasicStream __is = __inS.is();
         __is.startReadEncaps();
-        Face[] listOfFacesToLearn;
-        listOfFacesToLearn = FacesHelper.read(__is);
+        byte[] jpegFileOfFace;
+        jpegFileOfFace = FileHelper.read(__is);
+        String name;
+        name = __is.readString();
         __is.endReadEncaps();
-        __obj.learn(listOfFacesToLearn, __current);
+        __obj.learn(jpegFileOfFace, name, __current);
         return Ice.DispatchStatus.DispatchOK;
     }
 
@@ -137,7 +139,7 @@ public abstract class _RecognizerDisp extends Ice.ObjectImpl implements Recogniz
         "ice_isA",
         "ice_ping",
         "learn",
-        "recognizePeople"
+        "recognizeFace"
     };
 
     public Ice.DispatchStatus
@@ -177,7 +179,7 @@ public abstract class _RecognizerDisp extends Ice.ObjectImpl implements Recogniz
             }
             case 6:
             {
-                return ___recognizePeople(this, in, __current);
+                return ___recognizeFace(this, in, __current);
             }
         }
 

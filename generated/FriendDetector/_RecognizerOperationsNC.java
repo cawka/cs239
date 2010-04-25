@@ -15,7 +15,7 @@ public interface _RecognizerOperationsNC
 {
     Face[] findFacesAndRecognizePeople(byte[] jpegFile);
 
-    Face[] recognizePeople(byte[][] listOfJpegFiles);
+    String recognizeFace(byte[] jpegFileOfFace);
 
-    void learn(Face[] listOfFacesToLearn);
+    void learn(byte[] jpegFileOfFace, String name);
 }

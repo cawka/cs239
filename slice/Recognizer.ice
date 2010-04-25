@@ -3,7 +3,7 @@
  {
  	sequence<byte> File;
  	
- 	sequence<File> Files;
+ 	sequence<File > Files;
  	
  	struct FacePosition
  	{
@@ -25,11 +25,11 @@
  
  	interface Recognizer
  	{
- 		Faces findFacesAndRecognizePeople( File jpegFile );
+ 		Faces findFacesAndRecognizePeople( ["cpp:array"] File jpegFile );
  		
- 		Faces recognizePeople( Files listOfJpegFiles );
+ 		string recognizeFace( ["cpp:array"] File jpegFileOfFace );
  		
- 		void learn( Faces listOfFacesToLearn );
+ 		void learn( ["cpp:array"] File jpegFileOfFace, string name );
  	};
  };
  

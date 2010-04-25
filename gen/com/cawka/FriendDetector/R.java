@@ -14,11 +14,12 @@ public final class R {
         public static final int text_color=0x7f050000;
     }
     public static final class drawable {
-        public static final int ic_tab_artists=0x7f020000;
-        public static final int ic_tab_artists_grey=0x7f020001;
-        public static final int ic_tab_artists_white=0x7f020002;
-        public static final int icon=0x7f020003;
-        public static final int row=0x7f020004;
+        public static final int ic_menu_refresh=0x7f020000;
+        public static final int ic_tab_artists=0x7f020001;
+        public static final int ic_tab_artists_grey=0x7f020002;
+        public static final int ic_tab_artists_white=0x7f020003;
+        public static final int icon=0x7f020004;
+        public static final int row=0x7f020005;
     }
     public static final class id {
         public static final int frame_layout=0x7f060002;

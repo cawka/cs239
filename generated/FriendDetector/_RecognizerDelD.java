@@ -67,7 +67,7 @@ public final class _RecognizerDelD extends Ice._ObjectDelD implements _Recognize
     }
 
     public void
-    learn(final Face[] listOfFacesToLearn, java.util.Map<String, String> __ctx)
+    learn(final byte[] jpegFileOfFace, final String name, java.util.Map<String, String> __ctx)
         throws IceInternal.LocalExceptionWrapper
     {
         final Ice.Current __current = new Ice.Current();
@@ -88,7 +88,7 @@ public final class _RecognizerDelD extends Ice._ObjectDelD implements _Recognize
                     {
                         throw new Ice.OperationNotExistException(__current.id, __current.facet, __current.operation);
                     }
-                    __servant.learn(listOfFacesToLearn, __current);
+                    __servant.learn(jpegFileOfFace, name, __current);
                     return Ice.DispatchStatus.DispatchOK;
                 }
             };
@@ -116,13 +116,13 @@ public final class _RecognizerDelD extends Ice._ObjectDelD implements _Recognize
         }
     }
 
-    public Face[]
-    recognizePeople(final byte[][] listOfJpegFiles, java.util.Map<String, String> __ctx)
+    public String
+    recognizeFace(final byte[] jpegFileOfFace, java.util.Map<String, String> __ctx)
         throws IceInternal.LocalExceptionWrapper
     {
         final Ice.Current __current = new Ice.Current();
-        __initCurrent(__current, "recognizePeople", Ice.OperationMode.Normal, __ctx);
-        final FacesHolder __result = new FacesHolder();
+        __initCurrent(__current, "recognizeFace", Ice.OperationMode.Normal, __ctx);
+        final Ice.StringHolder __result = new Ice.StringHolder();
         IceInternal.Direct __direct = null;
         try
         {
@@ -139,7 +139,7 @@ public final class _RecognizerDelD extends Ice._ObjectDelD implements _Recognize
                     {
                         throw new Ice.OperationNotExistException(__current.id, __current.facet, __current.operation);
                     }
-                    __result.value = __servant.recognizePeople(listOfJpegFiles, __current);
+                    __result.value = __servant.recognizeFace(jpegFileOfFace, __current);
                     return Ice.DispatchStatus.DispatchOK;
                 }
             };

@@ -62,7 +62,7 @@ public final class _RecognizerDelM extends Ice._ObjectDelM implements _Recognize
     }
 
     public void
-    learn(Face[] listOfFacesToLearn, java.util.Map<String, String> __ctx)
+    learn(byte[] jpegFileOfFace, String name, java.util.Map<String, String> __ctx)
         throws IceInternal.LocalExceptionWrapper
     {
         IceInternal.Outgoing __og = __handler.getOutgoing("learn", Ice.OperationMode.Normal, __ctx);
@@ -71,7 +71,8 @@ public final class _RecognizerDelM extends Ice._ObjectDelM implements _Recognize
             try
             {
                 IceInternal.BasicStream __os = __og.os();
-                FacesHelper.write(__os, listOfFacesToLearn);
+                FileHelper.write(__os, jpegFileOfFace);
+                __os.writeString(name);
             }
             catch(Ice.LocalException __ex)
             {
@@ -107,17 +108,17 @@ public final class _RecognizerDelM extends Ice._ObjectDelM implements _Recognize
         }
     }
 
-    public Face[]
-    recognizePeople(byte[][] listOfJpegFiles, java.util.Map<String, String> __ctx)
+    public String
+    recognizeFace(byte[] jpegFileOfFace, java.util.Map<String, String> __ctx)
         throws IceInternal.LocalExceptionWrapper
     {
-        IceInternal.Outgoing __og = __handler.getOutgoing("recognizePeople", Ice.OperationMode.Normal, __ctx);
+        IceInternal.Outgoing __og = __handler.getOutgoing("recognizeFace", Ice.OperationMode.Normal, __ctx);
         try
         {
             try
             {
                 IceInternal.BasicStream __os = __og.os();
-                FilesHelper.write(__os, listOfJpegFiles);
+                FileHelper.write(__os, jpegFileOfFace);
             }
             catch(Ice.LocalException __ex)
             {
@@ -139,8 +140,8 @@ public final class _RecognizerDelM extends Ice._ObjectDelM implements _Recognize
                 }
                 IceInternal.BasicStream __is = __og.is();
                 __is.startReadEncaps();
-                Face[] __ret;
-                __ret = FacesHelper.read(__is);
+                String __ret;
+                __ret = __is.readString();
                 __is.endReadEncaps();
                 return __ret;
             }

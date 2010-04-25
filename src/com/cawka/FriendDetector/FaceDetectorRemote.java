@@ -8,51 +8,96 @@ import FriendDetector.RecognizerPrxHelper;
 import android.graphics.Bitmap;
 import android.util.Log;
 
-public class FaceDetectorRemote extends iFaceDetector 
+public class FaceDetectorRemote extends iFaceDetector implements iFaceLearner
 {
 	private final static String TAG="FaceDetector";
 	
-	public FaceDetectorRemote( Bitmap bmp ) throws DetectionError
+	private Ice.Communicator _ic=Ice.Util.initialize();
+	private RecognizerPrx _recognizer=null;
+	
+	private String _proxy="131.179.192.201"; //test01 server in LASR lab
+	private int    _timeout=1000;
+	
+	////////////////////////////////////////////////////////////////////////////////
+	////////////////////////////////////////////////////////////////////////////////
+	////////////////////////////////////////////////////////////////////////////////
+	
+	public FaceDetectorRemote( String proxy, int ms_timeout )
 	{
-		super( bmp );
+		_proxy=proxy;
+		_timeout=ms_timeout; //timeout in milliseconds. Technically, it can be longer due to DNS and connection issues
 	}
-
-	protected void performDetection( ) throws DetectionError
+	
+	
+	private void tryConnect( ) throws Exception
 	{
-		Ice.Communicator ic=null;
+		Log.v( TAG, "tryConnect" );
+		
+		Ice.ObjectPrx base=_ic.stringToProxy( "FaceDetector:default -h "+_proxy+" -t "+Integer.toString(_timeout)+" -p 55436" );
+		if( base==null ) throw new RuntimeException( "Remote server is not available" );
+		
+		_recognizer=RecognizerPrxHelper.checkedCast( base );
+		if( _recognizer==null ) throw new RuntimeException( "Remote server configuration error" );
+	}
+	
+	////////////////////////////////////////////////////////////////////////////////
+	////////////////////////////////////////////////////////////////////////////////
+	////////////////////////////////////////////////////////////////////////////////
+	
+	protected boolean detect( Bitmap bitmap )
+	{
 		try
 		{
-			ic = Ice.Util.initialize( );
-
-			Ice.ObjectPrx base=ic.stringToProxy( "FaceDetector:default -h cawka.homeip.net -t 1000 -p 55436" );
-			if( base==null ) throw new RuntimeException( "Remote server is not available" );
-
-			RecognizerPrx recognizer=RecognizerPrxHelper.checkedCast( base );
-			if( recognizer==null ) throw new RuntimeException( "Remote server configuration error" );
+			if( _recognizer==null ) tryConnect( );
 
 			ByteArrayOutputStream os=new ByteArrayOutputStream( );
-			_bitmap.compress( Bitmap.CompressFormat.JPEG, 100, os );
+			bitmap.compress( Bitmap.CompressFormat.JPEG, 100, os );
 
-			Face[] faces=recognizer.findFacesAndRecognizePeople( os.toByteArray() );
+			Face[] faces=_recognizer.findFacesAndRecognizePeople( os.toByteArray() );
 		
 			for( Face face : faces )
 			{
-				_faces.add( Person.createPerson(_bitmap, face.position, face.name) );
+				_faces.add( Person.createPerson(bitmap, face.position, face.name) );
 			}
-		}
-		catch( Ice.LocalException e )
-		{
-			Log.v( TAG, e.getMessage()+"e.getStackTrace().toString()" );
 			
+			return true;
+		}
+		catch( Exception e ) //Ice.LocalException e
+		{
+			_recognizer=null; //to make sure next time it will try again to connect
+			
+			Log.v( TAG, (e.getMessage()!=null)?e.getMessage():"unknown error" );
 			Log.v( TAG, Log.getStackTraceString(e) );
 			
-			throw new DetectionError( );
-		}
-		catch( Exception e )
-		{
-			Log.v( TAG, e.getMessage() );
-			
-			throw new DetectionError( );
+			return false;
 		}
 	}	
+	
+	////////////////////////////////////////////////////////////////////////////////
+	////////////////////////////////////////////////////////////////////////////////
+	////////////////////////////////////////////////////////////////////////////////
+
+	public boolean learn( Bitmap bitmap, String name )
+	{
+		try
+		{
+			if( _recognizer==null ) tryConnect( );
+			
+			ByteArrayOutputStream os=new ByteArrayOutputStream( );
+			bitmap.compress( Bitmap.CompressFormat.JPEG, 100, os );
+
+			_recognizer.learn( os.toByteArray(), name );
+			
+			return true;
+		}
+		catch( Exception e ) //Ice.LocalException e
+		{
+			_recognizer=null; //to make sure next time it will try again to connect
+			
+			Log.v( TAG, (e.getMessage()!=null)?e.getMessage():"unknown error" );
+			Log.v( TAG, Log.getStackTraceString(e) );
+			
+			return false;
+		}
+	}
 }

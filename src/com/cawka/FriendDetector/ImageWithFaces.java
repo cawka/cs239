@@ -75,6 +75,11 @@ public class ImageWithFaces extends View
 		return bmp;
 	}
 	
+	public Bitmap getBitmapSafe( ) //leave bitmap
+	{
+		return _bmp;
+	}
+	
 	public boolean isBitmap( )
 	{
 		return _bmp!=null;

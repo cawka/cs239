@@ -56,20 +56,20 @@ public final class RecognizerPrxHelper extends Ice.ObjectPrxHelperBase implement
     }
 
     public void
-    learn(Face[] listOfFacesToLearn)
+    learn(byte[] jpegFileOfFace, String name)
     {
-        learn(listOfFacesToLearn, null, false);
+        learn(jpegFileOfFace, name, null, false);
     }
 
     public void
-    learn(Face[] listOfFacesToLearn, java.util.Map<String, String> __ctx)
+    learn(byte[] jpegFileOfFace, String name, java.util.Map<String, String> __ctx)
     {
-        learn(listOfFacesToLearn, __ctx, true);
+        learn(jpegFileOfFace, name, __ctx, true);
     }
 
     @SuppressWarnings("unchecked")
     private void
-    learn(Face[] listOfFacesToLearn, java.util.Map<String, String> __ctx, boolean __explicitCtx)
+    learn(byte[] jpegFileOfFace, String name, java.util.Map<String, String> __ctx, boolean __explicitCtx)
     {
         if(__explicitCtx && __ctx == null)
         {
@@ -83,7 +83,7 @@ public final class RecognizerPrxHelper extends Ice.ObjectPrxHelperBase implement
             {
                 __delBase = __getDelegate(false);
                 _RecognizerDel __del = (_RecognizerDel)__delBase;
-                __del.learn(listOfFacesToLearn, __ctx);
+                __del.learn(jpegFileOfFace, name, __ctx);
                 return;
             }
             catch(IceInternal.LocalExceptionWrapper __ex)
@@ -97,21 +97,21 @@ public final class RecognizerPrxHelper extends Ice.ObjectPrxHelperBase implement
         }
     }
 
-    public Face[]
-    recognizePeople(byte[][] listOfJpegFiles)
+    public String
+    recognizeFace(byte[] jpegFileOfFace)
     {
-        return recognizePeople(listOfJpegFiles, null, false);
+        return recognizeFace(jpegFileOfFace, null, false);
     }
 
-    public Face[]
-    recognizePeople(byte[][] listOfJpegFiles, java.util.Map<String, String> __ctx)
+    public String
+    recognizeFace(byte[] jpegFileOfFace, java.util.Map<String, String> __ctx)
     {
-        return recognizePeople(listOfJpegFiles, __ctx, true);
+        return recognizeFace(jpegFileOfFace, __ctx, true);
     }
 
     @SuppressWarnings("unchecked")
-    private Face[]
-    recognizePeople(byte[][] listOfJpegFiles, java.util.Map<String, String> __ctx, boolean __explicitCtx)
+    private String
+    recognizeFace(byte[] jpegFileOfFace, java.util.Map<String, String> __ctx, boolean __explicitCtx)
     {
         if(__explicitCtx && __ctx == null)
         {
@@ -123,10 +123,10 @@ public final class RecognizerPrxHelper extends Ice.ObjectPrxHelperBase implement
             Ice._ObjectDel __delBase = null;
             try
             {
-                __checkTwowayOnly("recognizePeople");
+                __checkTwowayOnly("recognizeFace");
                 __delBase = __getDelegate(false);
                 _RecognizerDel __del = (_RecognizerDel)__delBase;
-                return __del.recognizePeople(listOfJpegFiles, __ctx);
+                return __del.recognizeFace(jpegFileOfFace, __ctx);
             }
             catch(IceInternal.LocalExceptionWrapper __ex)
             {

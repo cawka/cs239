@@ -1,13 +1,8 @@
 package com.cawka.FriendDetector;
 
 import java.io.IOException;
-
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
+import java.util.LinkedList;
+import java.util.List;
 
 import com.cawka.FriendDetector.R;
 
@@ -40,7 +35,7 @@ public class FriendDetector extends Activity
 	
     private static final int MENU_SELECT = 1;
 	private static final int MENU_ROTATE = 2;
-	private static final int MENU_XML    = 3;
+	private static final int MENU_RETRY = 3;
 
 	private static final int SELECT_IMAGE = 1;
 	
@@ -53,10 +48,20 @@ public class FriendDetector extends Activity
     private Handler _handler = new Handler(); //to handle UI updates
     private Thread _thread;
     
-    private FaceDetection _faceDetection;
+//    private FaceDetection _faceDetection;
     
     private ProgressBar    _progress2;
     private Object _progress_lock=new Object();
+    
+    private iFaceDetector _detectors[] = { 
+											//new FaceDetectorRemote( "cawka.homeip.net",20000 ), 
+    										new FaceDetectorRemote( "131.179.192.201",2000 ), 
+    										new FaceDetectorLocal( ) 
+    									 };
+    private iFaceLearner _learners[] = {
+								    		//new FaceDetectorRemote( "cawka.homeip.net",20000 )
+											new FaceDetectorRemote( "131.179.192.201",2000 ), 
+    								   };
     
     ////////////////////////////////////////////////////////////////////
     
@@ -71,6 +76,7 @@ public class FriendDetector extends Activity
         registerForContextMenu( _names_list );
         
         _names_list.setImageWithFaces( _picture );
+        _names_list.setFriendDetector( this );
         _picture   .setListOfPeople( _names_list );
         
         _picture.setOnClickListener( new OnClickListener()
@@ -104,18 +110,6 @@ public class FriendDetector extends Activity
         	state=null;
         	System.gc( );
         }
-	}
-	
-	private class SavedState
-	{
-		public Bitmap _bitmap;
-		public ListAdapter _adapter;
-		
-		public SavedState( ) //Bitmap face, ListAdapter adapter )
-		{
-			_bitmap=_picture.getBitmap( );
-			_adapter=_names_list.getAdapter();
-		}
 	}
 	
 	protected void onDestroy()
@@ -166,13 +160,10 @@ public class FriendDetector extends Activity
         {
 	        menu.add(0, MENU_ROTATE, 0, "Rotate")
 	        	.setIcon( android.R.drawable.ic_menu_rotate );
+	        
+	        menu.add(0, MENU_RETRY, 0, "Retry" )
+	        	.setIcon( R.drawable.ic_menu_refresh );
         }
-        
-//        if( _names_list.getAdapter().getCount()>0 )
-//        {
-//        	menu.add(0, MENU_XML, 0, "XML" )
-//        		.setIcon( android.R.drawable.ic_menu_info_details );
-//        }
 
     	return true;
     }
@@ -186,6 +177,9 @@ public class FriendDetector extends Activity
 	        case MENU_SELECT:
 	        	selectImage( );
 	            return true;
+    		case MENU_RETRY:
+	            retryDetection( );
+    			return true;
     		case MENU_ROTATE:
     			Bitmap bmp=_picture.getBitmap( );
     			if( bmp==null ) return false;
@@ -201,62 +195,20 @@ public class FriendDetector extends Activity
 
 				processBitmap( rotated_bitmap );
     			return true;
-//    		case MENU_XML:
-//    			try
-//    			{
-////    				StringBuilder request=new StringBuilder();
-////    				request.append( "<FriendDetector>\n" );
-////    				for( int i=0; i<_names_list.getAdapter().getCount(); i++ )
-////    				{
-////    					Person person=(Person)_names_list.getAdapter().getItem( i );
-////    					person.appendWithRequest( request );
-////    				}
-////    				request.append( "</FriendDetector>\n" );
-//
-////    				Log.v( TAG, request.toString() );
-//    			}
-//    			catch( Exception ex )
-//    			{
-//    				//
-//    			}
-//
-//    			return true;
         }
 
     	return false;
     }
-     
-    private void processBitmap( Bitmap bitmap )
+    
+    private void selectImage( )
     {
     	if( _thread!=null ) return;
     	
-    	_picture.setBitmap( bitmap );
+    	Intent i=new Intent( Intent.ACTION_PICK );
+    	i.setType( "image/*" );
 
-    	if( _progress2==null )
-    	{
-    		_progress2 =(ProgressBar) findViewById( R.id.progress_bar_image );
-    	}
-    	_progress2.setVisibility( View.VISIBLE );
-    	
-		_faceDetection=new FaceDetection( bitmap );
-		_thread=new Thread( _faceDetection );
-		_thread.start( );   	
+    	startActivityForResult( i, SELECT_IMAGE );
     }
-    
-    protected String getRealPathFromURI( Uri contentUri ) 
-    {
-    	// can post image  
-    	String [] proj={ Images.Media.DATA };
-    	Cursor cursor = managedQuery( contentUri,  
-    	        proj, // Which columns to return  
-    	        null,       // WHERE clause; which rows to return (all rows)  
-    	        null,       // WHERE clause selection arguments (none)  
-    	        null); // Order-by clause (ascending by name)  
-    	int column_index = cursor.getColumnIndexOrThrow( Images.Media.DATA );  	
-		cursor.moveToFirst();  
-
-		return cursor.getString(column_index);  
-    }  
     
     protected void onActivityResult( int requestCode, int resultCode, Intent data )
     {
@@ -267,6 +219,11 @@ public class FriendDetector extends Activity
     		case SELECT_IMAGE:
 				_names_list.clear( );
 				_picture.setBitmap( null ); //recycle the bitmap
+//				java.lang.MemoryUsage.
+				Log.v( TAG, Double.toString(Runtime.getRuntime().totalMemory()) );
+				Log.v( TAG, Double.toString(Runtime.getRuntime().freeMemory()) );
+
+				System.gc();
     			
     			Bitmap bmp=null;
     			int orientation=-1;//ExifInterface.ORIENTATION_UNDEFINED;
@@ -312,18 +269,86 @@ public class FriendDetector extends Activity
     	}
     }
     
-    private void selectImage( )
+    private void processBitmap( Bitmap bitmap )
     {
     	if( _thread!=null ) return;
     	
-    	Intent i=new Intent( Intent.ACTION_PICK );
-    	i.setType( "image/*" );
+    	_picture.setBitmap( bitmap );
 
-    	startActivityForResult( i, SELECT_IMAGE );
+    	if( _progress2==null )
+    	{
+    		_progress2 =(ProgressBar) findViewById( R.id.progress_bar_image );
+    	}
+    	_progress2.setVisibility( View.VISIBLE );
+    	
+		_thread=new Thread( new Thread(new FaceDetection( bitmap )) );
+		_thread.start( );   	
     }
     
+    private void retryDetection( )
+    {
+    	if( _thread!=null ) return;
+    	
+    	Bitmap bitmap=_picture.getBitmapSafe( );
+    	if( bitmap==null ) return;
+    	
+    	if( _progress2==null )
+    	{
+    		_progress2 =(ProgressBar) findViewById( R.id.progress_bar_image );
+    	}
+    	_progress2.setVisibility( View.VISIBLE );
+    	
+    	_names_list.clear( );
+		_thread=new Thread( new Thread(new FaceDetection( bitmap )) );
+		_thread.start( );    	
+    }
     
-    private class updateUI implements Runnable
+    protected String getRealPathFromURI( Uri contentUri ) 
+    {
+    	// can post image  
+    	String [] proj={ Images.Media.DATA };
+    	Cursor cursor = managedQuery( contentUri,  
+    	        proj, // Which columns to return  
+    	        null,       // WHERE clause; which rows to return (all rows)  
+    	        null,       // WHERE clause selection arguments (none)  
+    	        null); // Order-by clause (ascending by name)  
+    	int column_index = cursor.getColumnIndexOrThrow( Images.Media.DATA );  	
+		cursor.moveToFirst();  
+
+		return cursor.getString(column_index);  
+    }  
+    
+    public void onLearnRequest( Bitmap face, String name )
+    {
+    	if( _thread!=null ) return;
+
+    	if( _progress2==null )
+    	{
+    		_progress2 =(ProgressBar) findViewById( R.id.progress_bar_image );
+    	}
+    	_progress2.setVisibility( View.VISIBLE );
+    	
+		_thread=new Thread( new FaceLearning(face,name) );
+		_thread.start( );   	
+	}
+ 
+    /////////////////////////////////////////////////////////////////////////////////
+    
+	private class SavedState
+	{
+		public Bitmap _bitmap;
+		public ListAdapter _adapter;
+		
+		public SavedState( ) //Bitmap face, ListAdapter adapter )
+		{
+			_bitmap=_picture.getBitmap( );
+			_adapter=_names_list.getAdapter();
+		}
+	}    
+    
+    /////////////////////////////////////////////////////////////////////////////////
+
+	private class updateUI implements Runnable
     {
     	private iFaceDetector _detector;
     	
@@ -335,8 +360,8 @@ public class FriendDetector extends Activity
 		public void run() 
 		{
 			synchronized( _progress_lock ) 
-//			 to handle the case when onPause is called almost simultaneously
-//			 with thread termination
+			// to handle the case when onPause is called almost simultaneously
+			// with thread termination
 			{
 				if( _progress2!=null ) {  _progress2.setVisibility( View.INVISIBLE ); }
 			}
@@ -351,8 +376,25 @@ public class FriendDetector extends Activity
 			_thread=null;
 		}
     }
+	
+	private class releaseUI implements Runnable
+	{
+		public void run( )
+		{
+			synchronized( _progress_lock ) 
+			// to handle the case when onPause is called almost simultaneously
+			// with thread termination
+			{
+				if( _progress2!=null ) {  _progress2.setVisibility( View.INVISIBLE ); }
+			}
+			
+			_thread=null;
+		}
+	}
     
-    private class FaceDetection implements Runnable
+    /////////////////////////////////////////////////////////////////////////////////
+
+	private class FaceDetection implements Runnable
     {
     	private Bitmap _bitmap;
     	
@@ -365,26 +407,49 @@ public class FriendDetector extends Activity
 		{
 			Person.resetColors( );
 			
-			iFaceDetector detector=null;
 			// if a remote detector fails (e.g., network is unavailable or server is not running), run a local one
-			try
+			for( iFaceDetector detector : _detectors )
 			{
-				detector=new FaceDetectorRemote( _bitmap );
-			}
-			catch( iFaceDetector.DetectionError e )
-			{
-				try
+				boolean ret=detector.detect( _bitmap );
+				if( ret ) 
 				{
-					detector=new FaceDetectorLocal( _bitmap );
+					_handler.post( new updateUI(detector) );
+					// technically, we could run all detectors, but the question is how we going to merge the results
+					break;
 				}
-				catch( iFaceDetector.DetectionError e2 )
+				else
 				{
-					//cannot happen now
+					_handler.post( new Runnable() 
+						{ 
+							public void run() 
+							{ 
+								Toast.makeText(FriendDetector.this, "Detector timeout, using next available", Toast.LENGTH_SHORT).show(); 
+							} 
+						} );
 				}
 			}
-			
-			_handler.post( new updateUI(detector) );
 		}
     }
+	
+	private class FaceLearning implements Runnable
+	{
+		Bitmap _bitmap;
+		String _name;
+		
+		public FaceLearning( Bitmap bitmap, String name )
+		{
+			_bitmap=bitmap;
+			_name=name;
+		}
+		
+		public void run( )
+		{
+			for( iFaceLearner learner : _learners )
+			{
+				learner.learn( _bitmap, _name );
+			}
+			_handler.post( new releaseUI() );
+		}
+	}
 }
 

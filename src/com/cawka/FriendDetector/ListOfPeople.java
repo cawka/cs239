@@ -24,6 +24,8 @@ public class ListOfPeople extends ListView
 	private PeopleAdapter _adapter;
 	private ImageWithFaces _picture;
 	
+	private FriendDetector _friendDetector;
+	
 	public ListOfPeople( Context context, AttributeSet attrs, int defStyle )
 	{
 		super( context, attrs, defStyle );
@@ -43,6 +45,11 @@ public class ListOfPeople extends ListView
 		super( context );
 		
 		init( );
+	}
+	
+	public void setFriendDetector( FriendDetector friendDetector )
+	{
+		_friendDetector=friendDetector;
 	}
 
 	//////////////////////////////////////////////////////////////////////
@@ -103,6 +110,8 @@ public class ListOfPeople extends ListView
 					{
 						_adapter.getItem( position ).setName( value );
 						_adapter.notifyDataSetChanged( );
+						
+						ListOfPeople.this._friendDetector.onLearnRequest( _adapter.getItem(position).getFace(), value );
 					}
 				}  
 			} );  
