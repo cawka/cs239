@@ -20,7 +20,6 @@
         android:key="test"
         android:title="test settings"
         android:summary="test summary"
-        android:persistent="false"
-        android:disableDependentsState="true" />
+        android:persistent="true" />
 
 </PreferenceScreen>
