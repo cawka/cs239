@@ -14,6 +14,7 @@ import android.text.method.DigitsKeyListener;
 public class Settings extends PreferenceActivity
 	implements OnPreferenceChangeListener
 {
+	public static final String KEY_MAX_SIZE = "max_size";
 	public static final String KEY_LOCAL_ENABLED   = "local_enabled";
 	public static final String KEY_REMOTE_ENABLED  = "remote_enabled";
 	public static final String KEY_HOSTNAME = "remote_hostname";
@@ -24,6 +25,7 @@ public class Settings extends PreferenceActivity
 	private EditTextPreference _hostname;
 	private EditTextPreference _port;
 	private EditTextPreference _timeout;
+	private EditTextPreference _max_size;
 	
     protected void onCreate( Bundle savedInstanceState ) 
     {
@@ -32,6 +34,7 @@ public class Settings extends PreferenceActivity
         addPreferencesFromResource( R.xml.settings );
 
 //        _enabled =(CheckBoxPreference)findPreference( KEY_ENABLED );
+        _max_size=(EditTextPreference)findPreference( KEY_MAX_SIZE );
         _hostname=(EditTextPreference)findPreference( KEY_HOSTNAME );
         _port    =(EditTextPreference)findPreference( KEY_PORT );
         _timeout =(EditTextPreference)findPreference( KEY_TIMEOUT );
@@ -39,12 +42,16 @@ public class Settings extends PreferenceActivity
         _hostname.setOnPreferenceChangeListener( this );
         _port    .setOnPreferenceChangeListener( this );
         _timeout .setOnPreferenceChangeListener( this );
+        _max_size.setOnPreferenceChangeListener( this );
         
         PreferenceScreen prefSet = getPreferenceScreen();
+        
+        _max_size.setSummary( prefSet.getSharedPreferences().getString(KEY_MAX_SIZE,"800") );
         _hostname.setSummary( prefSet.getSharedPreferences().getString(KEY_HOSTNAME,"") );
         _port    .setSummary( prefSet.getSharedPreferences().getString(KEY_PORT, "55436") );
         _timeout .setSummary( prefSet.getSharedPreferences().getString(KEY_TIMEOUT,"2000") );
         
+        _max_size.getEditText().setKeyListener( DigitsKeyListener.getInstance(false,true) );
         _port    .getEditText().setKeyListener( DigitsKeyListener.getInstance(false,true) ); 
         _timeout .getEditText().setKeyListener( DigitsKeyListener.getInstance(false,true) ); 
         
@@ -63,7 +70,9 @@ public class Settings extends PreferenceActivity
 	{
 		if( preference==_hostname ||
 			preference==_port ||
-			preference==_timeout )
+			preference==_timeout ||
+			preference==_max_size
+			)
 		{
 			((EditTextPreference)preference).setSummary( (String)newValue );
 			return true;

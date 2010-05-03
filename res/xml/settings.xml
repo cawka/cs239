@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+	
+	<EditTextPreference
+        android:key="max_size"
+        android:title="Max size"
+        android:summary="Maximum dimension size of the image"
+        android:dialogTitle="Max size (pixels)"
+        android:singleLine="true"
+        />
 
     <CheckBoxPreference
         android:key="local_enabled"

@@ -43,10 +43,8 @@ public class FriendDetector extends Activity
 	private static final int SELECT_IMAGE = 1;
 	private static final int CHANGE_SETTINGS = 2;
 	
-	private static final int MAX_SIZE = 800;
+	private static int MAX_SIZE = 800;
 
-
-    
     private ImageWithFaces _picture;
     private ListOfPeople   _names_list;
     
@@ -103,8 +101,11 @@ public class FriendDetector extends Activity
         
         _detectors=new LinkedList<iFaceDetector>( );
         _learners =new LinkedList<iFaceLearner>( );
-
+        
         SharedPreferences prefs=PreferenceManager.getDefaultSharedPreferences( getBaseContext() );
+        
+        MAX_SIZE=Integer.parseInt( prefs.getString(Settings.KEY_MAX_SIZE, "800") );
+        
         if( prefs.getBoolean(Settings.KEY_REMOTE_ENABLED, false) )
         {
         	FaceDetectorRemote detector=new FaceDetectorRemote(
@@ -165,7 +166,7 @@ public class FriendDetector extends Activity
 	
 	public Object onRetainNonConfigurationInstance( ) 
 	{
-		Log.v( TAG, "onRetainNonConfiguratioInstance" );
+		Log.v( TAG, "onRetainNonConfigurationInstance" );
 		return new SavedState( );
 	}
 	
@@ -284,7 +285,7 @@ public class FriendDetector extends Activity
     		case SELECT_IMAGE:
 				_names_list.clear( );
 				_picture.setBitmap( null ); //recycle the bitmap
-//				java.lang.MemoryUsage.
+
 				Log.v( TAG, "Total mem: "+Double.toString(Runtime.getRuntime().totalMemory()) );
 				Log.v( TAG, "Free mem: "+Double.toString(Runtime.getRuntime().freeMemory()) );
 
@@ -321,11 +322,19 @@ public class FriendDetector extends Activity
     				Toast.makeText( this, e.getMessage(), Toast.LENGTH_LONG ).show( );
 					return; 
 				}
-				
-				Bitmap resized_bmp=ImageWithFaces.processBitmap( bmp, MAX_SIZE, orientation );				
-				bmp=null;
 
-				processBitmap( resized_bmp );
+    			try
+    			{
+					Bitmap resized_bmp=ImageWithFaces.processBitmap( bmp, MAX_SIZE, orientation );	
+//					bmp.recycle( );
+					bmp=null;
+					processBitmap( resized_bmp );
+    			}
+    			catch( Exception e )
+    			{
+    				Toast.makeText( this, e.getLocalizedMessage(), Toast.LENGTH_SHORT ).show( );
+    				processBitmap( bmp );
+    			}
 
     			break;
     		}
