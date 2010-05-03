@@ -4,12 +4,18 @@ import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
 
-import com.cawka.FriendDetector.R;
+import com.karthik.learnsql.R;
+import com.karthik.learnsql.DBHandle;
 
 import android.app.Activity;
+import android.content.ContentValues;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
+import android.database.sqlite.SQLiteDatabase.CursorFactory;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
@@ -35,7 +41,19 @@ public class FriendDetector extends Activity
 {
 	private static final String TAG="FriendDetector";
 	
-    private static final int MENU_SELECT = 1;
+	public static final String Create =  "create table detectors(_id integer primary key autoincrement, _server VARCHAR[20] not null, "
+        + "_port int not null, _enabled boolean not null,"
+        +	"_localEnabled boolean not null, _RemoteEnabled boolean not null, _timeout int not null);";
+	
+	private static final String Server = "_server";
+	private static final String Port = "_port";
+	private static final String Enabled = "_enabled";
+	private static final String LocalEnabled = "_localEnabled";
+	private static final String Timeout = "_timeout";
+	private static final String Table = "detectors";
+	private static final String RemoteEnabled = "_RemoteEnabled";
+	
+	private static final int MENU_SELECT = 1;
 	private static final int MENU_ROTATE = 2;
 	private static final int MENU_RETRY = 3;
 	private static final int MENU_SETTINGS = 4;
@@ -44,8 +62,6 @@ public class FriendDetector extends Activity
 	private static final int CHANGE_SETTINGS = 2;
 	
 	private static final int MAX_SIZE = 800;
-
-
     
     private ImageWithFaces _picture;
     private ListOfPeople   _names_list;
@@ -60,6 +76,9 @@ public class FriendDetector extends Activity
     
     private List<iFaceDetector> _detectors;
     private List<iFaceLearner>  _learners;
+    
+    private DBHandle helper;
+    private SQLiteDatabase db;
 //    = { 
 											//new FaceDetectorRemote( "cawka.homeip.net",20000 ), 
 //    										new FaceDetectorRemote( "131.179.192.201",2000 ), 
@@ -93,11 +112,30 @@ public class FriendDetector extends Activity
 					selectImage( );
 				}
         	} );
-        
-		restoreSettings( );
+        helper = new DBHandle(this, Create);
+        db = helper.getReadableDatabase();
+		LoadServers();
     }
+		
+	public Cursor fetchAllServers() {
+
+        return db.query(Table, new String[] {"_id", Server, Port,
+                Enabled, LocalEnabled, RemoteEnabled, Timeout}, null, null, null, null, null);
+    }
+
 	
-	protected void restoreSettings( )
+	private void LoadServers() {
+		// TODO Auto-generated method stub
+		//DB code goes here
+		//or can use the local detector
+		Cursor c = fetchAllServers();
+    	Log.v("Karthik","Cursor " + c.getCount());
+    	startManagingCursor(c);
+    	
+		new Toast(this).makeText(this, "Falling to Default !! " + c.getCount() + " entries in table", Toast.LENGTH_SHORT).show();
+	}
+
+	protected void restoreSettings(Intent data )
 	{
         Log.v( TAG, "restoreSettings" );
         
@@ -151,7 +189,7 @@ public class FriendDetector extends Activity
 	protected void onDestroy()
 	{
 		super.onDestroy( );
-
+		helper.close();
 		try
 		{
 			if( _thread!=null ) _thread.join( );
@@ -250,7 +288,7 @@ public class FriendDetector extends Activity
     			return true;
     		case MENU_SETTINGS:
     			Intent i=new Intent( );
-    			i.setAction( "com.cawka.FriendDetector.SETTINGS" );
+    			i.setAction( "com.karthik.learnsql.learnsql" );
     			startActivityForResult( i, CHANGE_SETTINGS );
     			
     			return true;
@@ -273,7 +311,7 @@ public class FriendDetector extends Activity
     {
     	if( requestCode==CHANGE_SETTINGS )
     	{
-    		restoreSettings( );
+    		restoreSettings(data );
     		return;
     	}
     	

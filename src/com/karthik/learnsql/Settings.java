@@ -1,6 +1,4 @@
-package com.cawka.FriendDetector;
-
-import com.karthik.learnsql.R;
+package com.karthik.learnsql;
 
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
@@ -14,6 +12,11 @@ import android.text.method.DigitsKeyListener;
 public class Settings extends PreferenceActivity
 	implements OnPreferenceChangeListener
 {
+	public static final String Create =  "create table detectors(_id integer primary key autoincrement, _server VARCHAR[20] not null, "
+        + "_port int not null, _enabled boolean not null,"
+        +	"_localEnabled boolean not null, _RemoteEnabled boolean not null, _timeout int not null);";
+	
+	public static final String Enabled = "_enabled";
 	public static final String KEY_LOCAL_ENABLED   = "local_enabled";
 	public static final String KEY_REMOTE_ENABLED  = "remote_enabled";
 	public static final String KEY_HOSTNAME = "remote_hostname";
