@@ -6,6 +6,7 @@ import java.util.List;
 
 import com.cawka.FriendDetector.R;
 import com.cawka.FriendDetector.detector.FaceDetectorLocal;
+import com.cawka.FriendDetector.detector.FaceDetectorRemote;
 import com.cawka.FriendDetector.detector.iFaceDetector;
 import com.cawka.FriendDetector.detector.iFaceLearner;
 import com.cawka.FriendDetector.gui.ImageWithFaces;
@@ -111,13 +112,13 @@ public class Main extends Activity
         	if( config.type==Server.REMOTE )
         	{
         		count_remote++;
-//	        	FaceDetectorRemote detector=new FaceDetectorRemote(
-//					config.hostname,
-//					Integer.toString(config.port),
-//					config.timeout
-//				);
-//		    	_detectors.add( detector );
-//		    	_learners.add( detector );
+	        	FaceDetectorRemote detector=new FaceDetectorRemote(
+					config.hostname,
+					Integer.toString(config.port),
+					config.timeout
+				);
+		    	_detectors.add( detector );
+		    	_learners.add( detector );
         	}
         	else if( config.type==Server.LOCAL )
         	{
