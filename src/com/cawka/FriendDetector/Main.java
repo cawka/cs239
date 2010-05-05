@@ -112,13 +112,13 @@ public class Main extends Activity
         	if( config.type==Server.REMOTE )
         	{
         		count_remote++;
-	        	FaceDetectorRemote detector=new FaceDetectorRemote(
-					config.hostname,
-					Integer.toString(config.port),
-					config.timeout
-				);
-		    	_detectors.add( detector );
-		    	_learners.add( detector );
+//	        	FaceDetectorRemote detector=new FaceDetectorRemote(
+//					config.hostname,
+//					Integer.toString(config.port),
+//					config.timeout
+//				);
+//		    	_detectors.add( detector );
+//		    	_learners.add( detector );
         	}
         	else if( config.type==Server.LOCAL )
         	{

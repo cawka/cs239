@@ -22,7 +22,7 @@ import android.widget.Toast;
 
 public class DBHandleEigen extends SQLiteOpenHelper
 {
-	private static final String DB_NAME="detectors";
+	private static final String DB_NAME="eigen";
 	private static final String TABLE  ="eigen";
 	
 	private static final String INIT_TABLE =  
@@ -45,7 +45,7 @@ public class DBHandleEigen extends SQLiteOpenHelper
 		
 	public DBHandleEigen( Context context ) 
 	{
-		super( context, DB_NAME, null, Main.DB_VERSION );
+		super( context, DB_NAME, null, 1 );
 		getWritableDatabase( ).close( ); // to initialize database if necessary
 		
 //		SQLiteDatabase db=getWritableDatabase( );

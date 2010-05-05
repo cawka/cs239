@@ -1,10 +1,17 @@
-<LinearLayout 
-	android:id="@+id/main_view" 
-	android:orientation="vertical"
+<FrameLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:id="@+id/frame_layout"
 	android:layout_width="fill_parent" 
-	android:layout_height="fill_parent" 
-	android:layout_weight="0"
-	xmlns:android="http://schemas.android.com/apk/res/android">
+	android:layout_height="fill_parent"
+>
+	<LinearLayout 
+		android:id="@+id/main_view" 
+		android:orientation="vertical"
+		android:layout_width="fill_parent" 
+		android:layout_height="fill_parent" 
+		android:layout_weight="0"
+		android:background="@drawable/background"
+		>
 	
 	<LinearLayout
 		android:id="@+id/upper_linear"
@@ -13,29 +20,19 @@
 		android:layout_height="fill_parent"
 		android:layout_weight="1"
 		>
-
-		<FrameLayout
-			android:id="@+id/frame_layout"
-			android:layout_width="wrap_content" 
-			android:layout_height="wrap_content"
-		>
+		
 			<com.cawka.FriendDetector.gui.ImageWithFaces 
 				android:id="@+id/picture"
 				android:layout_width="wrap_content" 
 				android:layout_height="wrap_content"
+				android:background="@drawable/block_background"
+				android:layout_marginBottom="4dip"
+				android:layout_marginLeft="4dip"
+				android:layout_marginRight="4dip"
+				android:layout_marginTop="4dip"
+				android:padding="4dip"
 			 />
 
-			<ProgressBar
-				android:id="@+id/progress_bar_image"
-				android:visibility="invisible"
-				android:layout_height="16dip"
-                android:layout_width="16dip"
-                android:indeterminate="true" 
-				android:background="@android:color/transparent"
-				/>
-
-		</FrameLayout>
-			
 	</LinearLayout>
 
 	<LinearLayout
@@ -49,7 +46,29 @@
 			android:id="@+id/names_list" 
 			android:layout_width="fill_parent" 
 			android:layout_height="fill_parent"
-			android:choiceMode="singleChoice" />
+			android:choiceMode="singleChoice" 
+			android:background="@drawable/block_background"
+			android:layout_marginBottom="4dip"
+			android:layout_marginLeft="4dip"
+			android:layout_marginRight="4dip"
+			android:layout_marginTop="4dip"
+			android:padding="4dip"
+		/>
 		
 	</LinearLayout>
 </LinearLayout>
+
+	<ProgressBar
+		android:id="@+id/progress_bar_image"
+		android:visibility="invisible"
+		android:layout_height="16dip"
+        android:layout_width="16dip"
+        android:indeterminate="true" 
+		android:layout_marginBottom="2dip"
+		android:layout_marginLeft="2dip"
+		android:layout_marginRight="2dip"
+		android:layout_marginTop="2dip"
+		android:background="@android:color/transparent"
+		/>
+
+</FrameLayout>

@@ -47,7 +47,7 @@ public class DBHandle extends SQLiteOpenHelper
 		
 	public DBHandle( Context context ) 
 	{
-		super( context, DB_NAME, null, Main.DB_VERSION );
+		super( context, DB_NAME, null, 4 );
 		getWritableDatabase( ).close( ); // to initialize database if necessary
 	}
 

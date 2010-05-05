@@ -4,6 +4,7 @@ import com.cawka.FriendDetector.Person;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Matrix;
 import android.graphics.Paint;
@@ -32,28 +33,30 @@ public class ImageWithFaces extends View
 	{
 		super( context, attrs );
 		
+		Bitmap bmp=BitmapFactory.decodeResource( getContext().getResources( ), android.R.drawable.ic_menu_search );
+		setBitmap( bmp );
 //		int resource=attrs.getAttributeResourceValue("android", "src", android.R.drawable.btn_star );
 //		this.setBackgroundResource( resource );
 		
 		init();
 	}
 
-	public ImageWithFaces( Context context, AttributeSet attrs, int defStyle )
-	{
-		super( context, attrs, defStyle );
-		
-		int resource=attrs.getAttributeResourceValue("android", "src", android.R.drawable.btn_star );
-		this.setBackgroundResource( resource );
-
-		init();
-	}
-
-	public ImageWithFaces( Context context ) 
-	{
-		super( context );
-
-		init();
-	}
+//	public ImageWithFaces( Context context, AttributeSet attrs, int defStyle )
+//	{
+//		super( context, attrs, defStyle );
+//		
+//		int resource=attrs.getAttributeResourceValue("android", "src", android.R.drawable.btn_star );
+//		this.setBackgroundResource( resource );
+//
+//		init();
+//	}
+//
+//	public ImageWithFaces( Context context ) 
+//	{
+//		super( context );
+//
+//		init();
+//	}
 	
 	protected void init( )
 	{
@@ -101,14 +104,14 @@ public class ImageWithFaces extends View
 	
 	private void makeDrawableBitmap( )
 	{
-		_ratio=calculateResizeRatio( _bmp, getWidth(), getHeight() );
+		_ratio=calculateResizeRatio( _bmp, getMeasuredWidth()-8, getMeasuredHeight()-8 );
 		_drawableBitmap=resizeBitmap( _bmp, _ratio );
 		
 		_srcRect=new Rect( 0, 0, _drawableBitmap.getWidth(),    _drawableBitmap.getHeight() );
 		_dstRect=new Rect( _srcRect );
 		
-		_offsetX=(getWidth()-_drawableBitmap.getWidth())/2;
-		_offsetY=(getHeight()-_drawableBitmap.getHeight())/2;
+		_offsetX=(getMeasuredWidth()-_drawableBitmap.getWidth())/2;
+		_offsetY=(getMeasuredHeight()-_drawableBitmap.getHeight())/2;
 		_dstRect.offset( _offsetX, _offsetY );
 	}
 	
