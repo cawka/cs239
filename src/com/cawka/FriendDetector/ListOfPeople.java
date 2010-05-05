@@ -1,5 +1,7 @@
 package com.cawka.FriendDetector;
 
+import com.karthik.learnsql.R;
+
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
