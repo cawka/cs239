@@ -5,6 +5,9 @@ import java.util.LinkedList;
 import java.util.List;
 
 import com.cawka.FriendDetector.R;
+import com.cawka.FriendDetector.detector.FaceDetectorLocal;
+import com.cawka.FriendDetector.detector.iFaceDetector;
+import com.cawka.FriendDetector.detector.iFaceLearner;
 import com.cawka.FriendDetector.gui.ImageWithFaces;
 import com.cawka.FriendDetector.gui.ListOfPeople;
 import com.cawka.FriendDetector.settings.DBHandle;
@@ -51,6 +54,8 @@ public class Main extends Activity
 	private static int MAX_SIZE = 800;
     
 	////////////////////////////////////////////////////////////////////
+	
+	public static final int DB_VERSION=4;
 	
     private ImageWithFaces _picture;
     private ListOfPeople   _names_list;
@@ -117,7 +122,9 @@ public class Main extends Activity
         	else if( config.type==Server.LOCAL )
         	{
         		count_local++;
-        		_detectors.add( new FaceDetectorLocal( ) );
+        		FaceDetectorLocal detector=new FaceDetectorLocal(this);
+        		_detectors.add( detector );
+		    	_learners.add( detector );
         	}
         }
         

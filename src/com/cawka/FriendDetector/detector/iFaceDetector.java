@@ -1,7 +1,9 @@
-package com.cawka.FriendDetector;
+package com.cawka.FriendDetector.detector;
 
 import java.util.LinkedList;
 import java.util.List;
+
+import com.cawka.FriendDetector.Person;
 
 import android.graphics.Bitmap;
 
@@ -21,7 +23,7 @@ public abstract class iFaceDetector
 		return ret; 
 	}
 	
-	protected abstract boolean detect( Bitmap bmp );
+	public abstract boolean detect( Bitmap bmp );
 
 	//////////////////////////////////////////////////////////////////
 

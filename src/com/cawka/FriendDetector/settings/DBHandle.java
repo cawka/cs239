@@ -3,6 +3,8 @@ package com.cawka.FriendDetector.settings;
 import java.util.LinkedList;
 import java.util.List;
 
+import com.cawka.FriendDetector.Main;
+
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -45,7 +47,7 @@ public class DBHandle extends SQLiteOpenHelper
 		
 	public DBHandle( Context context ) 
 	{
-		super( context, DB_NAME, null, 4 );
+		super( context, DB_NAME, null, Main.DB_VERSION );
 		getWritableDatabase( ).close( ); // to initialize database if necessary
 	}
 

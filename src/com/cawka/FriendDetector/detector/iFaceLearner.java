@@ -1,4 +1,4 @@
-package com.cawka.FriendDetector;
+package com.cawka.FriendDetector.detector;
 
 import android.graphics.Bitmap;
 

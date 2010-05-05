@@ -19,8 +19,8 @@ public class Person
 	
 	private static int ColorIndex=0;
 	
-	final private static int FACE_WIDTH =64;
-	final private static int FACE_HEIGHT=80;
+	final public static int FACE_WIDTH =64;
+	final public static int FACE_HEIGHT=80;
 	
 	private static final int [] COLORS={ 0xFFFF0000, 0xFF00FF00, 0xFF0000FF, 0xFFFFFF00, 0xFFFF00FF, 0xFF00FFFF, 0xFFFFFFFF };
 	private static Rect rect;

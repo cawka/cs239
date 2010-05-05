@@ -1,6 +1,8 @@
-package com.cawka.FriendDetector;
+package com.cawka.FriendDetector.detector;
 
 import java.io.ByteArrayOutputStream;
+
+import com.cawka.FriendDetector.Person;
 
 import FriendDetector.Face;
 import FriendDetector.RecognizerPrx;
@@ -46,7 +48,7 @@ public class FaceDetectorRemote extends iFaceDetector implements iFaceLearner
 	////////////////////////////////////////////////////////////////////////////////
 	////////////////////////////////////////////////////////////////////////////////
 	
-	protected boolean detect( Bitmap bitmap )
+	public boolean detect( Bitmap bitmap )
 	{
 		try
 		{
