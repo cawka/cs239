@@ -4,8 +4,6 @@ import com.cawka.FriendDetector.Main;
 import com.cawka.FriendDetector.Person;
 import com.cawka.FriendDetector.R;
 
-import com.karthik.learnsql.R;
-
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
