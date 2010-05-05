@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+	<Preference
+			android:key="add_server"
+            android:title="Add server"
+            android:persistent="false"
+             />
+             
+    <PreferenceCategory
+    		android:key="list_of_servers"
+    		android:title="List of detectors"
+    />
+      
+</PreferenceScreen>

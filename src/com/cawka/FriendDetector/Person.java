@@ -1,11 +1,5 @@
 package com.cawka.FriendDetector;
 
-import java.io.ByteArrayOutputStream;
-
-//import org.apache.commons.codec.binary.Base64;
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-
 import FriendDetector.FacePosition;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;

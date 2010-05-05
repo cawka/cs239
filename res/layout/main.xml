@@ -19,7 +19,7 @@
 			android:layout_width="wrap_content" 
 			android:layout_height="wrap_content"
 		>
-			<com.cawka.FriendDetector.ImageWithFaces 
+			<com.cawka.FriendDetector.gui.ImageWithFaces 
 				android:id="@+id/picture"
 				android:layout_width="wrap_content" 
 				android:layout_height="wrap_content"
@@ -45,7 +45,7 @@
 		android:layout_weight="1"
 		>
 		
-		<com.cawka.FriendDetector.ListOfPeople 
+		<com.cawka.FriendDetector.gui.ListOfPeople 
 			android:id="@+id/names_list" 
 			android:layout_width="fill_parent" 
 			android:layout_height="fill_parent"

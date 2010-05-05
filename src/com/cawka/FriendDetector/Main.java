@@ -4,8 +4,11 @@ import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
 
-import com.karthik.learnsql.R;
-import com.karthik.learnsql.DBHandle;
+import com.cawka.FriendDetector.R;
+import com.cawka.FriendDetector.gui.ImageWithFaces;
+import com.cawka.FriendDetector.gui.ListOfPeople;
+import com.cawka.FriendDetector.settings.DBHandle;
+import com.cawka.FriendDetector.settings.Server;
 
 import android.app.Activity;
 import android.content.ContentValues;
@@ -13,9 +16,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
-import android.database.sqlite.SQLiteDatabase.CursorFactory;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
@@ -23,7 +23,6 @@ import android.media.ExifInterface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
-import android.preference.PreferenceManager;
 import android.provider.MediaStore.Images;
 import android.util.Log;
 import android.view.ContextMenu;
@@ -37,21 +36,9 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 import android.widget.AdapterView.AdapterContextMenuInfo;
 
-public class FriendDetector extends Activity
+public class Main extends Activity
 {
 	private static final String TAG="FriendDetector";
-	
-	public static final String Create =  "create table detectors(_id integer primary key autoincrement, _server VARCHAR[20] not null, "
-        + "_port int not null, _enabled boolean not null,"
-        +	"_localEnabled boolean not null, _RemoteEnabled boolean not null, _timeout int not null);";
-	
-	private static final String Server = "_server";
-	private static final String Port = "_port";
-	private static final String Enabled = "_enabled";
-	private static final String LocalEnabled = "_localEnabled";
-	private static final String Timeout = "_timeout";
-	private static final String Table = "detectors";
-	private static final String RemoteEnabled = "_RemoteEnabled";
 	
 	private static final int MENU_SELECT = 1;
 	private static final int MENU_ROTATE = 2;
@@ -61,17 +48,15 @@ public class FriendDetector extends Activity
 	private static final int SELECT_IMAGE = 1;
 	private static final int CHANGE_SETTINGS = 2;
 	
-	private static final int MAX_SIZE = 800;
-
-
+	private static int MAX_SIZE = 800;
     
+	////////////////////////////////////////////////////////////////////
+	
     private ImageWithFaces _picture;
     private ListOfPeople   _names_list;
     
     private Handler _handler = new Handler(); //to handle UI updates
     private Thread _thread;
-    
-//    private FaceDetection _faceDetection;
     
     private ProgressBar    _progress2;
     private Object _progress_lock=new Object();
@@ -79,20 +64,8 @@ public class FriendDetector extends Activity
     private List<iFaceDetector> _detectors;
     private List<iFaceLearner>  _learners;
     
-    private DBHandle helper;
-    private SQLiteDatabase db;
-//    = { 
-											//new FaceDetectorRemote( "cawka.homeip.net",20000 ), 
-//    										new FaceDetectorRemote( "131.179.192.201",2000 ), 
-//    										new FaceDetectorLocal( ) 
-//    									 };
-//    private iFaceLearner _learners[] = {
-//								    		//new FaceDetectorRemote( "cawka.homeip.net",20000 )
-////											new FaceDetectorRemote( "131.179.192.201",2000 ), 
-//    								   };
-    
     ////////////////////////////////////////////////////////////////////
-    
+   
 	public void onCreate( Bundle savedInstanceState ) 
     {
         super.onCreate( savedInstanceState );
@@ -114,55 +87,46 @@ public class FriendDetector extends Activity
 					selectImage( );
 				}
         	} );
-        helper = new DBHandle(this, Create);
-        db = helper.getReadableDatabase();
-		LoadServers();
-    }
-		
-	public Cursor fetchAllServers() {
-
-        return db.query(Table, new String[] {"_id", Server, Port,
-                Enabled, LocalEnabled, RemoteEnabled, Timeout}, null, null, null, null, null);
+        restoreSettings( );
     }
 
-	
-	private void LoadServers() {
-		// TODO Auto-generated method stub
-		//DB code goes here
-		//or can use the local detector
-		Cursor c = fetchAllServers();
-    	Log.v("Karthik","Cursor " + c.getCount());
-    	startManagingCursor(c);
-    	
-		new Toast(this).makeText(this, "Falling to Default !! " + c.getCount() + " entries in table", Toast.LENGTH_SHORT).show();
-	}
-
-	protected void restoreSettings(Intent data )
+	protected void restoreSettings( )
 	{
         Log.v( TAG, "restoreSettings" );
         
         _detectors=new LinkedList<iFaceDetector>( );
         _learners =new LinkedList<iFaceLearner>( );
-        
-        SharedPreferences prefs=PreferenceManager.getDefaultSharedPreferences( getBaseContext() );
-        
-        MAX_SIZE=Integer.parseInt( prefs.getString(Settings.KEY_MAX_SIZE, "800") );
-        
-        if( prefs.getBoolean(Settings.KEY_REMOTE_ENABLED, false) )
+
+        int count_remote=0;
+        int count_local =0;
+        for( Server.Config config : new DBHandle(this).getAllConfigs() )
         {
-        	FaceDetectorRemote detector=new FaceDetectorRemote(
-        			prefs.getString(Settings.KEY_HOSTNAME, "127.0.0.1"),
-        			prefs.getString(Settings.KEY_PORT, "55436"),
-        			Integer.parseInt(prefs.getString( Settings.KEY_TIMEOUT, "2000" ))
-        			);
-        	_detectors.add( detector );
-        	_learners.add( detector );
+        	if( !config.enabled ) continue;
+        	
+        	if( config.type==Server.REMOTE )
+        	{
+        		count_remote++;
+//	        	FaceDetectorRemote detector=new FaceDetectorRemote(
+//					config.hostname,
+//					Integer.toString(config.port),
+//					config.timeout
+//				);
+//		    	_detectors.add( detector );
+//		    	_learners.add( detector );
+        	}
+        	else if( config.type==Server.LOCAL )
+        	{
+        		count_local++;
+        		_detectors.add( new FaceDetectorLocal( ) );
+        	}
         }
         
-        if( prefs.getBoolean(Settings.KEY_LOCAL_ENABLED, true) )
-        {
-        	_detectors.add( new FaceDetectorLocal( ) );
-        }
+        Log.v( TAG, 
+        	Integer.toString(count_local)+" local and "+Integer.toString(count_remote)+" remote detectors are configured" );
+        
+//        SharedPreferences prefs=PreferenceManager.getDefaultSharedPreferences( this.getBaseContext() );
+//        
+//        MAX_SIZE=Integer.parseInt( prefs.getString(Server.KEY_MAX_SIZE, "800") );
         
         System.gc( );
 	}
@@ -194,7 +158,7 @@ public class FriendDetector extends Activity
 	protected void onDestroy()
 	{
 		super.onDestroy( );
-		helper.close();
+
 		try
 		{
 			if( _thread!=null ) _thread.join( );
@@ -208,7 +172,6 @@ public class FriendDetector extends Activity
 	
 	public Object onRetainNonConfigurationInstance( ) 
 	{
-		Log.v( TAG, "onRetainNonConfigurationInstance" );
 		return new SavedState( );
 	}
 	
@@ -293,7 +256,7 @@ public class FriendDetector extends Activity
     			return true;
     		case MENU_SETTINGS:
     			Intent i=new Intent( );
-    			i.setAction( "com.karthik.learnsql.learnsql" );
+    			i.setAction( "com.cawka.FriendDetector.settings.List" );
     			startActivityForResult( i, CHANGE_SETTINGS );
     			
     			return true;
@@ -316,7 +279,7 @@ public class FriendDetector extends Activity
     {
     	if( requestCode==CHANGE_SETTINGS )
     	{
-    		restoreSettings(data );
+    		restoreSettings( );
     		return;
     	}
     	
@@ -364,19 +327,11 @@ public class FriendDetector extends Activity
     				Toast.makeText( this, e.getMessage(), Toast.LENGTH_LONG ).show( );
 					return; 
 				}
+				
+				Bitmap resized_bmp=ImageWithFaces.processBitmap( bmp, MAX_SIZE, orientation );				
+				bmp=null;
 
-    			try
-    			{
-					Bitmap resized_bmp=ImageWithFaces.processBitmap( bmp, MAX_SIZE, orientation );	
-//					bmp.recycle( );
-					bmp=null;
-					processBitmap( resized_bmp );
-    			}
-    			catch( Exception e )
-    			{
-    				Toast.makeText( this, e.getLocalizedMessage(), Toast.LENGTH_SHORT ).show( );
-    				processBitmap( bmp );
-    			}
+				processBitmap( resized_bmp );
 
     			break;
     		}
@@ -476,7 +431,7 @@ public class FriendDetector extends Activity
 			for( Person person : _detector.getFaces() )
 			{
 				if( !person.hasName() )
-					person.setDefaultName( FriendDetector.this.getResources().getString(R.string.unknown_person) );
+					person.setDefaultName( Main.this.getResources().getString(R.string.unknown_person) );
 				_names_list.add( person );
 			}
 		}
@@ -528,7 +483,7 @@ public class FriendDetector extends Activity
 						{ 
 							public void run() 
 							{ 
-								Toast.makeText(FriendDetector.this, "Detector timeout, using next available", Toast.LENGTH_SHORT).show(); 
+								Toast.makeText(Main.this, "Detector timeout, using next available", Toast.LENGTH_SHORT).show(); 
 							} 
 						} );
 				}

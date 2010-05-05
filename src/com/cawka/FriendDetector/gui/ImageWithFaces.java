@@ -1,4 +1,6 @@
-package com.cawka.FriendDetector;
+package com.cawka.FriendDetector.gui;
+
+import com.cawka.FriendDetector.Person;
 
 import android.content.Context;
 import android.graphics.Bitmap;

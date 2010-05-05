@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-      package="com.karthik.learnsql"
+      package="com.cawka.FriendDetector"
       android:versionCode="1"
       android:versionName="1.0">
     <application 
@@ -8,37 +8,36 @@
     	android:label="@string/app_name" 
     	android:debuggable="true"
     	>
-        <activity android:name="com.cawka.FriendDetector.FriendDetector"
+    	
+        <activity android:name=".Main"
                   android:label="@string/app_name"
                   android:clearTaskOnLaunch="true"
                   >
-                  
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         
-        <activity android:name="com.karthik.learnsql.learnsql" 
+       <activity android:name=".settings.ListOfServers" 
         			android:label="Detectors"
         			android:clearTaskOnLaunch="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-                <action android:name="com.karthik.learnsql.learnsql" />
+            	<action android:name="com.cawka.FriendDetector.settings.List" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
         
         
-        <activity android:name=".Settings"
+        <activity android:name=".settings.Server"
         		  android:label="@string/settings">
         	<intent-filter>
-        		<action android:name="android.intent.action.MAIN" />
-        		<action android:name="com.karthik.learnsql.Settings" />
-        		<category android:name="android.intent.category.DEFAULT" />
+                <action android:name="android.intent.action.MAIN" />
+            	<action android:name="com.cawka.FriendDetector.settings.Server" />
+                <category android:name="android.intent.category.DEFAULT" />
         	</intent-filter>
         </activity>
-        
         
     </application>
     <uses-sdk android:minSdkVersion="7" />

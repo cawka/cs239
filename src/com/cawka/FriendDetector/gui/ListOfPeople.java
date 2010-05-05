@@ -1,4 +1,8 @@
-package com.cawka.FriendDetector;
+package com.cawka.FriendDetector.gui;
+
+import com.cawka.FriendDetector.Main;
+import com.cawka.FriendDetector.Person;
+import com.cawka.FriendDetector.R;
 
 import com.karthik.learnsql.R;
 
@@ -7,11 +11,9 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.util.AttributeSet;
 import android.util.Log;
-import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ContextMenu.ContextMenuInfo;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -26,7 +28,7 @@ public class ListOfPeople extends ListView
 	private PeopleAdapter _adapter;
 	private ImageWithFaces _picture;
 	
-	private FriendDetector _friendDetector;
+	private Main _friendDetector;
 	
 	public ListOfPeople( Context context, AttributeSet attrs, int defStyle )
 	{
@@ -49,7 +51,7 @@ public class ListOfPeople extends ListView
 		init( );
 	}
 	
-	public void setFriendDetector( FriendDetector friendDetector )
+	public void setFriendDetector( Main friendDetector )
 	{
 		_friendDetector=friendDetector;
 	}

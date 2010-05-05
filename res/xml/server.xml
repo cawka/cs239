@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+	
+    <CheckBoxPreference
+        android:key="enabled"
+        android:title="Enable detector"
+        android:defaultValue="true"
+        android:summary=""
+        android:persistent="false"
+     />
+
+    <ListPreference
+        android:key="type"
+        android:title="Type"
+        android:entries="@array/detector_types" 
+        android:entryValues="@array/int_detector_types"
+        android:summary=""
+        android:persistent="false"
+        android:dependency="enabled"
+     />
+                
+    <EditTextPreference
+        android:key="hostname"
+        android:title="Hostname"
+        android:summary="Enter hostname of the remote server"
+        android:dialogTitle="Hostname"
+        android:singleLine="true"
+        android:dependency="enabled"
+        android:persistent="false"
+     />
+        
+ 	<EditTextPreference
+ 		android:key="port"
+ 		android:title="Port"
+ 		android:summary="Enter port of thre remote server"
+ 		android:dialogTitle="Port"
+ 		android:singleLine="true" 
+ 		android:defaultValue="55436"
+        android:dependency="enabled"
+        android:persistent="false"
+     />
+ 	
+ 	<EditTextPreference
+ 		android:key="timeout"
+ 		android:title="Timeout"
+ 		android:summary="Timeout for the remote server (ms)"
+ 		android:dialogTitle="Timeout (ms)"
+ 		android:singleLine="true"
+ 		android:defaultValue="2000" 
+        android:dependency="enabled"
+        android:persistent="false"
+     />
+     
+   	<Preference
+   		android:key="save"
+   		android:title="Save"
+   	/>
+     
+    <PreferenceCategory
+    		android:key="delete_category"
+    		android:title=""
+    >
+   	
+	   	<Preference
+	   		android:key="delete"
+	   		android:title="Remove detector"
+	   	/>
+   	
+   	</PreferenceCategory>
+
+</PreferenceScreen>
