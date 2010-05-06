@@ -84,35 +84,103 @@ public class DBHandleEigen extends SQLiteOpenHelper
 	private SQLiteDatabase _temp_db;
 	private Cursor		   _temp_cursor;
 	
-	public void requestFaces( )
+//	public void requestFaces( )
+//	{
+//		_temp_db=getReadableDatabase( );
+//		_temp_cursor=_temp_db.query( TABLE, COLUMNS, null, null, null, null, null );
+//		_temp_cursor.moveToFirst( );
+//	}
+//	
+//	public NamedFace getNextFace( )
+//	{
+//		if( _temp_db==null || _temp_cursor==null ) return null;
+//		String status=Environment.getExternalStorageState( );
+//        if( !status.equals(Environment.MEDIA_MOUNTED) ) return null;
+//		
+//		if( !_temp_cursor.isAfterLast( ) )
+//		{
+//			File filepath=new File( Environment.getExternalStorageDirectory()+"/friendDetector" );
+//			File filename=new File( filepath, Long.toString(_temp_cursor.getLong(0))+".png" );
+//
+//			NamedFace ret=new NamedFace( BitmapFactory.decodeFile(filename.getAbsolutePath() ), _temp_cursor.getString(1) );
+//			_temp_cursor.moveToNext( );
+//			return ret;
+//		}
+//		else
+//		{
+//			_temp_cursor.close( );
+//			_temp_db.close( );
+//			return null;
+//		}
+//	}
+	
+	public List<NamedFace> getAllFaces( )
 	{
 		_temp_db=getReadableDatabase( );
 		_temp_cursor=_temp_db.query( TABLE, COLUMNS, null, null, null, null, null );
 		_temp_cursor.moveToFirst( );
-	}
-	
-	public NamedFace getNextFace( )
-	{
-		if( _temp_db==null || _temp_cursor==null ) return null;
-		String status=Environment.getExternalStorageState( );
-        if( !status.equals(Environment.MEDIA_MOUNTED) ) return null;
 		
-		if( !_temp_cursor.isAfterLast( ) )
+		List<NamedFace> ret=new LinkedList<NamedFace>( );
+		
+		while( !_temp_cursor.isAfterLast( ) )
 		{
 			File filepath=new File( Environment.getExternalStorageDirectory()+"/friendDetector" );
 			File filename=new File( filepath, Long.toString(_temp_cursor.getLong(0))+".png" );
 
-			NamedFace ret=new NamedFace( BitmapFactory.decodeFile(filename.getAbsolutePath() ), _temp_cursor.getString(1) );
+			ret.add( new NamedFace( BitmapFactory.decodeFile(filename.getAbsolutePath() ), _temp_cursor.getString(1) ) );
 			_temp_cursor.moveToNext( );
-			return ret;
 		}
-		else
-		{
-			_temp_cursor.close( );
-			_temp_db.close( );
-			return null;
-		}
+		
+		_temp_cursor.close( );
+		_temp_db.close( );
+		
+		return ret;		
 	}
+
+	public List<NamedFace> getFacesByName( String name )
+	{
+		_temp_db=getReadableDatabase( );
+		_temp_cursor=_temp_db.query( TABLE, COLUMNS, "name=?", new String[]{name}, null, null, null );
+		_temp_cursor.moveToFirst( );
+		
+		List<NamedFace> ret=new LinkedList<NamedFace>( );
+		
+		while( !_temp_cursor.isAfterLast( ) )
+		{
+			File filepath=new File( Environment.getExternalStorageDirectory()+"/friendDetector" );
+			File filename=new File( filepath, Long.toString(_temp_cursor.getLong(0))+".png" );
+
+			ret.add( new NamedFace( BitmapFactory.decodeFile(filename.getAbsolutePath() ), _temp_cursor.getString(1) ) );
+			_temp_cursor.moveToNext( );
+			
+			_temp_cursor.moveToNext( );
+		}
+		
+		_temp_cursor.close( );
+		_temp_db.close( );
+		
+		return ret;		
+	}	
+	public List<String> getNames( )
+	{
+		_temp_db=getReadableDatabase( );
+		_temp_cursor=_temp_db.query( TABLE, new String[]{"name"}, null, null, "name", null, null );
+		_temp_cursor.moveToFirst( );
+		
+		List<String> ret=new LinkedList<String>( );
+		
+		while( !_temp_cursor.isAfterLast( ) )
+		{
+			ret.add( _temp_cursor.getString(0) );
+			_temp_cursor.moveToNext( );
+		}
+		
+		_temp_cursor.close( );
+		_temp_db.close( );
+		
+		return ret;
+	}
+	
 	
 //    public List<Server.Config> getAllConfigs( )
 //    {
@@ -178,14 +246,15 @@ public class DBHandleEigen extends SQLiteOpenHelper
         return Long.toString( id );
     }
 
-//    public void delete( long server_id ) 
-//    {
-//    	SQLiteDatabase db=getWritableDatabase( );
-//    	
-//    	db.delete( TABLE, "id=?", new String[]{ new Long(server_id).toString() } );
-//    	db.close( );
-//	}
-//    
+    public void deleteAll( ) 
+    {
+    	Log.v( TAG, "Purging local face database. Files are not deleted" );
+    	SQLiteDatabase db=getWritableDatabase( );
+    	
+    	db.delete( TABLE, null, null );
+    	db.close( );
+	}
+    
 //	public void update( Server.Config config )
 //	{
 //		SQLiteDatabase db=getWritableDatabase( );

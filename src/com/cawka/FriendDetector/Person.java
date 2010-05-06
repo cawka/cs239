@@ -1,5 +1,10 @@
 package com.cawka.FriendDetector;
 
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
+
 import FriendDetector.FacePosition;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -8,7 +13,7 @@ import android.graphics.Paint;
 import android.graphics.PointF;
 import android.graphics.Rect;
 
-public class Person 
+public class Person implements Serializable
 {
 	private boolean _hasName=false;
 	private String _name;
@@ -41,6 +46,23 @@ public class Person
 		_paint.setStrokeWidth( 1.5f );
 	}
 	
+	private void writeObject( ObjectOutputStream out ) throws IOException
+	{
+//		private boolean _hasName=false;
+//		private String _name;
+//		private Bitmap _face;
+//		private Rect   _faceRect;
+//		private Paint  _paint;
+//		private int    _index;
+		
+//		out.writeBoolean( _hasName );
+//		out.writeUTF( _name );
+	}
+
+	private void readObject( ObjectInputStream in ) throws IOException, ClassNotFoundException
+	{
+		//something
+	}	
 	
 	public static Person createPerson( Bitmap picture, PointF midpoint, float eyeDistance )
 	{

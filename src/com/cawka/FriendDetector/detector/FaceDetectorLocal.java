@@ -27,7 +27,14 @@ public class FaceDetectorLocal extends iFaceDetector implements iFaceLearner
 	public FaceDetectorLocal( Context context )
 	{
 		_context=context;
-		_eigenface=new Eigenface( _context );
+		
+		new Thread( new Runnable(){
+			public void run( )
+			{
+				Eigenface eigenface=new Eigenface( _context );
+				_eigenface=eigenface;
+			}
+		} ).start( );
 	}
 	
 	/////////////////////////////////////////////////////////
@@ -45,8 +52,12 @@ public class FaceDetectorLocal extends iFaceDetector implements iFaceLearner
 			faces[i].getMidPoint( midpoint );
 
 			Person person=Person.createPerson( bitmap, midpoint, faces[i].eyesDistance( ) );
-			String name=_eigenface.recognize( person.getFace( ) );
-			if( !name.equals("") ) person.setName( name );
+			
+			if( _eigenface!=null )
+			{
+				String name=_eigenface.recognize( person.getFace( ) );
+				if( !name.equals("") ) person.setName( name );
+			}
 			
 			_faces.add( person );
 		}

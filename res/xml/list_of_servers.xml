@@ -10,5 +10,15 @@
     		android:key="list_of_servers"
     		android:title="List of detectors"
     />
+    
+    <PreferenceCategory
+    		android:key=""
+    		android:title="Stuff"
+    >
+    	<Preference
+    		android:key="reset_eignefaces"
+    		android:title="Reset local eigenfaces"
+    	/>
+    </PreferenceCategory>
       
 </PreferenceScreen>

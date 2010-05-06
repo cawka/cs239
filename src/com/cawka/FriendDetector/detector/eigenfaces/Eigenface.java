@@ -68,9 +68,6 @@ public class Eigenface
 	public void update( )
 	{
 		DBHandleEigen db=new DBHandleEigen( _context );
-		int trainSetSize=db.getTrainSetSize( );
-		
-		db.requestFaces( );
 		_numTrainingImages=db.getTrainSetSize( );
 
 		int lastNumTrainingImages=Math.max( 0,_numTrainingImages-1 );//eigenfaceRecognition.lastNumberOfTrainingImages;
@@ -88,20 +85,22 @@ public class Eigenface
 				double[] tempAverageFace=new double[VECTORLENGTH];
 				byte[][] faceVectors=new byte[_numTrainingImages][];
 
-				for( int r=0; r < trainSetSize; r++ )
+				List<NamedFace> faces=db.getAllFaces( );
+				
+				int r=0;
+				for( NamedFace face : faces )
 				{
-					NamedFace face=db.getNextFace( );
-					if( face==null ) continue; 
 					Log.v( TAG, "next face" );
 					
 					byte[] intensityImage=Utilities.bufferedImageToIntensityArray( face.bitmap ) ;
 					for( int i=0; i < tempAverageFace.length; i++ )
 					{
-						tempAverageFace[i]+=( (double)( intensityImage[i] & 0xFF ) )
-								* factor;
+						tempAverageFace[i]+=( (double)( intensityImage[i] & 0xFF ) ) * factor;
 					}
 					faceVectors[r]=intensityImage;
 					face.bitmap.recycle( );
+					
+					r++;
 				}
 
 				// convert average face to byte array
@@ -188,80 +187,57 @@ public class Eigenface
 //			Region[] regionsForName=db.getRegionsForFace( name );
 
 		DBHandleEigen db=new DBHandleEigen( _context );
-		db.requestFaces( );
 		
 		String name="";
-		double minDist=Double.MAX_VALUE;
 		
 		Integer i=0;
-		for( NamedFace knownFacePlatform=db.getNextFace( ); knownFacePlatform!=null; knownFacePlatform=db.getNextFace( ) )
+
+		double bestScore=Double.MAX_VALUE;
+		
+		List<String> names=db.getNames( );
+		for( String candidate : names )
 		{
-			byte[]   knownFace      =Utilities.bufferedImageToIntensityArray( knownFacePlatform.bitmap );
-			double[] knownFaceWeight=getWeightForImage( knownFace );
+			List<NamedFace> faces=db.getFacesByName( candidate );
+			double minDist=Double.MAX_VALUE;
 
-			double distance=getDistanceBetweenWeights( knownFaceWeight, unknownFaceWeight );
-
-//			if( unknownMirroredFaceWeight != null )
-//			{
-//				distance=Math.min( distance,
-//						getDistanceBetweenWeights( knownFaceWeight,
-//								unknownMirroredFaceWeight ) );
-//			}
-
-			if( distance < minDist )
+			for( NamedFace knownFacePlatform : faces )
 			{
-				minDist=distance;
-				name=knownFacePlatform.name;
+				byte[]   knownFace      =Utilities.bufferedImageToIntensityArray( knownFacePlatform.bitmap );
+				double[] knownFaceWeight=getWeightForImage( knownFace );
+	
+				double distance=getDistanceBetweenWeights( knownFaceWeight, unknownFaceWeight );
+	
+	//			if( unknownMirroredFaceWeight != null )
+	//			{
+	//				distance=Math.min( distance,
+	//						getDistanceBetweenWeights( knownFaceWeight,
+	//								unknownMirroredFaceWeight ) );
+	//			}
+	
+				if( distance < minDist )
+				{
+					minDist=distance;
+//					name=knownFacePlatform.name;
+				}
+				
+				Log.v( TAG, "image:"+i+", name:"+candidate+", raw score:"+Double.toString(distance) );
+				
+				knownFacePlatform.bitmap.recycle( );
+				i++;
 			}
 			
-			Log.v( TAG, "image:"+i+", name:"+knownFacePlatform.name+", score:"+Double.toString(distance) );
-
 			// Map distance to interval [0, 100]
-//			Integer points=(int)Math.max( 0, 100 - Math
-//					.round( minDist * 0.2f ) );
-//			result.put( name, points );
+			Integer points=(int)Math.max( 0, 100 - Math.round( minDist * 0.2f ) );
 
-//			if( image != null && points != 0 )
-//			{
-//				bestHits
-//						.add( new SortableContainer<Region>( image, points ) );
-//			}
-			knownFacePlatform.bitmap.recycle( );
-			i++;
+			Log.v( TAG, "name:"+candidate+", raw score:"+Double.toString(minDist)+", scaled score:"+points );
+			
+			if( bestScore>minDist )
+			{
+				bestScore=minDist;
+				name=candidate;
+			}
 		}
 
-//		if( showHitsDialog )
-//		{
-//			// if (showHitsDialog && bestHits.size() > 0){
-//			if( hitsDialog == null )
-//			{
-//				hitsDialog=new NearestHitsDialog( );
-//			}
-//
-//			BufferedImage original=Utilities.intensityArrayToBufferedImage(
-//					unknownFace, Constants.FACE_THUMBNAIL_SIZE );
-//
-//			BufferedImage reconstruction=Utilities
-//					.intensityArrayToBufferedImage(
-//							getFaceReconstruction( unknownFaceWeight ),
-//							Constants.FACE_THUMBNAIL_SIZE );
-//
-//			Collections.sort( bestHits );
-//			BufferedImage[] nearestImages=new BufferedImage[Math.min( 9,
-//					bestHits.size( ) )];
-//			for( int i=0; i < nearestImages.length; i++ )
-//			{
-//				nearestImages[i]=bestHits.get( i ).getObject( ).toThumbnail(
-//						Constants.FACE_THUMBNAIL_SIZE );
-//			}
-//
-//			hitsDialog.show( original, reconstruction, nearestImages );
-//		}
-//
-//		// Prepare upcoming set of Eigenfaces in second thread.
-//		eigenfaceBuilder.updateEigenfacesInBackground( );
-
-//		return result;
 		return name;
 	}
 	
@@ -299,10 +275,13 @@ public class Eigenface
 		for( int i=0; i < weightA.length; i++ )
 		{
 			double diff=weightA[i] - weightB[i];
-			result+=diff*diff;
-//			result+=Math.abs( weightA[i] - weightB[i] );
+//			result+=diff*diff;
+			result+=Math.abs( weightA[i] - weightB[i] );
 		}
-		return Math.sqrt(result) / weightA.length;
+//		int n=weightA.length;
+//		int n_1=Math.max( n-1, 1 );
+//		return Math.sqrt(result / (n*n_1) );
+		return result/weightA.length;
 	}
 
 	protected byte[] getFaceReconstruction( double[] weight )

@@ -1,6 +1,9 @@
 package com.cawka.FriendDetector;
 
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -45,15 +48,13 @@ public class Main extends Activity
 	private static final String TAG="FriendDetector";
 	
 	private static final int MENU_SELECT = 1;
-	private static final int MENU_ROTATE = 2;
+//	private static final int MENU_ROTATE = 2;
 	private static final int MENU_RETRY = 3;
 	private static final int MENU_SETTINGS = 4;
 
 	private static final int SELECT_IMAGE = 1;
 	private static final int CHANGE_SETTINGS = 2;
 	
-	private static int MAX_SIZE = 800;
-    
 	////////////////////////////////////////////////////////////////////
 	
 	public static final int DB_VERSION=4;
@@ -95,7 +96,96 @@ public class Main extends Activity
         	} );
         restoreSettings( );
     }
+	
+	protected void onStart( )
+	{
+		Log.v( TAG, "onStart" );
+		super.onStart( );
+	}
+	
+	protected void onRestart( )
+	{
+		Log.v( TAG, "onRestart" );
+		super.onRestart( );
+	}
+	
+	protected void onResume( )
+	{
+		Log.v( TAG, "onResume" );
+		super.onResume( );
+	}
+	
+	protected void onPause( )
+	{
+		Log.v( TAG, "onPause" );
+		synchronized( _progress_lock ) 
+		{
+			_progress2=null;
+		}
+		
+		super.onPause( );
+	}
+	
+	protected void onStop( )
+	{
+		Log.v( TAG, "onStop" );
+		super.onStop( );
+	}
 
+	protected void onDestroy()
+	{
+		Log.v( TAG, "onDestroy" );
+		super.onDestroy( );
+
+		try
+		{
+			if( _thread!=null ) _thread.join( );
+			System.gc( );
+		}
+		catch( Exception e )
+		{
+			
+		}
+	}
+
+	protected void onRestoreInstanceState( Bundle savedInstanceState )
+	{
+		Log.v( TAG, "onRestoreInstanceState" );
+		super.onRestoreInstanceState( savedInstanceState );
+		
+		SavedState state=(SavedState)getLastNonConfigurationInstance( );
+		if( state == null )
+			state=(SavedState)savedInstanceState.getSerializable( "state" );
+
+		if( state != null )
+		{
+			if( !state._image.equals( "" ) )
+			{
+				_picture.setImage( state._image,false );
+				_names_list.setAdapter( state._adapter );
+			}
+
+			state=null;
+			System.gc( );
+		}
+	}
+		
+	protected void  onSaveInstanceState( Bundle outState )
+	{
+		Log.v( TAG, "onSaveInstanceState" );
+		
+		super.onSaveInstanceState( outState );
+		outState.putSerializable( "state", new SavedState( ) );
+	}
+	
+	public Object onRetainNonConfigurationInstance( ) 
+	{
+		Log.v( TAG, "onRetainNonConfigurationInstance" );
+		return new SavedState( );
+	}
+	
+	
+	
 	protected void restoreSettings( )
 	{
         Log.v( TAG, "restoreSettings" );
@@ -112,13 +202,13 @@ public class Main extends Activity
         	if( config.type==Server.REMOTE )
         	{
         		count_remote++;
-//	        	FaceDetectorRemote detector=new FaceDetectorRemote(
-//					config.hostname,
-//					Integer.toString(config.port),
-//					config.timeout
-//				);
-//		    	_detectors.add( detector );
-//		    	_learners.add( detector );
+	        	FaceDetectorRemote detector=new FaceDetectorRemote(
+					config.hostname,
+					Integer.toString(config.port),
+					config.timeout
+				);
+		    	_detectors.add( detector );
+		    	_learners.add( detector );
         	}
         	else if( config.type==Server.LOCAL )
         	{
@@ -145,77 +235,25 @@ public class Main extends Activity
 		if( v==_names_list ) _names_list.onCreateContextMenu( ((AdapterContextMenuInfo)menuInfo).position );
 	}
 		
-	protected void onStart( )
-	{
-		super.onStart( );
-		
-        SavedState state=(SavedState)getLastNonConfigurationInstance( );
-        if( state!=null )
-        {
-        	if( state._bitmap!=null && !state._bitmap.isRecycled() )
-        	{
-    			_picture.setBitmap( state._bitmap );
-            	_names_list.setAdapter( state._adapter );
-        	}
-        	
-        	state=null;
-        	System.gc( );
-        }
-	}
-	
-	protected void onDestroy()
-	{
-		super.onDestroy( );
 
-		try
-		{
-			if( _thread!=null ) _thread.join( );
-			System.gc( );
-		}
-		catch( Exception e )
-		{
-			
-		}
-	}
-	
-	public Object onRetainNonConfigurationInstance( ) 
-	{
-		return new SavedState( );
-	}
-	
-	protected void onResume( )
-	{
-		super.onResume( );
-	}
-	
-	protected void onPause( )
-	{
-		synchronized( _progress_lock ) 
-		{
-			_progress2=null;
-		}
-		
-		super.onPause( );
-	}
-	
 	///////////////////////////////////////////////////////////////////////
 	
 	public boolean onPrepareOptionsMenu( Menu menu )
 	{
 		if( _picture.isBitmap() )
         {
-			if( menu.findItem(MENU_ROTATE)==null )
+			if( menu.findItem(MENU_RETRY)==null )
 			{
-		        menu.add(0, MENU_ROTATE, 0, "Rotate")
-		        	.setIcon( android.R.drawable.ic_menu_rotate );
-		        
+//		        menu.add(0, MENU_ROTATE, 0, "Rotate")
+//		        	.setIcon( android.R.drawable.ic_menu_rotate );
+//		        
 		        menu.add(0, MENU_RETRY, 0, "Retry" )
 		        	.setIcon( R.drawable.ic_menu_refresh );
 			}
         }
 		else
 		{
-			menu.removeItem( MENU_ROTATE );
+//			menu.removeItem( MENU_ROTATE );
 			menu.removeItem( MENU_RETRY );
 		}
 		
@@ -247,21 +285,21 @@ public class Main extends Activity
     		case MENU_RETRY:
 	            retryDetection( );
     			return true;
-    		case MENU_ROTATE:
-    			Bitmap bmp=_picture.getBitmap( );
-    			if( bmp==null ) return false;
-    			
-    			Matrix m=new Matrix( );
-    			m.postRotate( 90 );
-    			Bitmap rotated_bitmap=Bitmap.createBitmap( bmp, 0, 0, bmp.getWidth(), bmp.getHeight(), m, true );
-    			
-    			bmp.recycle();
-    			bmp=null;
-    			
-				_names_list.clear( );
-
-				processBitmap( rotated_bitmap );
-    			return true;
+//    		case MENU_ROTATE:
+//    			Bitmap bmp=_picture.getBitmap( );
+//    			if( bmp==null ) return false;
+//    			
+//    			Matrix m=new Matrix( );
+//    			m.postRotate( 90 );
+//    			Bitmap rotated_bitmap=Bitmap.createBitmap( bmp, 0, 0, bmp.getWidth(), bmp.getHeight(), m, true );
+//    			
+//    			bmp.recycle();
+//    			bmp=null;
+//    			
+//				_names_list.clear( );
+//
+//				processBitmap( rotated_bitmap );
+//    			return true;
     		case MENU_SETTINGS:
     			Intent i=new Intent( );
     			i.setAction( "com.cawka.FriendDetector.settings.List" );
@@ -297,15 +335,8 @@ public class Main extends Activity
     		{
     		case SELECT_IMAGE:
 				_names_list.clear( );
-				_picture.setBitmap( null ); //recycle the bitmap
 
-				Log.v( TAG, "Total mem: "+Double.toString(Runtime.getRuntime().totalMemory()) );
-				Log.v( TAG, "Free mem: "+Double.toString(Runtime.getRuntime().freeMemory()) );
-
-				System.gc();
-    			
-    			Bitmap bmp=null;
-    			int orientation=-1;//ExifInterface.ORIENTATION_UNDEFINED;
+    			String filename="";
     			try 
     			{
     				if( data.getDataString().equals("") )
@@ -314,19 +345,7 @@ public class Main extends Activity
     				}
     				else
     				{
-    					String filename=getRealPathFromURI( data.getData() );
-    					bmp=BitmapFactory.decodeFile( filename );
-    					
-    					try
-    					{
-	    					ExifInterface exif=new ExifInterface( filename );
-	    					orientation=Integer.parseInt( exif.getAttribute(ExifInterface.TAG_ORIENTATION) );
-    					}
-    					catch( IOException ex )
-    					{
-    						//not a jpeg file
-    						Log.d( TAG, filename+" is a jpeg file or doesn't have exif information available" );
-    					}
+    					filename=getRealPathFromURI( data.getData() );
     				}
     				
 				} 
@@ -336,21 +355,18 @@ public class Main extends Activity
 					return; 
 				}
 				
-				Bitmap resized_bmp=ImageWithFaces.processBitmap( bmp, MAX_SIZE, orientation );				
-				bmp=null;
-
-				processBitmap( resized_bmp );
-
+    			if( !filename.equals("") ) processImage( filename );
+    				
     			break;
     		}
     	}
     }
     
-    private void processBitmap( Bitmap bitmap )
+    private void processImage( String filename )
     {
     	if( _thread!=null ) return;
     	
-    	_picture.setBitmap( bitmap );
+    	_picture.setImage( filename,true );
 
     	if( _progress2==null )
     	{
@@ -358,7 +374,7 @@ public class Main extends Activity
     	}
     	_progress2.setVisibility( View.VISIBLE );
     	
-		_thread=new Thread( new Thread(new FaceDetection( bitmap )) );
+		_thread=new Thread( new FaceDetection( _picture.getBitmap( )) );
 		_thread.start( );   	
     }
     
@@ -366,7 +382,7 @@ public class Main extends Activity
     {
     	if( _thread!=null ) return;
     	
-    	Bitmap bitmap=_picture.getBitmapSafe( );
+    	Bitmap bitmap=_picture.getBitmap( );
     	if( bitmap==null ) return;
     	
     	if( _progress2==null )
@@ -376,8 +392,8 @@ public class Main extends Activity
     	_progress2.setVisibility( View.VISIBLE );
     	
     	_names_list.clear( );
-		_thread=new Thread( new Thread(new FaceDetection( bitmap )) );
-		_thread.start( );    	
+		_thread=new Thread( new FaceDetection( bitmap ) );
+		_thread.start( );
     }
     
     protected String getRealPathFromURI( Uri contentUri ) 
@@ -411,15 +427,40 @@ public class Main extends Activity
  
     /////////////////////////////////////////////////////////////////////////////////
     
-	private class SavedState
+	private class SavedState implements Serializable
 	{
-		public Bitmap _bitmap;
+		private static final long	serialVersionUID	=-5766693616119479431L;
+		
+		public String 	   _image;
 		public ListAdapter _adapter;
 		
 		public SavedState( ) //Bitmap face, ListAdapter adapter )
 		{
-			_bitmap=_picture.getBitmap( );
+			_image=_picture.getImage( );
 			_adapter=_names_list.getAdapter();
+		}
+
+		private void writeObject( ObjectOutputStream out ) throws IOException
+		{
+			out.writeUTF( _image );
+			
+			out.writeInt( _adapter.getCount() );
+			for( int i=0; i<_adapter.getCount(); i++ )
+			{
+				out.writeObject( _adapter.getItem(i) );
+			}
+		}
+
+		private void readObject( ObjectInputStream in ) throws IOException,
+				ClassNotFoundException
+		{
+			_image=in.readUTF( );
+			
+			int count=in.readInt( );
+			for( int i=0; i<count; i++ )
+			{
+				Person person=(Person)in.readObject( );
+			}
 		}
 	}    
     

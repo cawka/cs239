@@ -2,6 +2,7 @@
 package com.cawka.FriendDetector.settings;
 
 import com.cawka.FriendDetector.R;
+import com.cawka.FriendDetector.detector.eigenfaces.DBHandleEigen;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -16,6 +17,7 @@ public class ListOfServers extends PreferenceActivity
 {
 	private static final String KEY_ADD  = "add_server";
 	private static final String KEY_LIST = "list_of_servers";
+	private static final String KEY_RESET = "reset_eignefaces";
 	
 	private static final int    UPDATE_SERVER_INFO = 1;
 
@@ -25,6 +27,7 @@ public class ListOfServers extends PreferenceActivity
 	
 	private Preference	_add_server;
 	private PreferenceCategory	_list_of_servers;
+	private Preference  _reset_eignefaces;
 	
 
     public void onCreate( Bundle savedInstanceState ) 
@@ -36,6 +39,8 @@ public class ListOfServers extends PreferenceActivity
         
         _list_of_servers=(PreferenceCategory)findPreference( KEY_LIST );
         _list_of_servers.setOrderingAsAdded( true );
+        
+        _reset_eignefaces=findPreference( KEY_RESET );
         
         _dbHandler = new DBHandle( this );
         displayAllServers( ); 
@@ -64,6 +69,11 @@ public class ListOfServers extends PreferenceActivity
         	Intent i=new Intent( "com.cawka.FriendDetector.settings.Server" );
         	i.putExtra( "config", ((PreferenceServer)preference).getConfig() );
         	startActivityForResult( i, UPDATE_SERVER_INFO );
+        }
+        else if( preference==_reset_eignefaces )
+        {
+        	DBHandleEigen db=new DBHandleEigen( this );
+        	db.deleteAll( );
         }
         
         return true;
