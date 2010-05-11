@@ -22,6 +22,8 @@ import android.preference.PreferenceCategory;
 import android.preference.PreferenceScreen;
 import android.preference.Preference.OnPreferenceChangeListener;
 import android.text.method.DigitsKeyListener;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.Toast;
 
 public class Server extends PreferenceActivity
@@ -36,6 +38,7 @@ public class Server extends PreferenceActivity
 	private static final String KEY_DELETE_CATEGORY = "delete_category";
 	private static final String KEY_DELETE_SERVER = "delete";
 	private static final String KEY_SAVE = "save";
+	private static final String KEY_TRAINING_SET = "training_set";
 	
 	private CheckBoxPreference _enabled;
 	private ListPreference     _type;
@@ -43,13 +46,17 @@ public class Server extends PreferenceActivity
 	private EditTextPreference _port;
 	private EditTextPreference _timeout;
 	
-	private Preference 		  _delete_server;
-	private Preference 		  _save;
-	
+//	private Preference 		  _delete_server;
+//	private Preference 		  _save;
+	private Preference		  _training_set;
+
 	public static final int LOCAL  = 0;
 	public static final int REMOTE = 1;
 	
 	public static final int	RESULT_DELETE_DETECTOR = 10;
+	
+	private static final int	MENU_DELETE	= 1;
+//	private static final int    MENU_RESET  = 2;
 	
 	private Server.Config _config;
 	
@@ -59,6 +66,8 @@ public class Server extends PreferenceActivity
 
         addPreferencesFromResource( R.xml.server );
        
+        getListView( ).setBackgroundResource( R.drawable.background );
+
         if( savedInstanceState!=null )
         	_config=(Server.Config)savedInstanceState.getSerializable( "config" );
         
@@ -71,13 +80,14 @@ public class Server extends PreferenceActivity
         _port    =(EditTextPreference)findPreference( KEY_PORT );
         _timeout =(EditTextPreference)findPreference( KEY_TIMEOUT );
         
-        _delete_server=findPreference( KEY_DELETE_SERVER );
-        _save         =findPreference( KEY_SAVE );
-        if( _config.id<0 ) 
-        {
-        	((PreferenceCategory)findPreference(KEY_DELETE_CATEGORY)).removeAll( );
-        	((PreferenceCategory)findPreference(KEY_DELETE_CATEGORY)).setEnabled( false );
-        }
+        _training_set=findPreference( KEY_TRAINING_SET );
+//        _delete_server=findPreference( KEY_DELETE_SERVER );
+//        _save         =findPreference( KEY_SAVE );
+//        if( _config.id<0 ) 
+//        {
+//        	((PreferenceCategory)findPreference(KEY_DELETE_CATEGORY)).removeAll( );
+//        	((PreferenceCategory)findPreference(KEY_DELETE_CATEGORY)).setEnabled( false );
+//        }
         
         _enabled .setOnPreferenceChangeListener( this );
         _type    .setOnPreferenceChangeListener( this );
@@ -105,9 +115,22 @@ public class Server extends PreferenceActivity
         
         _port    .getEditText().setKeyListener( DigitsKeyListener.getInstance(false,true) ); 
         _timeout .getEditText().setKeyListener( DigitsKeyListener.getInstance(false,true) ); 
+        
+        setResult( Activity.RESULT_OK, getIntent() ); //always OK except when server is deleted
     }
 
-	public boolean onPreferenceChange( Preference preference, Object newValue ) 
+    public boolean onCreateOptionsMenu( Menu menu )
+    {
+//    	menu.add(0, MENU_RESET,  0, "Reset training set" )
+//    		.setIcon( R.drawable.ic_menu_refresh );
+//    	
+        menu.add(0, MENU_DELETE, 0, "Delete server")
+        	.setIcon( android.R.drawable.ic_menu_delete );
+
+    	return true;
+    }
+    
+    public boolean onPreferenceChange( Preference preference, Object newValue ) 
 	{
 		if( preference==_hostname ||
 			preference==_port ||
@@ -147,13 +170,12 @@ public class Server extends PreferenceActivity
 		return true;
 	}
 
-    public boolean onPreferenceTreeClick( PreferenceScreen preferenceScreen, Preference preference ) 
+    public boolean onOptionsItemSelected( MenuItem item )
     {
-        super.onPreferenceTreeClick( preferenceScreen, preference );
-
-        if( preference==_delete_server ) 
-        {
-        	new AlertDialog.Builder( this )
+    	switch( item.getItemId() ) 
+    	{
+	        case MENU_DELETE:
+	        	new AlertDialog.Builder( this )
 	            .setMessage( "Are you sure?" )
 	            .setPositiveButton("Yup",  new DialogInterface.OnClickListener(){
 					public void onClick( DialogInterface dialog, int which )
@@ -170,13 +192,23 @@ public class Server extends PreferenceActivity
 					}
 				} )
 	            .show();
-        }
-        else if( preference==_save )
+	            return true;
+//	        case MENU_RESET:
+//	        	return true;
+    	}
+    	
+    	return false;
+    }
+    
+    public boolean onPreferenceTreeClick( PreferenceScreen preferenceScreen, Preference preference ) 
+    {
+        super.onPreferenceTreeClick( preferenceScreen, preference );
+
+    	if( preference==_training_set )
         {
-    		getIntent().putExtra( "config", _config );
-    		setResult( Activity.RESULT_OK, getIntent() );
-    		
-    		finish( );
+    		Intent i=new Intent( ).setAction( "com.cawka.FriendDetector.Gallery" );
+    		i.putExtra( "config", _config );
+			startActivity( i );
         }
         
         return true;

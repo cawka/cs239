@@ -1,14 +1,18 @@
 package com.cawka.FriendDetector.detector;
 
 import java.io.ByteArrayOutputStream;
+import java.util.LinkedList;
+import java.util.List;
 
 import com.cawka.FriendDetector.Person;
+import com.cawka.FriendDetector.detector.eigenfaces.Eigenface.NamedFace;
 
 import FriendDetector.Face;
 import FriendDetector.RecognizerPrx;
 import FriendDetector.RecognizerPrxHelper;
 import android.graphics.Bitmap;
 import android.util.Log;
+import android.widget.Toast;
 
 public class FaceDetectorRemote extends iFaceDetector implements iFaceLearner
 {
@@ -103,5 +107,20 @@ public class FaceDetectorRemote extends iFaceDetector implements iFaceLearner
 			
 			return false;
 		}
+	}
+
+
+	public List<NamedFace> getTrainSet( )
+	{
+//		Toast.makeText( _context, "Not implemented yet", Toast.LENGTH_LONG ).show( );
+		Log.v( TAG, "Obtaining a training set from the remote server is not yet implemented" );
+		
+		return new LinkedList<NamedFace>();
+	}
+
+	public void unLearn( long id )
+	{
+		// TODO Auto-generated method stub
+		
 	}
 }

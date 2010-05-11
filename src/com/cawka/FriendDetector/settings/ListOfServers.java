@@ -27,20 +27,21 @@ public class ListOfServers extends PreferenceActivity
 	
 	private Preference	_add_server;
 	private PreferenceCategory	_list_of_servers;
-	private Preference  _reset_eignefaces;
+//	private Preference  _reset_eignefaces;
 	
 
     public void onCreate( Bundle savedInstanceState ) 
     {
         super.onCreate( savedInstanceState );
         addPreferencesFromResource( R.xml.list_of_servers );
+        getListView( ).setBackgroundResource( R.drawable.background );
         
         _add_server=findPreference( KEY_ADD );
         
         _list_of_servers=(PreferenceCategory)findPreference( KEY_LIST );
         _list_of_servers.setOrderingAsAdded( true );
         
-        _reset_eignefaces=findPreference( KEY_RESET );
+//        _reset_eignefaces=findPreference( KEY_RESET );
         
         _dbHandler = new DBHandle( this );
         displayAllServers( ); 
@@ -70,11 +71,11 @@ public class ListOfServers extends PreferenceActivity
         	i.putExtra( "config", ((PreferenceServer)preference).getConfig() );
         	startActivityForResult( i, UPDATE_SERVER_INFO );
         }
-        else if( preference==_reset_eignefaces )
-        {
-        	DBHandleEigen db=new DBHandleEigen( this );
-        	db.deleteAll( );
-        }
+//        else if( preference==_reset_eignefaces )
+//        {
+//        	DBHandleEigen db=new DBHandleEigen( this );
+//        	db.deleteAll( );
+//        }
         
         return true;
     }

@@ -68,7 +68,8 @@ public class Eigenface
 	public void update( )
 	{
 		DBHandleEigen db=new DBHandleEigen( _context );
-		_numTrainingImages=db.getTrainSetSize( );
+		List<NamedFace> faces=db.getAllFaces( );
+		_numTrainingImages=faces.size( );
 
 		int lastNumTrainingImages=Math.max( 0,_numTrainingImages-1 );//eigenfaceRecognition.lastNumberOfTrainingImages;
 		Integer step=null;//eigenfaceRecognition.rebuildFaceSpace;
@@ -85,12 +86,10 @@ public class Eigenface
 				double[] tempAverageFace=new double[VECTORLENGTH];
 				byte[][] faceVectors=new byte[_numTrainingImages][];
 
-				List<NamedFace> faces=db.getAllFaces( );
-				
 				int r=0;
 				for( NamedFace face : faces )
 				{
-					Log.v( TAG, "next face" );
+					Log.v( TAG, "next face, id: "+Long.toString( face.id ) );
 					
 					byte[] intensityImage=Utilities.bufferedImageToIntensityArray( face.bitmap ) ;
 					for( int i=0; i < tempAverageFace.length; i++ )
@@ -312,11 +311,13 @@ public class Eigenface
 	
 	public static class NamedFace
 	{
+		public long   id;
 		public Bitmap bitmap;
 		public String name;
 		
-		public NamedFace( Bitmap _bitmap, String _name )
+		public NamedFace( long _id, Bitmap _bitmap, String _name )
 		{
+			id=_id;
 			bitmap=_bitmap;
 			name=_name;
 		}

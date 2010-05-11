@@ -51,6 +51,7 @@ public class Main extends Activity
 //	private static final int MENU_ROTATE = 2;
 	private static final int MENU_RETRY = 3;
 	private static final int MENU_SETTINGS = 4;
+	private static final int MENU_GALLERY = 5;
 
 	private static final int SELECT_IMAGE = 1;
 	private static final int CHANGE_SETTINGS = 2;
@@ -202,13 +203,21 @@ public class Main extends Activity
         	if( config.type==Server.REMOTE )
         	{
         		count_remote++;
-	        	FaceDetectorRemote detector=new FaceDetectorRemote(
-					config.hostname,
-					Integer.toString(config.port),
-					config.timeout
-				);
-		    	_detectors.add( detector );
-		    	_learners.add( detector );
+        		
+        		try
+        		{
+		        	FaceDetectorRemote detector=new FaceDetectorRemote(
+						config.hostname,
+						Integer.toString(config.port),
+						config.timeout
+					);
+			    	_detectors.add( detector );
+			    	_learners.add( detector );
+        		}
+        		catch( NoClassDefFoundError e )
+        		{
+        			Log.v( TAG, "Ice library wasn't enabled during the compilation. Proceeding without a remote detector" );
+        		}
         	}
         	else if( config.type==Server.LOCAL )
         	{
@@ -269,6 +278,9 @@ public class Main extends Activity
                 
         menu.add(0, MENU_SETTINGS, 0, "Settings" )
         	.setIcon( android.R.drawable.ic_menu_preferences );
+        
+        menu.add(0, MENU_GALLERY, 0, "Local training set" )
+        	.setIcon(  R.drawable.ic_menu_allfriends );
 
     	return true;
     }
@@ -304,6 +316,11 @@ public class Main extends Activity
     			Intent i=new Intent( );
     			i.setAction( "com.cawka.FriendDetector.settings.List" );
     			startActivityForResult( i, CHANGE_SETTINGS );
+    			
+    			return true;
+    		case MENU_GALLERY:
+    			// need to revalidate detectors if the training set was modified
+    			startActivityForResult( new Intent( ).setAction( "com.cawka.FriendDetector.Gallery" ), CHANGE_SETTINGS );
     			
     			return true;
         }

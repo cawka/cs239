@@ -4,16 +4,19 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.List;
 
 import com.cawka.FriendDetector.Person;
 import com.cawka.FriendDetector.detector.eigenfaces.DBHandleEigen;
 import com.cawka.FriendDetector.detector.eigenfaces.Eigenface;
+import com.cawka.FriendDetector.detector.eigenfaces.Eigenface.NamedFace;
 
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.PointF;
 import android.graphics.Bitmap.CompressFormat;
+import android.media.ExifInterface;
 import android.os.Environment;
 import android.util.Log;
 
@@ -80,12 +83,16 @@ public class FaceDetectorLocal extends iFaceDetector implements iFaceLearner
 		File filepath=new File( Environment.getExternalStorageDirectory()+"/friendDetector" );
 		filepath.mkdirs( );
 
-		File filename=new File( filepath, id+".png" );
+		File filename=new File( filepath, id+".jpeg" );
+//		File filename=new File( filepath, id+".png" );
 		try
 		{
 			FileOutputStream fos = new FileOutputStream( filename );
 			bitmap.compress( CompressFormat.PNG, 100, fos );
 			fos.close( );
+			
+			ExifInterface exif=new ExifInterface( filename.getAbsolutePath() );
+			exif.setAttribute( "ImageDescription", "Test" );
 		}
 		catch( FileNotFoundException e )
 		{
@@ -98,5 +105,15 @@ public class FaceDetectorLocal extends iFaceDetector implements iFaceLearner
 		
 		_eigenface.update( ); //recalculate eigenfaces
 		return true;
+	}
+
+	public List<NamedFace> getTrainSet( )
+	{
+		return new DBHandleEigen( _context ).getAllFaces( );
+	}
+
+	public void unLearn( long id )
+	{
+		new DBHandleEigen( _context ).delete( id );
 	}
 }

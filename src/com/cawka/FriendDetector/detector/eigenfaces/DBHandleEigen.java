@@ -67,23 +67,20 @@ public class DBHandleEigen extends SQLiteOpenHelper
 	
 	/////////////////////////////////////////////////////////////////
     
-	public int getTrainSetSize( )
-	{
-		SQLiteDatabase db=getReadableDatabase( );
+//	public int getTrainSetSize( )
+//	{
+//		SQLiteDatabase db=getReadableDatabase( );
+//		
+//		Cursor cursor=db.query( TABLE, new String[]{"count(*)"}, null, null, null, null, null );
+//		int ret=0;
+//		if( cursor.moveToFirst() ) ret=cursor.getInt( 0 );
+//		
+//		cursor.close( );
+//		db.close( );
+//		
+//		return ret;
+//	}
 		
-		Cursor cursor=db.query( TABLE, new String[]{"count(*)"}, null, null, null, null, null );
-		int ret=0;
-		if( cursor.moveToFirst() ) ret=cursor.getInt( 0 );
-		
-		cursor.close( );
-		db.close( );
-		
-		return ret;
-	}
-	
-	private SQLiteDatabase _temp_db;
-	private Cursor		   _temp_cursor;
-	
 //	public void requestFaces( )
 //	{
 //		_temp_db=getReadableDatabase( );
@@ -116,18 +113,29 @@ public class DBHandleEigen extends SQLiteOpenHelper
 	
 	public List<NamedFace> getAllFaces( )
 	{
+		SQLiteDatabase _temp_db;
+		Cursor		   _temp_cursor;
+
 		_temp_db=getReadableDatabase( );
-		_temp_cursor=_temp_db.query( TABLE, COLUMNS, null, null, null, null, null );
+		_temp_cursor=_temp_db.query( TABLE, COLUMNS, null, null, null, null, "name,id" );
 		_temp_cursor.moveToFirst( );
 		
 		List<NamedFace> ret=new LinkedList<NamedFace>( );
+		
+		String status=Environment.getExternalStorageState( );
+		if( !status.equals(Environment.MEDIA_MOUNTED) ) return ret;
 		
 		while( !_temp_cursor.isAfterLast( ) )
 		{
 			File filepath=new File( Environment.getExternalStorageDirectory()+"/friendDetector" );
 			File filename=new File( filepath, Long.toString(_temp_cursor.getLong(0))+".png" );
+			if( !filename.exists() )
+				filename=new File( filepath, Long.toString(_temp_cursor.getLong(0))+".jpeg" );
 
-			ret.add( new NamedFace( BitmapFactory.decodeFile(filename.getAbsolutePath() ), _temp_cursor.getString(1) ) );
+			ret.add( new NamedFace( 
+					_temp_cursor.getLong(0), 
+					BitmapFactory.decodeFile(filename.getAbsolutePath() ), 
+					_temp_cursor.getString(1) ) );
 			_temp_cursor.moveToNext( );
 		}
 		
@@ -139,6 +147,9 @@ public class DBHandleEigen extends SQLiteOpenHelper
 
 	public List<NamedFace> getFacesByName( String name )
 	{
+		SQLiteDatabase _temp_db;
+		Cursor		   _temp_cursor;
+
 		_temp_db=getReadableDatabase( );
 		_temp_cursor=_temp_db.query( TABLE, COLUMNS, "name=?", new String[]{name}, null, null, null );
 		_temp_cursor.moveToFirst( );
@@ -149,8 +160,13 @@ public class DBHandleEigen extends SQLiteOpenHelper
 		{
 			File filepath=new File( Environment.getExternalStorageDirectory()+"/friendDetector" );
 			File filename=new File( filepath, Long.toString(_temp_cursor.getLong(0))+".png" );
+			if( !filename.exists() )
+				filename=new File( filepath, Long.toString(_temp_cursor.getLong(0))+".jpeg" );
 
-			ret.add( new NamedFace( BitmapFactory.decodeFile(filename.getAbsolutePath() ), _temp_cursor.getString(1) ) );
+			ret.add( new NamedFace( 
+					_temp_cursor.getLong(0), 
+					BitmapFactory.decodeFile(filename.getAbsolutePath()), 
+					_temp_cursor.getString(1) ) );
 			_temp_cursor.moveToNext( );
 			
 			_temp_cursor.moveToNext( );
@@ -160,9 +176,13 @@ public class DBHandleEigen extends SQLiteOpenHelper
 		_temp_db.close( );
 		
 		return ret;		
-	}	
+	}
+	
 	public List<String> getNames( )
 	{
+		SQLiteDatabase _temp_db;
+		Cursor		   _temp_cursor;
+
 		_temp_db=getReadableDatabase( );
 		_temp_cursor=_temp_db.query( TABLE, new String[]{"name"}, null, null, "name", null, null );
 		_temp_cursor.moveToFirst( );
@@ -254,6 +274,23 @@ public class DBHandleEigen extends SQLiteOpenHelper
     	db.delete( TABLE, null, null );
     	db.close( );
 	}
+    
+    public void delete( long id ) 
+    {
+    	Log.v( TAG, "Removing item "+Long.toString(id) );
+    	SQLiteDatabase db=getWritableDatabase( );
+    	
+    	db.delete( TABLE, "id=?", new String[]{Long.toString(id)} );
+    	db.close( );
+
+		File filepath=new File( Environment.getExternalStorageDirectory()+"/friendDetector" );
+		File filename=new File( filepath, Long.toString(id)+".png" );
+		if( !filename.exists() )
+			filename=new File( filepath, Long.toString(id)+".jpeg" );
+		
+		if( filename.exists() )
+			filename.delete( );
+    } 
     
 //	public void update( Server.Config config )
 //	{

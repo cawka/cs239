@@ -52,21 +52,10 @@
         android:persistent="false"
      />
      
-   	<Preference
-   		android:key="save"
-   		android:title="Save"
-   	/>
-     
-    <PreferenceCategory
-    		android:key="delete_category"
-    		android:title=""
-    >
-   	
-	   	<Preference
-	   		android:key="delete"
-	   		android:title="Remove detector"
-	   	/>
-   	
-   	</PreferenceCategory>
+     <Preference
+     	android:key="training_set"
+     	android:title="Training set"
+     	android:summary="Show faces in the training set"
+     	/> 
 
 </PreferenceScreen>

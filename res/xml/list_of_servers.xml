@@ -11,7 +11,7 @@
     		android:title="List of detectors"
     />
     
-    <PreferenceCategory
+    <!--<PreferenceCategory
     		android:key=""
     		android:title="Stuff"
     >
@@ -21,4 +21,4 @@
     	/>
     </PreferenceCategory>
       
-</PreferenceScreen>
+--></PreferenceScreen>
