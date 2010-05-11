@@ -74,6 +74,12 @@ public abstract class _RecognizerDisp extends Ice.ObjectImpl implements Recogniz
         return findFacesAndRecognizePeople(jpegFile, null);
     }
 
+    public final FacePictureWithName[]
+    getTrainSet()
+    {
+        return getTrainSet(null);
+    }
+
     public final void
     learn(byte[] jpegFileOfFace, String name)
     {
@@ -84,6 +90,12 @@ public abstract class _RecognizerDisp extends Ice.ObjectImpl implements Recogniz
     recognizeFace(byte[] jpegFileOfFace)
     {
         return recognizeFace(jpegFileOfFace, null);
+    }
+
+    public final void
+    unLearn(int id)
+    {
+        unLearn(id, null);
     }
 
     public static Ice.DispatchStatus
@@ -131,15 +143,41 @@ public abstract class _RecognizerDisp extends Ice.ObjectImpl implements Recogniz
         return Ice.DispatchStatus.DispatchOK;
     }
 
+    public static Ice.DispatchStatus
+    ___getTrainSet(Recognizer __obj, IceInternal.Incoming __inS, Ice.Current __current)
+    {
+        __checkMode(Ice.OperationMode.Normal, __current.mode);
+        __inS.is().skipEmptyEncaps();
+        IceInternal.BasicStream __os = __inS.os();
+        FacePictureWithName[] __ret = __obj.getTrainSet(__current);
+        FacePicturesWithNamesHelper.write(__os, __ret);
+        return Ice.DispatchStatus.DispatchOK;
+    }
+
+    public static Ice.DispatchStatus
+    ___unLearn(Recognizer __obj, IceInternal.Incoming __inS, Ice.Current __current)
+    {
+        __checkMode(Ice.OperationMode.Normal, __current.mode);
+        IceInternal.BasicStream __is = __inS.is();
+        __is.startReadEncaps();
+        int id;
+        id = __is.readInt();
+        __is.endReadEncaps();
+        __obj.unLearn(id, __current);
+        return Ice.DispatchStatus.DispatchOK;
+    }
+
     private final static String[] __all =
     {
         "findFacesAndRecognizePeople",
+        "getTrainSet",
         "ice_id",
         "ice_ids",
         "ice_isA",
         "ice_ping",
         "learn",
-        "recognizeFace"
+        "recognizeFace",
+        "unLearn"
     };
 
     public Ice.DispatchStatus
@@ -159,27 +197,35 @@ public abstract class _RecognizerDisp extends Ice.ObjectImpl implements Recogniz
             }
             case 1:
             {
-                return ___ice_id(this, in, __current);
+                return ___getTrainSet(this, in, __current);
             }
             case 2:
             {
-                return ___ice_ids(this, in, __current);
+                return ___ice_id(this, in, __current);
             }
             case 3:
             {
-                return ___ice_isA(this, in, __current);
+                return ___ice_ids(this, in, __current);
             }
             case 4:
             {
-                return ___ice_ping(this, in, __current);
+                return ___ice_isA(this, in, __current);
             }
             case 5:
             {
-                return ___learn(this, in, __current);
+                return ___ice_ping(this, in, __current);
             }
             case 6:
             {
+                return ___learn(this, in, __current);
+            }
+            case 7:
+            {
                 return ___recognizeFace(this, in, __current);
+            }
+            case 8:
+            {
+                return ___unLearn(this, in, __current);
             }
         }
 

@@ -11,15 +11,18 @@
 
 package FriendDetector;
 
-public interface _RecognizerOperationsNC
+public final class FacePictureWithNameHolder
 {
-    Face[] findFacesAndRecognizePeople(byte[] jpegFile);
+    public
+    FacePictureWithNameHolder()
+    {
+    }
 
-    String recognizeFace(byte[] jpegFileOfFace);
+    public
+    FacePictureWithNameHolder(FacePictureWithName value)
+    {
+        this.value = value;
+    }
 
-    void learn(byte[] jpegFileOfFace, String name);
-
-    FacePictureWithName[] getTrainSet();
-
-    void unLearn(int id);
+    public FacePictureWithName value;
 }

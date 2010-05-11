@@ -279,8 +279,8 @@ public class Main extends Activity
         menu.add(0, MENU_SETTINGS, 0, "Settings" )
         	.setIcon( android.R.drawable.ic_menu_preferences );
         
-        menu.add(0, MENU_GALLERY, 0, "Local training set" )
-        	.setIcon(  R.drawable.ic_menu_allfriends );
+//        menu.add(0, MENU_GALLERY, 0, "Local training set" )
+//        	.setIcon(  R.drawable.ic_menu_allfriends );
 
     	return true;
     }
@@ -318,11 +318,11 @@ public class Main extends Activity
     			startActivityForResult( i, CHANGE_SETTINGS );
     			
     			return true;
-    		case MENU_GALLERY:
-    			// need to revalidate detectors if the training set was modified
-    			startActivityForResult( new Intent( ).setAction( "com.cawka.FriendDetector.Gallery" ), CHANGE_SETTINGS );
-    			
-    			return true;
+//    		case MENU_GALLERY:
+//    			// need to revalidate detectors if the training set was modified
+//    			startActivityForResult( new Intent( ).setAction( "com.cawka.FriendDetector.Gallery" ), CHANGE_SETTINGS );
+//    			
+//    			return true;
         }
 
     	return false;

@@ -55,6 +55,48 @@ public final class RecognizerPrxHelper extends Ice.ObjectPrxHelperBase implement
         }
     }
 
+    public FacePictureWithName[]
+    getTrainSet()
+    {
+        return getTrainSet(null, false);
+    }
+
+    public FacePictureWithName[]
+    getTrainSet(java.util.Map<String, String> __ctx)
+    {
+        return getTrainSet(__ctx, true);
+    }
+
+    @SuppressWarnings("unchecked")
+    private FacePictureWithName[]
+    getTrainSet(java.util.Map<String, String> __ctx, boolean __explicitCtx)
+    {
+        if(__explicitCtx && __ctx == null)
+        {
+            __ctx = _emptyContext;
+        }
+        int __cnt = 0;
+        while(true)
+        {
+            Ice._ObjectDel __delBase = null;
+            try
+            {
+                __checkTwowayOnly("getTrainSet");
+                __delBase = __getDelegate(false);
+                _RecognizerDel __del = (_RecognizerDel)__delBase;
+                return __del.getTrainSet(__ctx);
+            }
+            catch(IceInternal.LocalExceptionWrapper __ex)
+            {
+                __handleExceptionWrapper(__delBase, __ex, null);
+            }
+            catch(Ice.LocalException __ex)
+            {
+                __cnt = __handleException(__delBase, __ex, null, __cnt);
+            }
+        }
+    }
+
     public void
     learn(byte[] jpegFileOfFace, String name)
     {
@@ -127,6 +169,48 @@ public final class RecognizerPrxHelper extends Ice.ObjectPrxHelperBase implement
                 __delBase = __getDelegate(false);
                 _RecognizerDel __del = (_RecognizerDel)__delBase;
                 return __del.recognizeFace(jpegFileOfFace, __ctx);
+            }
+            catch(IceInternal.LocalExceptionWrapper __ex)
+            {
+                __handleExceptionWrapper(__delBase, __ex, null);
+            }
+            catch(Ice.LocalException __ex)
+            {
+                __cnt = __handleException(__delBase, __ex, null, __cnt);
+            }
+        }
+    }
+
+    public void
+    unLearn(int id)
+    {
+        unLearn(id, null, false);
+    }
+
+    public void
+    unLearn(int id, java.util.Map<String, String> __ctx)
+    {
+        unLearn(id, __ctx, true);
+    }
+
+    @SuppressWarnings("unchecked")
+    private void
+    unLearn(int id, java.util.Map<String, String> __ctx, boolean __explicitCtx)
+    {
+        if(__explicitCtx && __ctx == null)
+        {
+            __ctx = _emptyContext;
+        }
+        int __cnt = 0;
+        while(true)
+        {
+            Ice._ObjectDel __delBase = null;
+            try
+            {
+                __delBase = __getDelegate(false);
+                _RecognizerDel __del = (_RecognizerDel)__delBase;
+                __del.unLearn(id, __ctx);
+                return;
             }
             catch(IceInternal.LocalExceptionWrapper __ex)
             {

@@ -8,9 +8,11 @@ import com.cawka.FriendDetector.Person;
 import com.cawka.FriendDetector.detector.eigenfaces.Eigenface.NamedFace;
 
 import FriendDetector.Face;
+import FriendDetector.FacePictureWithName;
 import FriendDetector.RecognizerPrx;
 import FriendDetector.RecognizerPrxHelper;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -112,10 +114,27 @@ public class FaceDetectorRemote extends iFaceDetector implements iFaceLearner
 
 	public List<NamedFace> getTrainSet( )
 	{
-//		Toast.makeText( _context, "Not implemented yet", Toast.LENGTH_LONG ).show( );
-		Log.v( TAG, "Obtaining a training set from the remote server is not yet implemented" );
-		
-		return new LinkedList<NamedFace>();
+		List<NamedFace> ret=new LinkedList<NamedFace>();
+		try
+		{
+			if( _recognizer==null ) tryConnect( );
+			
+			for( FacePictureWithName face : _recognizer.getTrainSet() ) 
+			{
+				Bitmap bmp=BitmapFactory.decodeByteArray( face.jpegFileOfFace, 0, face.jpegFileOfFace.length );
+				ret.add( new NamedFace(face.id, bmp, face.name) );
+			}
+
+			return ret;
+		}
+		catch( Exception e ) //Ice.LocalException e
+		{
+			_recognizer=null; //to make sure next time it will try again to connect
+			
+			Log.v( TAG, (e.getMessage()!=null)?e.getMessage():"unknown error" );
+			Log.v( TAG, Log.getStackTraceString(e) );
+		}
+		return ret;
 	}
 
 	public void unLearn( long id )
