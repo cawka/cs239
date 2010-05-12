@@ -84,13 +84,13 @@ public class Person implements Serializable
 	public static Person createPerson( Bitmap picture, FacePosition rect, String name )
 	{
 		Person person=new Person( );
-		person._faceRect=new Rect( rect.left, rect.top, rect.right, rect.bottom ); //should be corrected later
+		person._faceRect=new Rect( rect.left, rect.top, rect.right, rect.bottom );
 		
-//		Matrix x=new Matrix();
-//		x.postScale( 1.0f*FACE_WIDTH/person._faceRect.width(),
-//					1.0f*FACE_HEIGHT/person._faceRect.height() );
+		Matrix x=new Matrix();
+		x.postScale( 1.0f*FACE_WIDTH/person._faceRect.width(),
+					1.0f*FACE_HEIGHT/person._faceRect.height() );
 		person._face=Bitmap.createBitmap( picture, person._faceRect.left,    person._faceRect.top,
-												   person._faceRect.width(), person._faceRect.height() );//, x, true );
+												   person._faceRect.width(), person._faceRect.height(), x, true );
 		
 		if( !name.equals("") ) person.setName( name );
 		return person;

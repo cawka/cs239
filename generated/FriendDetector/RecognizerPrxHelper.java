@@ -14,6 +14,48 @@ package FriendDetector;
 public final class RecognizerPrxHelper extends Ice.ObjectPrxHelperBase implements RecognizerPrx
 {
     public Face[]
+    findFaces(byte[] jpegFile)
+    {
+        return findFaces(jpegFile, null, false);
+    }
+
+    public Face[]
+    findFaces(byte[] jpegFile, java.util.Map<String, String> __ctx)
+    {
+        return findFaces(jpegFile, __ctx, true);
+    }
+
+    @SuppressWarnings("unchecked")
+    private Face[]
+    findFaces(byte[] jpegFile, java.util.Map<String, String> __ctx, boolean __explicitCtx)
+    {
+        if(__explicitCtx && __ctx == null)
+        {
+            __ctx = _emptyContext;
+        }
+        int __cnt = 0;
+        while(true)
+        {
+            Ice._ObjectDel __delBase = null;
+            try
+            {
+                __checkTwowayOnly("findFaces");
+                __delBase = __getDelegate(false);
+                _RecognizerDel __del = (_RecognizerDel)__delBase;
+                return __del.findFaces(jpegFile, __ctx);
+            }
+            catch(IceInternal.LocalExceptionWrapper __ex)
+            {
+                __handleExceptionWrapper(__delBase, __ex, null);
+            }
+            catch(Ice.LocalException __ex)
+            {
+                __cnt = __handleException(__delBase, __ex, null, __cnt);
+            }
+        }
+    }
+
+    public Face[]
     findFacesAndRecognizePeople(byte[] jpegFile)
     {
         return findFacesAndRecognizePeople(jpegFile, null, false);

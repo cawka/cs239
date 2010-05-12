@@ -63,7 +63,11 @@ public class FaceDetectorRemote extends iFaceDetector implements iFaceLearner
 			ByteArrayOutputStream os=new ByteArrayOutputStream( );
 			bitmap.compress( Bitmap.CompressFormat.JPEG, 100, os );
 
-			Face[] faces=_recognizer.findFacesAndRecognizePeople( os.toByteArray() );
+			Face[] faces;
+			if( _fullDetection )
+				faces=_recognizer.findFacesAndRecognizePeople( os.toByteArray() );
+			else
+				faces=_recognizer.findFaces( os.toByteArray() );
 		
 			for( Face face : faces )
 			{
@@ -82,7 +86,31 @@ public class FaceDetectorRemote extends iFaceDetector implements iFaceLearner
 			return false;
 		}
 	}	
-	
+
+	public boolean recognize( Person person )
+	{
+		try
+		{
+			if( _recognizer==null ) tryConnect( );
+			
+			ByteArrayOutputStream os=new ByteArrayOutputStream( );
+			person.getFace( ).compress( Bitmap.CompressFormat.JPEG, 100, os );
+
+			String name=_recognizer.recognizeFace( os.toByteArray() );
+			if( name!="" ) person.setName( name );
+		}
+		catch( Exception e ) //Ice.LocalException e
+		{
+			_recognizer=null; //to make sure next time it will try again to connect
+			
+			Log.v( TAG, (e.getMessage()!=null)?e.getMessage():"unknown error" );
+			Log.v( TAG, Log.getStackTraceString(e) );
+			
+			return false;
+		}
+		
+		return true;
+	}	
 	////////////////////////////////////////////////////////////////////////////////
 	////////////////////////////////////////////////////////////////////////////////
 	////////////////////////////////////////////////////////////////////////////////
@@ -139,7 +167,18 @@ public class FaceDetectorRemote extends iFaceDetector implements iFaceLearner
 
 	public void unLearn( long id )
 	{
-		// TODO Auto-generated method stub
-		
+		try
+		{
+			if( _recognizer==null ) tryConnect( );
+			
+			_recognizer.unLearn( (int)id );
+		}
+		catch( Exception e ) //Ice.LocalException e
+		{
+			_recognizer=null; //to make sure next time it will try again to connect
+			
+			Log.v( TAG, (e.getMessage()!=null)?e.getMessage():"unknown error" );
+			Log.v( TAG, Log.getStackTraceString(e) );
+		}
 	}
 }

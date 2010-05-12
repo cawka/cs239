@@ -69,6 +69,12 @@ public abstract class _RecognizerDisp extends Ice.ObjectImpl implements Recogniz
     }
 
     public final Face[]
+    findFaces(byte[] jpegFile)
+    {
+        return findFaces(jpegFile, null);
+    }
+
+    public final Face[]
     findFacesAndRecognizePeople(byte[] jpegFile)
     {
         return findFacesAndRecognizePeople(jpegFile, null);
@@ -109,6 +115,21 @@ public abstract class _RecognizerDisp extends Ice.ObjectImpl implements Recogniz
         __is.endReadEncaps();
         IceInternal.BasicStream __os = __inS.os();
         Face[] __ret = __obj.findFacesAndRecognizePeople(jpegFile, __current);
+        FacesHelper.write(__os, __ret);
+        return Ice.DispatchStatus.DispatchOK;
+    }
+
+    public static Ice.DispatchStatus
+    ___findFaces(Recognizer __obj, IceInternal.Incoming __inS, Ice.Current __current)
+    {
+        __checkMode(Ice.OperationMode.Normal, __current.mode);
+        IceInternal.BasicStream __is = __inS.is();
+        __is.startReadEncaps();
+        byte[] jpegFile;
+        jpegFile = FileHelper.read(__is);
+        __is.endReadEncaps();
+        IceInternal.BasicStream __os = __inS.os();
+        Face[] __ret = __obj.findFaces(jpegFile, __current);
         FacesHelper.write(__os, __ret);
         return Ice.DispatchStatus.DispatchOK;
     }
@@ -169,6 +190,7 @@ public abstract class _RecognizerDisp extends Ice.ObjectImpl implements Recogniz
 
     private final static String[] __all =
     {
+        "findFaces",
         "findFacesAndRecognizePeople",
         "getTrainSet",
         "ice_id",
@@ -193,37 +215,41 @@ public abstract class _RecognizerDisp extends Ice.ObjectImpl implements Recogniz
         {
             case 0:
             {
-                return ___findFacesAndRecognizePeople(this, in, __current);
+                return ___findFaces(this, in, __current);
             }
             case 1:
             {
-                return ___getTrainSet(this, in, __current);
+                return ___findFacesAndRecognizePeople(this, in, __current);
             }
             case 2:
             {
-                return ___ice_id(this, in, __current);
+                return ___getTrainSet(this, in, __current);
             }
             case 3:
             {
-                return ___ice_ids(this, in, __current);
+                return ___ice_id(this, in, __current);
             }
             case 4:
             {
-                return ___ice_isA(this, in, __current);
+                return ___ice_ids(this, in, __current);
             }
             case 5:
             {
-                return ___ice_ping(this, in, __current);
+                return ___ice_isA(this, in, __current);
             }
             case 6:
             {
-                return ___learn(this, in, __current);
+                return ___ice_ping(this, in, __current);
             }
             case 7:
             {
-                return ___recognizeFace(this, in, __current);
+                return ___learn(this, in, __current);
             }
             case 8:
+            {
+                return ___recognizeFace(this, in, __current);
+            }
+            case 9:
             {
                 return ___unLearn(this, in, __current);
             }

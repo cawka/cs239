@@ -31,6 +31,11 @@ import com.cawka.FriendDetector.Person;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.ColorMatrix;
+import android.graphics.ColorMatrixColorFilter;
+import android.graphics.Paint;
+import android.graphics.Bitmap.Config;
 import android.util.Log;
 
 /**
@@ -60,7 +65,6 @@ public class Eigenface
 		update( ); //initialize
 	}
 	
-
 	/**
 	 * Calculates a new set of Eigenfaces and then replaces the old set.
 	 * 
@@ -92,6 +96,8 @@ public class Eigenface
 					Log.v( TAG, "next face, id: "+Long.toString( face.id ) );
 					
 					byte[] intensityImage=Utilities.bufferedImageToIntensityArray( face.bitmap ) ;
+					Log.v( TAG, "Face bitmap size: w:"+Integer.toString(face.bitmap.getWidth())+", h:"+Integer.toString(face.bitmap.getHeight( )));
+					
 					for( int i=0; i < tempAverageFace.length; i++ )
 					{
 						tempAverageFace[i]+=( (double)( intensityImage[i] & 0xFF ) ) * factor;
@@ -178,12 +184,6 @@ public class Eigenface
 //			}
 //			unknownMirroredFaceWeight=this.getWeightForImage( mirroredFace );
 //		}
-
-//		ArrayList<SortableContainer<Region>> bestHits=new ArrayList<SortableContainer<Region>>( );
-//		for( String name : names )
-//		{
-//			Region image=null;
-//			Region[] regionsForName=db.getRegionsForFace( name );
 
 		DBHandleEigen db=new DBHandleEigen( _context );
 		
@@ -295,7 +295,7 @@ public class Eigenface
 
 		for( int j=0; j < temp.length; j++ )
 		{
-			temp[j]+=_averageFace[j] & 0xff;
+			temp[j]+=((int)_averageFace[j]) & 0xff;
 		}
 
 		byte[] image=new byte[VECTORLENGTH];
@@ -306,6 +306,11 @@ public class Eigenface
 		}
 		return image;
 	}	
+	
+	public Bitmap getAverageFace( )
+	{
+		return Utilities.intensityArraytoBitmap( _averageFace, Person.FACE_WIDTH, Person.FACE_HEIGHT );
+	}
 	
 	//
 	

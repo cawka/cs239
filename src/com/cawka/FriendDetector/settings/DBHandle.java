@@ -27,16 +27,23 @@ public class DBHandle extends SQLiteOpenHelper
 			"hostname VARCHAR(255) NOT NULL, " +
 	        "port INT NOT NULL, " +
 	        "enabled BOOLEAN NOT NULL," +
+	        "enabled_recognizer BOOLEAN NOT NULL," +
 	        "timeout INTEGER NOT NULL" +
 	    ")";
 	
-	private static final String COLUMNS[] = { "id", Server.KEY_TYPE, Server.KEY_HOSTNAME, Server.KEY_PORT, Server.KEY_ENABLED, Server.KEY_TIMEOUT };
+	private static final String	COLUMNS[]					= { 
+			"id",
+			Server.KEY_TYPE, Server.KEY_HOSTNAME, Server.KEY_PORT,
+			Server.KEY_ENABLED, Server.KEY_ENABLED_RECOGNIZER,
+			Server.KEY_TIMEOUT								};
+	
 	private static final int INDEX_ID 		= 0;
 	private static final int INDEX_TYPE 	= 1;
 	private static final int INDEX_SERVER 	= 2;
 	private static final int INDEX_PORT 	= 3;
 	private static final int INDEX_ENABLED 	= 4;
-	private static final int INDEX_TIMEOUT 	= 5;
+	private static final int INDEX_ENABLED_RECOGNIZER 	= 5;
+	private static final int INDEX_TIMEOUT 	= 6;
 	
 	private static final String DROP_TABLE = 
 		"DROP TABLE IF EXISTS "+TABLE;
@@ -47,7 +54,7 @@ public class DBHandle extends SQLiteOpenHelper
 		
 	public DBHandle( Context context ) 
 	{
-		super( context, DB_NAME, null, 4 );
+		super( context, DB_NAME, null, 5 );
 		getWritableDatabase( ).close( ); // to initialize database if necessary
 	}
 
@@ -93,6 +100,7 @@ public class DBHandle extends SQLiteOpenHelper
     		row.getString(INDEX_SERVER),
     		row.getInt(INDEX_PORT),
     		row.getInt(INDEX_ENABLED)==1,
+    		row.getInt(INDEX_ENABLED_RECOGNIZER)==1,
     		row.getInt(INDEX_TIMEOUT)
     	);
     }
@@ -126,6 +134,7 @@ public class DBHandle extends SQLiteOpenHelper
         values.put(Server.KEY_HOSTNAME, config.hostname );
         values.put(Server.KEY_PORT, 	config.port );
         values.put(Server.KEY_ENABLED, 	config.enabled );
+        values.put(Server.KEY_ENABLED_RECOGNIZER, 	config.enabled_recognizer );
         values.put(Server.KEY_TIMEOUT, 	config.timeout );
         
         config.id=db.insert( TABLE, null, values );
@@ -150,6 +159,7 @@ public class DBHandle extends SQLiteOpenHelper
         values.put(Server.KEY_HOSTNAME, config.hostname );
         values.put(Server.KEY_PORT, 	config.port );
         values.put(Server.KEY_ENABLED, 	config.enabled );
+        values.put(Server.KEY_ENABLED_RECOGNIZER, 	config.enabled_recognizer );
         values.put(Server.KEY_TIMEOUT, 	config.timeout );
 
         db.update( TABLE, values, "id=?", new String[]{ new Long(config.id).toString() } );

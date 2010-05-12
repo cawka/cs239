@@ -16,6 +16,9 @@ public interface RecognizerPrx extends Ice.ObjectPrx
     public Face[] findFacesAndRecognizePeople(byte[] jpegFile);
     public Face[] findFacesAndRecognizePeople(byte[] jpegFile, java.util.Map<String, String> __ctx);
 
+    public Face[] findFaces(byte[] jpegFile);
+    public Face[] findFaces(byte[] jpegFile, java.util.Map<String, String> __ctx);
+
     public String recognizeFace(byte[] jpegFileOfFace);
     public String recognizeFace(byte[] jpegFileOfFace, java.util.Map<String, String> __ctx);
 

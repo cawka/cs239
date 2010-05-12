@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.LinkedList;
 import java.util.List;
 
 import com.cawka.FriendDetector.Person;
@@ -27,17 +28,20 @@ public class FaceDetectorLocal extends iFaceDetector implements iFaceLearner
 	private Context _context;
 	private Eigenface _eigenface;
 	
+	private Thread _thread;
+	
 	public FaceDetectorLocal( Context context )
 	{
 		_context=context;
 		
-		new Thread( new Runnable(){
+		_thread=new Thread( new Runnable(){
 			public void run( )
 			{
 				Eigenface eigenface=new Eigenface( _context );
 				_eigenface=eigenface;
 			}
-		} ).start( );
+		} );
+		_thread.start( );
 	}
 	
 	/////////////////////////////////////////////////////////
@@ -56,7 +60,7 @@ public class FaceDetectorLocal extends iFaceDetector implements iFaceLearner
 
 			Person person=Person.createPerson( bitmap, midpoint, faces[i].eyesDistance( ) );
 			
-			if( _eigenface!=null )
+			if( _fullDetection && _eigenface!=null )
 			{
 				String name=_eigenface.recognize( person.getFace( ) );
 				if( !name.equals("") ) person.setName( name );
@@ -67,6 +71,17 @@ public class FaceDetectorLocal extends iFaceDetector implements iFaceLearner
 		
 		// it would be great to throw an exception here if it is taking to long to compute...
 		// but, there is no way I can interrupt android's face detector
+		
+		return true;
+	}
+
+	public boolean recognize( Person person )
+	{
+		if( _eigenface!=null )
+		{
+			String name=_eigenface.recognize( person.getFace( ) );
+			if( !name.equals("") ) person.setName( name );
+		}
 		
 		return true;
 	}
@@ -83,16 +98,12 @@ public class FaceDetectorLocal extends iFaceDetector implements iFaceLearner
 		File filepath=new File( Environment.getExternalStorageDirectory()+"/friendDetector" );
 		filepath.mkdirs( );
 
-		File filename=new File( filepath, id+".jpeg" );
-//		File filename=new File( filepath, id+".png" );
+		File filename=new File( filepath, id+".png" );
 		try
 		{
 			FileOutputStream fos = new FileOutputStream( filename );
 			bitmap.compress( CompressFormat.PNG, 100, fos );
 			fos.close( );
-			
-			ExifInterface exif=new ExifInterface( filename.getAbsolutePath() );
-			exif.setAttribute( "ImageDescription", "Test" );
 		}
 		catch( FileNotFoundException e )
 		{
@@ -107,9 +118,14 @@ public class FaceDetectorLocal extends iFaceDetector implements iFaceLearner
 		return true;
 	}
 
-	public List<NamedFace> getTrainSet( )
+	public List<NamedFace> getTrainSet( ) 
 	{
-		return new DBHandleEigen( _context ).getAllFaces( );
+		LinkedList<NamedFace> ret=(LinkedList<NamedFace>)new DBHandleEigen( _context ).getAllFaces( );
+		
+		try { _thread.join( ); } catch( InterruptedException e ) { return ret; }
+		
+		ret.addFirst( new NamedFace(-1, _eigenface.getAverageFace(), "Average face") );
+		return ret;
 	}
 
 	public void unLearn( long id )

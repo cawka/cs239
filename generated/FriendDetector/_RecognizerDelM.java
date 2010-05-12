@@ -14,6 +14,54 @@ package FriendDetector;
 public final class _RecognizerDelM extends Ice._ObjectDelM implements _RecognizerDel
 {
     public Face[]
+    findFaces(byte[] jpegFile, java.util.Map<String, String> __ctx)
+        throws IceInternal.LocalExceptionWrapper
+    {
+        IceInternal.Outgoing __og = __handler.getOutgoing("findFaces", Ice.OperationMode.Normal, __ctx);
+        try
+        {
+            try
+            {
+                IceInternal.BasicStream __os = __og.os();
+                FileHelper.write(__os, jpegFile);
+            }
+            catch(Ice.LocalException __ex)
+            {
+                __og.abort(__ex);
+            }
+            boolean __ok = __og.invoke();
+            try
+            {
+                if(!__ok)
+                {
+                    try
+                    {
+                        __og.throwUserException();
+                    }
+                    catch(Ice.UserException __ex)
+                    {
+                        throw new Ice.UnknownUserException(__ex.ice_name());
+                    }
+                }
+                IceInternal.BasicStream __is = __og.is();
+                __is.startReadEncaps();
+                Face[] __ret;
+                __ret = FacesHelper.read(__is);
+                __is.endReadEncaps();
+                return __ret;
+            }
+            catch(Ice.LocalException __ex)
+            {
+                throw new IceInternal.LocalExceptionWrapper(__ex, false);
+            }
+        }
+        finally
+        {
+            __handler.reclaimOutgoing(__og);
+        }
+    }
+
+    public Face[]
     findFacesAndRecognizePeople(byte[] jpegFile, java.util.Map<String, String> __ctx)
         throws IceInternal.LocalExceptionWrapper
     {

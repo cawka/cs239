@@ -11,19 +11,29 @@ public abstract class iFaceDetector
 {
 	protected List<Person> _faces=new LinkedList<Person>(); 
 	
+	protected boolean _fullDetection=true;
+	
 	//////////////////////////////////////////////////////////////////
 
 	// releasing _faces after this call
 	public List<Person> getFaces( ) 
 	{ 
-		if( _faces.size()==0 ) return _faces;
-		
-		List<Person> ret=_faces;
+		return _faces;
+	}
+	
+	public void resetFaces( )
+	{
 		_faces=new LinkedList<Person>( );
-		return ret; 
 	}
 	
 	public abstract boolean detect( Bitmap bmp );
+	
+	public void setFullDetection( boolean enabled )
+	{
+		_fullDetection=enabled;
+	}
+	
+	public boolean getFullDetection( ) { return _fullDetection; }
 
 	//////////////////////////////////////////////////////////////////
 

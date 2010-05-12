@@ -23,7 +23,14 @@ public class PreferenceServer extends Preference
 		_config=config;
 		
 		String extra="";
-		if( !_config.enabled ) extra=" (disabled)";
+		if( !(_config.enabled && _config.enabled_recognizer) )
+		{
+			if( _config.enabled )
+				extra=" (detector only)";
+			else
+				extra=" (recognizer only)";
+		}
+		if( !(_config.enabled || _config.enabled_recognizer) ) extra=" (disabled)";
 		
 		switch( _config.type )
 		{

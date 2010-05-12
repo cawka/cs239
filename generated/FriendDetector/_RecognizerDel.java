@@ -16,6 +16,9 @@ public interface _RecognizerDel extends Ice._ObjectDel
     Face[] findFacesAndRecognizePeople(byte[] jpegFile, java.util.Map<String, String> __ctx)
         throws IceInternal.LocalExceptionWrapper;
 
+    Face[] findFaces(byte[] jpegFile, java.util.Map<String, String> __ctx)
+        throws IceInternal.LocalExceptionWrapper;
+
     String recognizeFace(byte[] jpegFileOfFace, java.util.Map<String, String> __ctx)
         throws IceInternal.LocalExceptionWrapper;
 

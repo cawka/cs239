@@ -10,6 +10,14 @@
         android:persistent="false"
      />
 
+    <CheckBoxPreference
+        android:key="enabled_recognizer"
+        android:title="Enable recognizer"
+        android:defaultValue="true"
+        android:summary=""
+        android:persistent="false"
+     />
+
     <ListPreference
         android:key="type"
         android:title="Type"
@@ -17,7 +25,6 @@
         android:entryValues="@array/int_detector_types"
         android:summary=""
         android:persistent="false"
-        android:dependency="enabled"
      />
                 
     <EditTextPreference
@@ -26,7 +33,6 @@
         android:summary="Enter hostname of the remote server"
         android:dialogTitle="Hostname"
         android:singleLine="true"
-        android:dependency="enabled"
         android:persistent="false"
      />
         
@@ -37,7 +43,6 @@
  		android:dialogTitle="Port"
  		android:singleLine="true" 
  		android:defaultValue="55436"
-        android:dependency="enabled"
         android:persistent="false"
      />
  	
@@ -48,7 +53,6 @@
  		android:dialogTitle="Timeout (ms)"
  		android:singleLine="true"
  		android:defaultValue="2000" 
-        android:dependency="enabled"
         android:persistent="false"
      />
      

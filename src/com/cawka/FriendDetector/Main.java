@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -185,8 +186,6 @@ public class Main extends Activity
 		return new SavedState( );
 	}
 	
-	
-	
 	protected void restoreSettings( )
 	{
         Log.v( TAG, "restoreSettings" );
@@ -198,7 +197,7 @@ public class Main extends Activity
         int count_local =0;
         for( Server.Config config : new DBHandle(this).getAllConfigs() )
         {
-        	if( !config.enabled ) continue;
+        	if( !(config.enabled || config.enabled_recognizer) ) continue; //ignore disabled detector
         	
         	if( config.type==Server.REMOTE )
         	{
@@ -211,8 +210,10 @@ public class Main extends Activity
 						Integer.toString(config.port),
 						config.timeout
 					);
-			    	_detectors.add( detector );
-			    	_learners.add( detector );
+	        		detector.setFullDetection( config.enabled && config.enabled_recognizer );
+		        	
+		        	if( config.enabled ) 			_detectors.add( detector );
+			    	if( config.enabled_recognizer ) _learners.add( detector );
         		}
         		catch( NoClassDefFoundError e )
         		{
@@ -222,18 +223,16 @@ public class Main extends Activity
         	else if( config.type==Server.LOCAL )
         	{
         		count_local++;
-        		FaceDetectorLocal detector=new FaceDetectorLocal(this);
-        		_detectors.add( detector );
-		    	_learners.add( detector );
+        		FaceDetectorLocal detector=new FaceDetectorLocal( this );
+        		detector.setFullDetection( config.enabled && config.enabled_recognizer );
+        		
+        		if( config.enabled ) 			_detectors.add( detector );
+        		if( config.enabled_recognizer ) _learners.add( detector );
         	}
         }
         
-        Log.v( TAG, 
-        	Integer.toString(count_local)+" local and "+Integer.toString(count_remote)+" remote detectors are configured" );
-        
-//        SharedPreferences prefs=PreferenceManager.getDefaultSharedPreferences( this.getBaseContext() );
-//        
-//        MAX_SIZE=Integer.parseInt( prefs.getString(Server.KEY_MAX_SIZE, "800") );
+        Log.v( TAG, Integer.toString(count_local)+" local and "+Integer.toString(count_remote)+" remote detectors are configured" );
+        Log.v( TAG, "Detectors: "+Integer.toString(_detectors.size( ))+", learners: "+Integer.toString(_learners.size( ))  );
         
         System.gc( );
 	}
@@ -485,16 +484,16 @@ public class Main extends Activity
 
 	private class updateUI implements Runnable
     {
-    	private iFaceDetector _detector;
+    	private List<Person> _faces;
     	
-    	public updateUI( iFaceDetector detector )
+    	public updateUI( List<Person> faces )
     	{
-    		_detector=detector;
+    		_faces=faces;
     	}
 
 		public void run() 
 		{
-			for( Person person : _detector.getFaces() )
+			for( Person person : _faces )
 			{
 				if( !person.hasName() )
 					person.setDefaultName( Main.this.getResources().getString(R.string.unknown_person) );
@@ -533,29 +532,58 @@ public class Main extends Activity
 		{
 			Person.resetColors( );
 			
-			// if a remote detector fails (e.g., network is unavailable or server is not running), run a local one
-			for( iFaceDetector detector : _detectors )
+			Iterator<iFaceDetector> i_detector;
+			iFaceDetector detector=null;
+			for( i_detector=_detectors.iterator(); i_detector.hasNext( );  )
 			{
-				boolean ret=detector.detect( _bitmap );
-				if( ret ) 
-				{
-					_handler.post( new updateUI(detector) );
-					// technically, we could run all detectors, but the question is how we going to merge the results
-					break;
-				}
-				else
-				{
-					_handler.post( new Runnable() 
-						{ 
-							public void run() 
-							{ 
-								Toast.makeText(Main.this, "Detector timeout, using next available", Toast.LENGTH_SHORT).show(); 
-							} 
-						} );
-				}
+				detector=i_detector.next( );
+				
+				boolean ok=detector.detect( _bitmap );
+				if( ok ) break;
+
+				_handler.post( new Runnable() 
+				{ 
+					public void run() 
+					{ 
+						Toast.makeText(Main.this, "Detector timeout, using next available", Toast.LENGTH_SHORT).show(); 
+					} 
+				} );
 			}
 			
-			_handler.post( new releaseUI() );
+			if( detector==null ) 
+			{ 
+				_handler.post( new releaseUI() ); //no detectors available
+				return;
+			}
+			if( detector.getFullDetection() )
+			{
+				List<Person> list=detector.getFaces( );
+				detector.resetFaces( );
+				_handler.post( new updateUI(list) ); 
+				_handler.post( new releaseUI() ); 
+			}
+			
+			for( Person person : detector.getFaces() )
+			{
+				for( iFaceLearner learner : _learners )
+				{
+					boolean ok=learner.recognize( person );
+					if( ok ) break;
+					
+					_handler.post( new Runnable() 
+					{ 
+						public void run() 
+						{ 
+							Toast.makeText(Main.this, "Recognizer timeout, using next available (if available)", Toast.LENGTH_SHORT).show(); 
+						} 
+					} );
+				}
+			}
+			List<Person> list=detector.getFaces( );
+			detector.resetFaces( );
+			
+			_handler.post( new updateUI(list) ); 
+			_handler.post( new releaseUI() ); 
 		}
     }
 	
