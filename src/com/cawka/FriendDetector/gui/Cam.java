@@ -69,23 +69,20 @@ public class Cam implements SurfaceHolder.Callback
             	}
             else 
             	Log.v("Karthik","NULL");
-            Destroy();
-            //mCamera.startPreview();
+            
         }
     };
 
     public void surfaceCreated(SurfaceHolder holder)
     {
         Log.e(TAG, "surfaceCreated");
-        if(mCamera == null)
-        	mCamera = Camera.open();
+        mCamera = Camera.open();
         //mCamera.startPreview();
     }
 
     public void surfaceChanged(SurfaceHolder holder, int format, int w, int h)
     {
         Log.e("Karthik", "surfaceChanged - noticed");
-
         // XXX stopPreview() will crash if preview is not running
         if (mPreviewRunning) {
             mCamera.stopPreview();
@@ -123,22 +120,6 @@ public class Cam implements SurfaceHolder.Callback
 		Log.v("Karthik","INSIDE.. Take Picture");
 		mCamera.takePicture(null, mPictureCallbackRAW, mPictureCallbackJPEG);
 		
-	}
-	
-	public void StartPreview()
-	{
-		if(mCamera==null)
-			mCamera = Camera.open();
-		mPreviewRunning = true;
-		mCamera.startPreview();
-	}
-	
-	public void Destroy()
-	{
-		if(mPreviewRunning)
-			mCamera.stopPreview();
-        mPreviewRunning = false;
-        mCamera.release();
 	}
 	
 }

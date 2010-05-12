@@ -644,7 +644,7 @@ public class Main extends Activity
             {
             	findViewById(R.id.picture).setVisibility(View.GONE);
             	findViewById(R.id.surface).setVisibility(View.VISIBLE);
-            	_cam.StartPreview();
+            	//_cam.StartPreview();
             }
             else
         	{
