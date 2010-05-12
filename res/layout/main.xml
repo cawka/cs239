@@ -31,7 +31,6 @@
 				android:layout_marginRight="4dip"
 				android:layout_marginTop="4dip"
 				android:padding="4dip"
-				android:visibility="invisible" 
 				android:layout_weight="1"
 			 />
 			 
@@ -44,7 +43,8 @@
 				android:layout_marginRight="4dip"
 				android:layout_marginTop="4dip"
 				android:padding="4dip"
-        		
+        		android:orientation="vertical"
+        		android:visibility="gone"
         	/>
 			 		
 	</LinearLayout>

@@ -37,6 +37,7 @@ public final class R {
         public static final int row_text=0x7f080002;
         public static final int row_text_linear=0x7f08000d;
         public static final int surface=0x7f080008;
+        public static final int test=0x7f08000e;
         public static final int text1=0x7f08000c;
         public static final int upper_linear=0x7f080006;
     }
@@ -47,6 +48,7 @@ public final class R {
         public static final int notepad_list=0x7f030003;
         public static final int notes_row=0x7f030004;
         public static final int row=0x7f030005;
+        public static final int test=0x7f030006;
     }
     public static final class string {
         public static final int app_name=0x7f060000;

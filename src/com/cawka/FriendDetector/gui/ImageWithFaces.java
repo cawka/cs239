@@ -262,6 +262,8 @@ public class ImageWithFaces extends View
 		
 		canvas.drawBitmap( _drawableBitmap, _srcRect, _dstRect, null );
 		
+		if( _names_list==null || _names_list.getAdapter()==null ) return; //
+		
 		for( int i=0; i<_names_list.getAdapter().getCount(); i++ )
 		{
 			Person p=(Person)_names_list.getAdapter().getItem( i );

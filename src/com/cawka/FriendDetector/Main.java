@@ -48,9 +48,11 @@ public class Main extends Activity
 	private static final int MENU_RETRY = 3;
 	private static final int MENU_SETTINGS = 4;
 	private static final int MENU_GALLERY = 5;
+	private static final int MENU_SELECT_CONTACT = 6;
 
 	private static final int SELECT_IMAGE = 1;
 	private static final int CHANGE_SETTINGS = 2;
+	private static final int CONTACT_IMAGE = 3;
 	
 	////////////////////////////////////////////////////////////////////
 	
@@ -290,11 +292,11 @@ public class Main extends Activity
         menu.add(0, MENU_SELECT, 0, "Select")
         	.setIcon( android.R.drawable.ic_menu_search );
                 
+        menu.add(0, MENU_SELECT_CONTACT, 0, "Select contact" )
+    	.setIcon(  R.drawable.ic_menu_allfriends );
+
         menu.add(0, MENU_SETTINGS, 0, "Settings" )
         	.setIcon( android.R.drawable.ic_menu_preferences );
-        
-//        menu.add(0, MENU_GALLERY, 0, "Local training set" )
-//        	.setIcon(  R.drawable.ic_menu_allfriends );
 
     	return true;
     }
@@ -306,9 +308,9 @@ public class Main extends Activity
     	switch( item.getItemId() ) 
     	{
 	        case MENU_SELECT:
+	        	switchToPicture( );
+	        	
 	        	selectImage( );
-	        	findViewById(R.id.surface).setVisibility(View.GONE);
-	        	findViewById(R.id.picture).setVisibility(View.VISIBLE);
 	            return true;
     		case MENU_RETRY:
 	            retryDetection( );
@@ -329,17 +331,29 @@ public class Main extends Activity
 //				processBitmap( rotated_bitmap );
 //    			return true;
     		case MENU_SETTINGS:
+    		{
     			Intent i=new Intent( );
     			i.setAction( "com.cawka.FriendDetector.settings.List" );
     			startActivityForResult( i, CHANGE_SETTINGS );
     			
     			return true;
+    		}
 //    		case MENU_GALLERY:
 //    			// need to revalidate detectors if the training set was modified
 //    			startActivityForResult( new Intent( ).setAction( "com.cawka.FriendDetector.Gallery" ), CHANGE_SETTINGS );
 //    			
 //    			return true;
-        }
+    		case MENU_SELECT_CONTACT:
+    		{
+    			switchToPicture( );
+    			
+    			Intent i=new Intent( );
+    			i.setAction( "com.cawka.FriendDetector.Contacts" );
+    			
+    			startActivityForResult( i, CONTACT_IMAGE );
+    			return true;
+    		}
+    	}
 
     	return false;
     }
@@ -367,6 +381,7 @@ public class Main extends Activity
     		switch( requestCode )
     		{
     		case SELECT_IMAGE:
+    		{
 				_names_list.clear( );
 
     			String filename="";
@@ -391,6 +406,14 @@ public class Main extends Activity
     			if( !filename.equals("") ) processImage( filename, true );
     				
     			break;
+    		}
+    		case CONTACT_IMAGE:
+    		{
+    			String filename=data.getExtras( ).getString( "file" );
+    			if( !filename.equals("") ) processImage( filename, true );
+    			
+    			break;
+    		}
     		}
     	}
     }
@@ -655,7 +678,7 @@ public class Main extends Activity
         return super.onKeyDown(keyCode, event);
     }
 	
-	public void switchToPicture()
+	public void switchToPicture( )
 	{
 		if( _thread!=null ) return;
 		
