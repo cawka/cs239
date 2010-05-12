@@ -59,8 +59,7 @@ public class Cam implements SurfaceHolder.Callback
 						Log.v("Karthik","File + " + temp.getAbsolutePath());
 						out.close();
 						main.switchToPicture();
-						picture.setImage(temp.getAbsolutePath(), false
-								);
+						picture.setImage(temp.getAbsolutePath(), false);
 						
 						
 					} catch (IOException e) {
@@ -78,7 +77,8 @@ public class Cam implements SurfaceHolder.Callback
     public void surfaceCreated(SurfaceHolder holder)
     {
         Log.e(TAG, "surfaceCreated");
-        mCamera = Camera.open();
+        if(mCamera == null)
+        	mCamera = Camera.open();
         //mCamera.startPreview();
     }
 
@@ -129,12 +129,14 @@ public class Cam implements SurfaceHolder.Callback
 	{
 		if(mCamera==null)
 			mCamera = Camera.open();
+		mPreviewRunning = true;
 		mCamera.startPreview();
 	}
 	
 	public void Destroy()
 	{
-		mCamera.stopPreview();
+		if(mPreviewRunning)
+			mCamera.stopPreview();
         mPreviewRunning = false;
         mCamera.release();
 	}
