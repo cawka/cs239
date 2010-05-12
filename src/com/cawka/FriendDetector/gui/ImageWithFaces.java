@@ -106,6 +106,17 @@ public class ImageWithFaces extends View
 		if( _drawableBitmap!=null ) _drawableBitmap.recycle( );
 		_drawableBitmap=null;
 		
+		if( _image.equals("") ) return;
+		Log.v( TAG, _image );
+		
+		Log.v( TAG, "beforeDecode" );
+		Options opts=new Options();
+		opts.inSampleSize=_resample;
+		Bitmap bmp=BitmapFactory.decodeFile( _image, opts );
+		_bmp=resizeBitmap( bmp, 1.0f, _orientation );
+		Log.v(  TAG, "afterDecode" );
+
+		
 		if( immidiatelyInvalidate )
 		{
 			makeDrawableBitmap( );
@@ -127,15 +138,6 @@ public class ImageWithFaces extends View
 	private void makeDrawableBitmap( )
 	{
 		if( _image.equals("") ) return;
-		Log.v( TAG, _image );
-		
-		Log.v( TAG, "beforeDecode" );
-		Options opts=new Options();
-		opts.inSampleSize=_resample;
-		Bitmap bmp=BitmapFactory.decodeFile( _image, opts );
-		_bmp=resizeBitmap( bmp, 1.0f, _orientation );
-		Log.v(  TAG, "afterDecode" );
-		
 		Log.v( TAG, "resample: "+Float.toString(_resample)+"width: "+Integer.toString(_bmp.getWidth())+", height: "+Integer.toString(_bmp.getHeight()) );
 		
 		_ratio=calculateResizeRatio( _bmp, getMeasuredWidth()-8, getMeasuredHeight()-8, 0 );

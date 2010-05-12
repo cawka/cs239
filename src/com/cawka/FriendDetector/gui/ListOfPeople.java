@@ -7,6 +7,7 @@ import com.cawka.FriendDetector.R;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.os.Handler;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -25,6 +26,8 @@ public class ListOfPeople extends ListView
 	protected static final int CONTEXTMENU_DELETEITEM = 0;
 	private PeopleAdapter _adapter;
 	private ImageWithFaces _picture;
+	
+	private Handler _handler=new Handler( );
 	
 	private Main _friendDetector;
 	
@@ -127,6 +130,18 @@ public class ListOfPeople extends ListView
 			} );  
 		  
 		alert.show();		
+	}
+	
+	public void refresh( )
+	{
+		_handler.post( 
+			new Runnable()
+			{
+				public void run( )
+				{
+					_adapter.notifyDataSetChanged( );
+				}
+			} );
 	}
 	
 	public void clear( )

@@ -5,6 +5,8 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
+import com.cawka.FriendDetector.gui.ListOfPeople;
+
 import FriendDetector.FacePosition;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -21,6 +23,8 @@ public class Person implements Serializable
 	private Rect   _faceRect;
 	private Paint  _paint;
 	private int    _index;
+	
+	ListOfPeople   _parent=null;
 	
 	private static int ColorIndex=0;
 	
@@ -67,10 +71,10 @@ public class Person implements Serializable
 	public static Person createPerson( Bitmap picture, PointF midpoint, float eyeDistance )
 	{
 		Person person=new Person( );
-		person._faceRect=new Rect( Math.max(2,(int)(midpoint.x-eyeDistance*1.3)), 
-				Math.max(2,(int)(midpoint.y-eyeDistance*1.7)),
-				Math.min(picture.getWidth()-2, (int)(midpoint.x+eyeDistance*1.3)), 
-				Math.min(picture.getHeight()-2, (int)(midpoint.y+eyeDistance*1.625)) );
+		person._faceRect=new Rect( Math.max(2,(int)(midpoint.x-eyeDistance*1)), 
+				Math.max(2,(int)(midpoint.y-eyeDistance*1.25+eyeDistance*0.3)),
+				Math.min(picture.getWidth()-2, (int)(midpoint.x+eyeDistance*1)), 
+				Math.min(picture.getHeight()-2, (int)(midpoint.y+eyeDistance*1.25+eyeDistance*0.3)) );
 		
 		Matrix x=new Matrix();
 		x.postScale( 1.0f*FACE_WIDTH/person._faceRect.width(),
@@ -101,14 +105,19 @@ public class Person implements Serializable
 		ColorIndex=0;
 	}
 	
+	public void setParent( ListOfPeople parent )
+	{
+		_parent=parent;
+	}
+	
 	
 	public void   setDefaultName( String name ) { _name=name; }
-	public void   setName( String name ) { _name=name; _hasName=true; }
+	public void   setName( String name ) { _name=name; _hasName=true; if( _parent!=null ) _parent.refresh( ); }
 	public String getName( )             { return _name; }
 	
 	public boolean hasName( ) { return _hasName; }
 	
-	public void   setFace( Bitmap face ) { _face=face; }
+	public void   setFace( Bitmap face ) { _face=face; if( _parent!=null ) _parent.refresh( ); }
 	public Bitmap getFace( ) //there should be something compressed somewhere
 	{
 		return _face;

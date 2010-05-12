@@ -35,7 +35,8 @@
 				android:layout_weight="1"
 			 />
 			 
-			 <SurfaceView android:id="@+id/surface"
+			 <com.cawka.FriendDetector.gui.Cam 
+			 	android:id="@+id/surface"
         		android:layout_width="fill_parent" 
         		android:layout_height="fill_parent"
 				android:layout_marginBottom="4dip"

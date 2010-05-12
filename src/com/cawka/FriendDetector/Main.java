@@ -10,7 +10,6 @@ import java.util.List;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.content.pm.ActivityInfo;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -59,7 +58,7 @@ public class Main extends Activity
 	
     private ImageWithFaces _picture;
     private ListOfPeople   _names_list;
-    private Cam _cam;
+    private Cam 		   _cam;
     
     private Handler _handler = new Handler(); //to handle UI updates
     private Thread _thread;
@@ -80,23 +79,18 @@ public class Main extends Activity
         
         _picture=   (ImageWithFaces)findViewById( R.id.picture );
         _names_list=(ListOfPeople)  findViewById( R.id.names_list );
-        //_cam = (Cam)  findViewById( R.id.surface);
+        _cam       =(Cam)findViewById( R.id.surface );
         
-        Log.v("Karthik", "Creating Cam");
-        _cam = new Cam();
-        Log.v("Karthik", "Calling INit");
-        _cam.init(this, findViewById(R.id.surface),_picture);
-        Log.v("Karthik", "INit done");
+        _cam.init( this, _picture );
         
-        findViewById(R.id.surface).setOnClickListener(new OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				_cam.takePicture();
-			}
-		});
-        
+        _cam.setOnClickListener(
+        	new OnClickListener() 
+        	{
+				public void onClick(View v) 
+				{
+					_cam.takePicture();
+				}
+        	});
         
         registerForContextMenu( _names_list );
         
@@ -394,18 +388,19 @@ public class Main extends Activity
 					return; 
 				}
 				
-    			if( !filename.equals("") ) processImage( filename );
+    			if( !filename.equals("") ) processImage( filename, true );
     				
     			break;
     		}
     	}
     }
     
-    private void processImage( String filename )
+    public void processImage( String filename, boolean invalidate )
     {
     	if( _thread!=null ) return;
     	
-    	_picture.setImage( filename,true );
+    	_names_list.clear( );
+    	_picture.setImage( filename,invalidate );
 
     	if( _progress2==null )
     	{
@@ -526,6 +521,7 @@ public class Main extends Activity
 				if( !person.hasName() )
 					person.setDefaultName( Main.this.getResources().getString(R.string.unknown_person) );
 				_names_list.add( person );
+				person.setParent( _names_list );
 			}
 		}
     }
@@ -583,12 +579,14 @@ public class Main extends Activity
 				_handler.post( new releaseUI() ); //no detectors available
 				return;
 			}
+			
+			_handler.post( new updateUI(detector.getFaces( )) ); 
+			
 			if( detector.getFullDetection() )
 			{
-				List<Person> list=detector.getFaces( );
 				detector.resetFaces( );
-				_handler.post( new updateUI(list) ); 
 				_handler.post( new releaseUI() ); 
+				return;
 			}
 			
 			for( Person person : detector.getFaces() )
@@ -610,7 +608,6 @@ public class Main extends Activity
 			List<Person> list=detector.getFaces( );
 			detector.resetFaces( );
 			
-			_handler.post( new updateUI(list) ); 
 			_handler.post( new releaseUI() ); 
 		}
     }
@@ -638,19 +635,18 @@ public class Main extends Activity
 	
 	public boolean onKeyDown(int keyCode, KeyEvent event)
     {
-     
-        if (keyCode == 80) {
-            if(findViewById(R.id.surface).getVisibility() != View.VISIBLE)
+		if( _thread!=null ) return super.onKeyDown(keyCode, event);
+		
+        if (keyCode == 80) 
+        {
+            if( _cam.getVisibility() != View.VISIBLE)
             {
-            	findViewById(R.id.picture).setVisibility(View.GONE);
-            	findViewById(R.id.surface).setVisibility(View.VISIBLE);
-            	_cam.StartPreview();
+            	_cam    .setVisibility( View.VISIBLE );
+            	_picture.setVisibility( View.GONE );
             }
             else
         	{
-            	Log.v("Karthik","Camera Visbile.. Take Picture");
             	_cam.takePicture();
-            	Log.v("Karthik","Camera Visbile.. Making it invisble");
           	}
             
             return true;
@@ -661,9 +657,10 @@ public class Main extends Activity
 	
 	public void switchToPicture()
 	{
-       	findViewById(R.id.surface).setVisibility(View.GONE);
-    	findViewById(R.id.picture).setVisibility(View.VISIBLE);
+		if( _thread!=null ) return;
+		
+       	_picture.setVisibility( View.VISIBLE );
+       	_cam    .setVisibility( View.GONE );
 	
 	}
 }
-

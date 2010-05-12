@@ -6,140 +6,213 @@ import java.io.IOException;
 
 import com.cawka.FriendDetector.Main;
 
+import Ice._LoggerOperationsNC;
+import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.PixelFormat;
 import android.hardware.Camera;
+import android.hardware.Camera.PreviewCallback;
+import android.hardware.Camera.Size;
+import android.util.AttributeSet;
 import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
 
-public class Cam implements SurfaceHolder.Callback
+public class Cam extends SurfaceView implements SurfaceHolder.Callback, PreviewCallback 
 {
-    private static final String TAG = "CameraApiTest";
-    Camera mCamera;
-    boolean mPreviewRunning = false;
-    ImageWithFaces picture;
-    private Main main;
+	private static final String TAG = "Karthik";
+	
+    private	Camera 			_camera;
+    private boolean 		_previewRunning = false;
+    private ImageWithFaces 	_picture;
 
-    public void init(Main main, View findViewById, ImageWithFaces picture) {
-		// TODO Auto-generated method stub
-    	Log.v("Karthik", "Cam Init Called + "+ findViewById);
-    	this.picture = picture;
-    	mSurfaceView = (SurfaceView)findViewById;
-    	this.main = main;
-        mSurfaceHolder = mSurfaceView.getHolder();
-        mSurfaceHolder.addCallback(this);
-        mSurfaceHolder.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
+    private Main 			_main;
+
+    public Cam( Context context )
+	{
+		super( context );
+	}
+	
+	public Cam( Context context, AttributeSet attrs )
+	{
+		super( context, attrs );
 	}
 
+	public Cam( Context context, AttributeSet attrs, int defStyle )
+	{
+		super( context, attrs, defStyle );
+	}
 	
-    Camera.PictureCallback mPictureCallbackRAW = new Camera.PictureCallback() {
-        public void onPictureTaken(byte[] data, Camera c) {
-            Log.v(TAG, "PICTURE CALLBACK RAW: data.length = ");
-            if(data != null)
-            	Log.v("Karthik","data.length = " + data.length); 
-            else 
-            	Log.v("Karthik","NULL");
-            //mCamera.startPreview();
-        }
-    };
+    public void init( Main main, ImageWithFaces picture ) 
+    {
+    	Log.v( TAG, "Cam Init Called" );
+    	_picture = picture;
+    	_main = main;
+    	
+        SurfaceHolder surfaceHolder=getHolder( );
+        surfaceHolder.addCallback( this );
+        surfaceHolder.setType( SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS );
+	}
 
-    Camera.PictureCallback mPictureCallbackJPEG = new Camera.PictureCallback() {
-        public void onPictureTaken(byte[] data, Camera c) {
-            Log.v(TAG, "PICTURE CALLBACK JPEG: data.length = " );
-            if(data != null)
-            	{
-            		Log.v("Karthik","data.length = " + data.length);
-            		try {
-						File tmp = File.createTempFile("Cam", "Preview.jpeg",new File("/sdcard/DCIM/Camera/"));
-						tmp.delete();
-						File temp = new File(tmp.getAbsolutePath());
-						FileOutputStream out = new FileOutputStream(temp);
-						out.write(data);
-						Log.v("Karthik","File + " + temp.getAbsolutePath());
-						out.close();
-						main.switchToPicture();
-						picture.setImage(temp.getAbsolutePath(), false);
+	Camera.PictureCallback	mPictureCallbackJPEG=new Camera.PictureCallback( )
+		{
+			public void onPictureTaken( byte[] data, Camera c )
+			{
+				Log.v( TAG, "PICTURE CALLBACK JPEG: data.length = " );
+				if( data != null )
+				{
+					Log.v( "Karthik", "data.length = " + data.length );
+					try
+					{
+						//File.createTempFile( "Cam", "Preview.jpeg",
+						File temp=new File( "/sdcard/DCIM/Camera/preview.jpeg" );
+						temp.delete( );
+						temp.createNewFile( );
 						
-						
-					} catch (IOException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
+//						File temp=new File( tmp.getAbsolutePath( ) );
+						FileOutputStream out=new FileOutputStream( temp );
+						out.write( data );
+						Log.v( "Karthik", "File + " + temp.getAbsolutePath( ) );
+						out.close( );
+						_main.switchToPicture( );
+						_main.processImage( temp.getAbsolutePath( ), false );
+//						_picture.setImage( temp.getAbsolutePath( ), false );
+
+					} catch( IOException e )
+					{
+						e.printStackTrace( );
 					}
-            	}
-            else 
-            	Log.v("Karthik","NULL");
-            Destroy();
-            //mCamera.startPreview();
-        }
-    };
+				} else
+					Log.v( "Karthik", "NULL" );
+				// Destroy();
+				// mCamera.startPreview();
+			}
+		};
 
-    public void surfaceCreated(SurfaceHolder holder)
-    {
-        Log.e(TAG, "surfaceCreated");
-        if(mCamera == null)
-        	mCamera = Camera.open();
-        //mCamera.startPreview();
-    }
+	public void surfaceCreated( SurfaceHolder holder )
+	{
+		Log.e( TAG, "surfaceCreated" );
+		_camera=Camera.open( );
+	}
 
-    public void surfaceChanged(SurfaceHolder holder, int format, int w, int h)
-    {
-        Log.e("Karthik", "surfaceChanged - noticed");
-
-        // XXX stopPreview() will crash if preview is not running
-        if (mPreviewRunning) {
-            mCamera.stopPreview();
-        }
-
-        Camera.Parameters p = mCamera.getParameters();
-        p.setPreviewSize(w, h);
-        p.setPictureFormat(PixelFormat.JPEG);
-        p.setPictureSize(800, 640);
-        
-        mCamera.setParameters(p);
-        try {
-			mCamera.setPreviewDisplay(holder);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+	public void surfaceChanged( SurfaceHolder holder, int format, int w, int h )
+	{
+		Log.e( "Karthik", "surfaceChanged - noticed" );
+		// XXX stopPreview() will crash if preview is not running
+		if( _previewRunning )
+		{
+			_camera.stopPreview( );
 		}
-        mCamera.startPreview();
-        mPreviewRunning = true;
-    }
 
-    public void surfaceDestroyed(SurfaceHolder holder)
-    {
-        Log.e(TAG, "surfaceDestroyed");
-        mCamera.stopPreview();
-        mPreviewRunning = false;
-        mCamera.release();
-    }
+		Camera.Parameters p=_camera.getParameters( );
 
-    private SurfaceView mSurfaceView;
-    private SurfaceHolder mSurfaceHolder;
-
-	public void takePicture() {
-		// TODO Auto-generated method stub
-		Log.v("Karthik","INSIDE.. Take Picture");
-		mCamera.takePicture(null, mPictureCallbackRAW, mPictureCallbackJPEG);
+//		p.setPreviewSize( 176, 144 );
+//		p.setPreviewFormat( PixelFormat.YCbCr_420_SP );
+		p.setPictureFormat( PixelFormat.JPEG );
+		p.setPictureSize( 800, 640 );
 		
+		_camera.setParameters( p );
+		try
+		{
+			_camera.setPreviewDisplay( holder );
+//			_camera.setPreviewCallback( this );
+		} 
+		catch( IOException e )
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace( );
+		}
+		_camera.startPreview( );
+		_previewRunning=true;
 	}
-	
-	public void StartPreview()
-	{
-		if(mCamera==null)
-			mCamera = Camera.open();
-		mPreviewRunning = true;
-		mCamera.startPreview();
-	}
-	
-	public void Destroy()
-	{
-		if(mPreviewRunning)
-			mCamera.stopPreview();
-        mPreviewRunning = false;
-        mCamera.release();
-	}
-	
-}
 
+	public void surfaceDestroyed( SurfaceHolder holder )
+	{
+		Log.e( TAG, "surfaceDestroyed" );
+		_camera.stopPreview( );
+		_previewRunning=false;
+		_camera.release( );
+	}
+
+	public void takePicture( )
+	{
+		Log.v( "Karthik", "INSIDE.. Take Picture" );
+		_camera.takePicture( null, null, mPictureCallbackJPEG );
+	}
+
+//	public void startPreview( )
+//	{
+//		if( _camera == null ) _camera=Camera.open( );
+//
+//		Camera.Parameters p=_camera.getParameters( );
+//		
+////		Log.v( TAG, "frame_rate" );
+////		for( Integer frame_rate : p.getSupportedPreviewFrameRates( ) )
+////		{
+////			Log.v( TAG, frame_rate.toString( ) );
+////		}
+////		Log.v( TAG, "format" );
+////		for( Integer format : p.getSupportedPreviewFormats( ) )
+////		{
+////			Log.v( TAG, format.toString( ) );
+////			
+////		}
+////		Log.v( TAG, "sizes" );
+////		for( Size size : p.getSupportedPreviewSizes( ) )
+////		{
+////			Log.v( TAG, Integer.toString(size.width)+", "+Integer.toString(size.height) );
+////		}
+//		
+//		p.setPreviewSize( 176, 144 );
+//		p.setPreviewFormat( PixelFormat.YCbCr_420_SP );
+//		p.setPictureFormat( PixelFormat.JPEG );
+//		p.setPictureSize( 800, 640 );
+//
+//		_camera.setParameters( p );
+//		
+//		
+//				
+////		try
+////		{
+////			_camera.setPreviewDisplay( holder );
+////			
+////			_camera.setPreviewCallback( 
+////				new PreviewCallback() 
+////				{ 
+////					public void onPreviewFrame( byte[] _data, Camera _camera ) 
+////					{
+////						Log.v( TAG, Integer.toString(_data.length) );
+////					}
+////				} );
+////		} 
+////		catch( IOException e )
+////		{
+////			e.printStackTrace( );
+////		}
+////		_camera.startPreview( );		
+////		_previewRunning=true;
+//		_camera.startPreview( );
+//	}
+
+	public void onPreviewFrame( byte[] _data, Camera _camera ) 
+	{
+//		_camera.stopPreview( );
+		
+//		Bitmap bmp=Bitmap.createBitmap( 176, 144, Bitmap.Config.RGB_565 );
+//		Log.v( "test", Integer.toString(_data.length) );
+//		
+//		bmp.recycle( );
+		
+//		_camera.star/tPreview( );
+	}	
+	
+//	public void Destroy( )
+//	{
+////		if( _previewRunning )
+////			_camera.stopPreview( );
+////		_previewRunning=false;
+////		_camera.release( );
+//	}
+}
