@@ -8,32 +8,18 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
-import com.cawka.FriendDetector.R;
-import com.cawka.FriendDetector.detector.FaceDetectorLocal;
-import com.cawka.FriendDetector.detector.FaceDetectorRemote;
-import com.cawka.FriendDetector.detector.iFaceDetector;
-import com.cawka.FriendDetector.detector.iFaceLearner;
-import com.cawka.FriendDetector.gui.ImageWithFaces;
-import com.cawka.FriendDetector.gui.ListOfPeople;
-import com.cawka.FriendDetector.settings.DBHandle;
-import com.cawka.FriendDetector.settings.Server;
-
 import android.app.Activity;
-import android.content.ContentValues;
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
+import android.content.pm.ActivityInfo;
 import android.database.Cursor;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Matrix;
-import android.media.ExifInterface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.provider.MediaStore.Images;
 import android.util.Log;
 import android.view.ContextMenu;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -44,7 +30,17 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 import android.widget.AdapterView.AdapterContextMenuInfo;
 
-public class Main extends Activity
+import com.cawka.FriendDetector.detector.FaceDetectorLocal;
+import com.cawka.FriendDetector.detector.FaceDetectorRemote;
+import com.cawka.FriendDetector.detector.iFaceDetector;
+import com.cawka.FriendDetector.detector.iFaceLearner;
+import com.cawka.FriendDetector.gui.Cam;
+import com.cawka.FriendDetector.gui.ImageWithFaces;
+import com.cawka.FriendDetector.gui.ListOfPeople;
+import com.cawka.FriendDetector.settings.DBHandle;
+import com.cawka.FriendDetector.settings.Server;
+
+public class Main extends Activity 
 {
 	private static final String TAG="FriendDetector";
 	
@@ -63,6 +59,7 @@ public class Main extends Activity
 	
     private ImageWithFaces _picture;
     private ListOfPeople   _names_list;
+    private Cam _cam;
     
     private Handler _handler = new Handler(); //to handle UI updates
     private Thread _thread;
@@ -79,9 +76,27 @@ public class Main extends Activity
     {
         super.onCreate( savedInstanceState );
         setContentView( R.layout.main );
+        //setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         
         _picture=   (ImageWithFaces)findViewById( R.id.picture );
         _names_list=(ListOfPeople)  findViewById( R.id.names_list );
+        //_cam = (Cam)  findViewById( R.id.surface);
+        
+        Log.v("Karthik", "Creating Cam");
+        _cam = new Cam();
+        Log.v("Karthik", "Calling INit");
+        _cam.init(this, findViewById(R.id.surface),_picture);
+        Log.v("Karthik", "INit done");
+        
+        findViewById(R.id.surface).setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				_cam.takePicture();
+			}
+		});
+        
         
         registerForContextMenu( _names_list );
         
@@ -137,8 +152,9 @@ public class Main extends Activity
 	protected void onDestroy()
 	{
 		Log.v( TAG, "onDestroy" );
+		
 		super.onDestroy( );
-
+		
 		try
 		{
 			if( _thread!=null ) _thread.join( );
@@ -165,6 +181,11 @@ public class Main extends Activity
 			{
 				_picture.setImage( state._image,false );
 				_names_list.setAdapter( state._adapter );
+			}
+			
+			if(!state.isCamera)
+			{
+				switchToPicture();
 			}
 
 			state=null;
@@ -292,6 +313,8 @@ public class Main extends Activity
     	{
 	        case MENU_SELECT:
 	        	selectImage( );
+	        	findViewById(R.id.surface).setVisibility(View.GONE);
+	        	findViewById(R.id.picture).setVisibility(View.VISIBLE);
 	            return true;
     		case MENU_RETRY:
 	            retryDetection( );
@@ -449,16 +472,20 @@ public class Main extends Activity
 		
 		public String 	   _image;
 		public ListAdapter _adapter;
+		Boolean isCamera;
 		
 		public SavedState( ) //Bitmap face, ListAdapter adapter )
 		{
 			_image=_picture.getImage( );
 			_adapter=_names_list.getAdapter();
+			isCamera = findViewById(R.id.picture).getVisibility() != View.VISIBLE;
+			
 		}
 
 		private void writeObject( ObjectOutputStream out ) throws IOException
 		{
 			out.writeUTF( _image );
+			out.writeBoolean(isCamera);
 			
 			out.writeInt( _adapter.getCount() );
 			for( int i=0; i<_adapter.getCount(); i++ )
@@ -471,6 +498,7 @@ public class Main extends Activity
 				ClassNotFoundException
 		{
 			_image=in.readUTF( );
+			isCamera = in.readBoolean();
 			
 			int count=in.readInt( );
 			for( int i=0; i<count; i++ )
@@ -606,6 +634,36 @@ public class Main extends Activity
 			}
 			_handler.post( new releaseUI() );
 		}
+	}
+	
+	public boolean onKeyDown(int keyCode, KeyEvent event)
+    {
+     
+        if (keyCode == 80) {
+            if(findViewById(R.id.surface).getVisibility() != View.VISIBLE)
+            {
+            	findViewById(R.id.picture).setVisibility(View.GONE);
+            	findViewById(R.id.surface).setVisibility(View.VISIBLE);
+            	_cam.StartPreview();
+            }
+            else
+        	{
+            	Log.v("Karthik","Camera Visbile.. Take Picture");
+            	_cam.takePicture();
+            	Log.v("Karthik","Camera Visbile.. Making it invisble");
+          	}
+            
+            return true;
+        }
+        
+        return super.onKeyDown(keyCode, event);
+    }
+	
+	public void switchToPicture()
+	{
+       	findViewById(R.id.surface).setVisibility(View.GONE);
+    	findViewById(R.id.picture).setVisibility(View.VISIBLE);
+	
 	}
 }
 

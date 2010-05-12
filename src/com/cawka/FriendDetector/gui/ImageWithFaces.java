@@ -79,6 +79,8 @@ public class ImageWithFaces extends View
 		_orientation=0;
 		_resample=1;
 		
+		Log.v("Karthik",image);
+		
 		try
 		{
 			ExifInterface exif=new ExifInterface( image );

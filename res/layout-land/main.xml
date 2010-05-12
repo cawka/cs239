@@ -4,60 +4,74 @@
 	android:layout_width="fill_parent" 
 	android:layout_height="fill_parent"
 >
-
 	<LinearLayout 
 		android:id="@+id/main_view" 
 		android:orientation="horizontal"
 		android:layout_width="fill_parent" 
 		android:layout_height="fill_parent" 
-		android:layout_weight="0"
+		android:layout_weight="1"
 		android:background="@drawable/background"
 		>
-		
-		<LinearLayout
-			android:id="@+id/upper_linear"
-			android:gravity="center_vertical|center_horizontal"
-			android:layout_width="fill_parent"
-			android:layout_height="fill_parent"
-			android:layout_weight="1"
-			>
-			
-		<com.cawka.FriendDetector.gui.ImageWithFaces 
-			android:id="@+id/picture"
-			android:layout_width="wrap_content" 
-			android:layout_height="wrap_content" 
-			android:background="@drawable/block_background"
-			android:layout_marginBottom="4dip"
-			android:layout_marginLeft="4dip"
-			android:layout_marginRight="4dip"
-			android:layout_marginTop="4dip"
-			android:padding="4dip"
-			/>
-				
-		</LinearLayout>
 	
-		<LinearLayout
-			android:id="@+id/lower_linear"
-			android:layout_width="fill_parent"
-			android:layout_height="fill_parent"
-			android:layout_weight="1"
-			>
-			
-			<com.cawka.FriendDetector.gui.ListOfPeople 
-				android:id="@+id/names_list" 
-				android:layout_width="fill_parent" 
-				android:layout_height="fill_parent"
-				android:choiceMode="singleChoice"
+	<LinearLayout
+		android:id="@+id/upper_linear"
+		android:orientation="horizontal"
+		android:layout_width="fill_parent"
+		android:layout_height="fill_parent"
+		android:layout_weight="1"
+		>
+		
+			<com.cawka.FriendDetector.gui.ImageWithFaces 
+				android:id="@+id/picture"
+				android:layout_width="wrap_content" 
+				android:layout_height="wrap_content"
 				android:background="@drawable/block_background"
 				android:layout_marginBottom="4dip"
 				android:layout_marginLeft="4dip"
 				android:layout_marginRight="4dip"
 				android:layout_marginTop="4dip"
 				android:padding="4dip"
-				 />
-			
-		</LinearLayout>
+				android:visibility="invisible" 
+				android:layout_weight="1"
+			 />
+			 
+			 <SurfaceView android:id="@+id/surface"
+        		android:layout_width="fill_parent" 
+        		android:layout_height="fill_parent"
+				android:layout_marginBottom="4dip"
+				android:layout_marginLeft="4dip"
+				android:layout_marginRight="4dip"
+				android:layout_marginTop="4dip"
+				android:padding="4dip"
+        		
+        	/>
+			 		
 	</LinearLayout>
+
+	<LinearLayout
+		android:id="@+id/lower_linear"
+		android:layout_width="fill_parent"
+		android:layout_height="fill_parent"
+		android:layout_weight="1"
+		>
+		
+		<com.cawka.FriendDetector.gui.ListOfPeople 
+			android:id="@+id/names_list" 
+			android:layout_width="fill_parent" 
+			android:layout_height="fill_parent"
+			android:choiceMode="singleChoice" 
+			android:background="@drawable/block_background"
+			android:layout_marginBottom="4dip"
+			android:layout_marginLeft="4dip"
+			android:layout_marginRight="4dip"
+			android:layout_marginTop="4dip"
+			android:padding="4dip"
+		/>
+		
+		
+		
+	</LinearLayout>
+</LinearLayout>
 
 	<ProgressBar
 		android:id="@+id/progress_bar_image"
@@ -65,6 +79,12 @@
 		android:layout_height="16dip"
         android:layout_width="16dip"
         android:indeterminate="true" 
+		android:layout_marginBottom="2dip"
+		android:layout_marginLeft="2dip"
+		android:layout_marginRight="2dip"
+		android:layout_marginTop="2dip"
 		android:background="@android:color/transparent"
 		/>
+		
+
 </FrameLayout>
