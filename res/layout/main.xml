@@ -9,13 +9,13 @@
 		android:orientation="vertical"
 		android:layout_width="fill_parent" 
 		android:layout_height="fill_parent" 
-		android:layout_weight="0"
+		android:layout_weight="1"
 		android:background="@drawable/background"
 		>
 	
 	<LinearLayout
 		android:id="@+id/upper_linear"
-		android:gravity="center_vertical|center_horizontal"
+		android:orientation="vertical"
 		android:layout_width="fill_parent"
 		android:layout_height="fill_parent"
 		android:layout_weight="1"
@@ -31,8 +31,21 @@
 				android:layout_marginRight="4dip"
 				android:layout_marginTop="4dip"
 				android:padding="4dip"
+				android:visibility="invisible" 
+				android:layout_weight="1"
 			 />
-
+			 
+			 <SurfaceView android:id="@+id/surface"
+        		android:layout_width="fill_parent" 
+        		android:layout_height="fill_parent"
+				android:layout_marginBottom="4dip"
+				android:layout_marginLeft="4dip"
+				android:layout_marginRight="4dip"
+				android:layout_marginTop="4dip"
+				android:padding="4dip"
+        		
+        	/>
+			 		
 	</LinearLayout>
 
 	<LinearLayout
@@ -55,6 +68,8 @@
 			android:padding="4dip"
 		/>
 		
+		
+		
 	</LinearLayout>
 </LinearLayout>
 
@@ -70,5 +85,6 @@
 		android:layout_marginTop="2dip"
 		android:background="@android:color/transparent"
 		/>
+		
 
 </FrameLayout>
