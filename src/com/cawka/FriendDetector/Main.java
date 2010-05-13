@@ -57,10 +57,10 @@ public class Main extends Activity
 	private static final int FB_IMAGE = 4;
 	
 	////////////////////////////////////////////////////////////////////
-		
+	
     private ImageWithFaces _picture;
     private ListOfPeople   _names_list;
-    private Cam 		   _cam;
+    private Cam _cam;
     
     private Handler _handler = new Handler(); //to handle UI updates
     private Thread _thread;
@@ -92,9 +92,9 @@ public class Main extends Activity
         	{
 				public void onClick(View v) 
 				{
-					_cam.takePicture();
-				}
-        	});
+				_cam.takePicture();
+			}
+		});
         
         registerForContextMenu( _names_list );
         
@@ -302,7 +302,7 @@ public class Main extends Activity
 
         menu.add(0, MENU_SETTINGS, 0, "Settings" )
         	.setIcon( android.R.drawable.ic_menu_preferences );
-
+        
     	return true;
     }
 
@@ -357,11 +357,11 @@ public class Main extends Activity
     			
     			startActivityForResult( i, CONTACT_IMAGE );
     			return true;
-    		}
+        }
     		case MENU_SELECT_FB:
     		{
     			switchToPicture( );
-    			
+
     			Intent i=new Intent( );
     			i.setAction( "com.cawka.FriendDetector.FBGallery" );
     			
@@ -430,8 +430,8 @@ public class Main extends Activity
     			if( !filename.equals("") ) processImage( filename, true );
     			
     			break;
-    		}
-    		}
+    	}
+    }
     	}
     }
     
@@ -679,9 +679,9 @@ public class Main extends Activity
 	public boolean onKeyDown(int keyCode, KeyEvent event)
     {
 		if( _thread!=null ) return super.onKeyDown(keyCode, event);
-		
+     
         if (keyCode == 80) 
-        {
+            {
             if( _cam.getVisibility() != View.VISIBLE)
             {
             	_cam    .setVisibility( View.VISIBLE );
@@ -698,10 +698,10 @@ public class Main extends Activity
         return super.onKeyDown(keyCode, event);
     }
 	
-	public void switchToPicture( )
+	public void switchToPicture()
 	{
 		if( _thread!=null ) return;
-		
+	
        	_picture.setVisibility( View.VISIBLE );
        	_cam    .setVisibility( View.GONE );
 	

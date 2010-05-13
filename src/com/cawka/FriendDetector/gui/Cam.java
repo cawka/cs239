@@ -23,7 +23,7 @@ import android.view.View;
 public class Cam extends SurfaceView implements SurfaceHolder.Callback, PreviewCallback 
 {
 	private static final String TAG = "Karthik";
-	
+
     private	Camera 			_camera;
     private boolean 		_previewRunning = false;
     private ImageWithFaces 	_picture;
@@ -34,17 +34,17 @@ public class Cam extends SurfaceView implements SurfaceHolder.Callback, PreviewC
 	{
 		super( context );
 	}
-	
+
 	public Cam( Context context, AttributeSet attrs )
 	{
 		super( context, attrs );
 	}
-
+	
 	public Cam( Context context, AttributeSet attrs, int defStyle )
 	{
 		super( context, attrs, defStyle );
-	}
-	
+        }
+
     public void init( Main main, ImageWithFaces picture ) 
     {
     	Log.v( TAG, "Cam Init Called" );
@@ -60,10 +60,10 @@ public class Cam extends SurfaceView implements SurfaceHolder.Callback, PreviewC
 		{
 			public void onPictureTaken( byte[] data, Camera c )
 			{
-				Log.v( TAG, "PICTURE CALLBACK JPEG: data.length = " );
-				if( data != null )
-				{
-					Log.v( "Karthik", "data.length = " + data.length );
+            Log.v(TAG, "PICTURE CALLBACK JPEG: data.length = " );
+            if(data != null)
+            	{
+            		Log.v("Karthik","data.length = " + data.length);
 					try
 					{
 						//File.createTempFile( "Cam", "Preview.jpeg",
@@ -72,47 +72,47 @@ public class Cam extends SurfaceView implements SurfaceHolder.Callback, PreviewC
 						temp.createNewFile( );
 						
 //						File temp=new File( tmp.getAbsolutePath( ) );
-						FileOutputStream out=new FileOutputStream( temp );
-						out.write( data );
-						Log.v( "Karthik", "File + " + temp.getAbsolutePath( ) );
-						out.close( );
+						FileOutputStream out = new FileOutputStream(temp);
+						out.write(data);
+						Log.v("Karthik","File + " + temp.getAbsolutePath());
+						out.close();
 						_main.switchToPicture( );
 						_main.processImage( temp.getAbsolutePath( ), false );
 //						_picture.setImage( temp.getAbsolutePath( ), false );
-
+						
 					} catch( IOException e )
 					{
-						e.printStackTrace( );
+						e.printStackTrace();
 					}
 				} else
-					Log.v( "Karthik", "NULL" );
+            	Log.v("Karthik","NULL");
 				// Destroy();
 				// mCamera.startPreview();
-			}
-		};
+        }
+    };
 
-	public void surfaceCreated( SurfaceHolder holder )
-	{
-		Log.e( TAG, "surfaceCreated" );
+    public void surfaceCreated(SurfaceHolder holder)
+    {
+        Log.e(TAG, "surfaceCreated");
 		_camera=Camera.open( );
-	}
+    }
 
-	public void surfaceChanged( SurfaceHolder holder, int format, int w, int h )
-	{
-		Log.e( "Karthik", "surfaceChanged - noticed" );
-		// XXX stopPreview() will crash if preview is not running
+    public void surfaceChanged(SurfaceHolder holder, int format, int w, int h)
+    {
+        Log.e("Karthik", "surfaceChanged - noticed");
+        // XXX stopPreview() will crash if preview is not running
 		if( _previewRunning )
 		{
 			_camera.stopPreview( );
-		}
+        }
 
 		Camera.Parameters p=_camera.getParameters( );
 
 //		p.setPreviewSize( 176, 144 );
 //		p.setPreviewFormat( PixelFormat.YCbCr_420_SP );
-		p.setPictureFormat( PixelFormat.JPEG );
-		p.setPictureSize( 800, 640 );
-		
+        p.setPictureFormat(PixelFormat.JPEG);
+        p.setPictureSize(800, 640);
+        
 		_camera.setParameters( p );
 		try
 		{
@@ -122,26 +122,26 @@ public class Cam extends SurfaceView implements SurfaceHolder.Callback, PreviewC
 		catch( IOException e )
 		{
 			// TODO Auto-generated catch block
-			e.printStackTrace( );
+			e.printStackTrace();
 		}
 		_camera.startPreview( );
 		_previewRunning=true;
-	}
+    }
 
-	public void surfaceDestroyed( SurfaceHolder holder )
-	{
-		Log.e( TAG, "surfaceDestroyed" );
+    public void surfaceDestroyed(SurfaceHolder holder)
+    {
+        Log.e(TAG, "surfaceDestroyed");
 		_camera.stopPreview( );
 		_previewRunning=false;
 		_camera.release( );
-	}
+    }
 
 	public void takePicture( )
 	{
-		Log.v( "Karthik", "INSIDE.. Take Picture" );
+		Log.v("Karthik","INSIDE.. Take Picture");
 		_camera.takePicture( null, null, mPictureCallbackJPEG );
 	}
-
+	
 //	public void startPreview( )
 //	{
 //		if( _camera == null ) _camera=Camera.open( );
@@ -199,7 +199,7 @@ public class Cam extends SurfaceView implements SurfaceHolder.Callback, PreviewC
 	public void onPreviewFrame( byte[] _data, Camera _camera ) 
 	{
 //		_camera.stopPreview( );
-		
+
 //		Bitmap bmp=Bitmap.createBitmap( 176, 144, Bitmap.Config.RGB_565 );
 //		Log.v( "test", Integer.toString(_data.length) );
 //		
