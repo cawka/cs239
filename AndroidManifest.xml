@@ -19,17 +19,6 @@
             </intent-filter>
         </activity>
         
-         <activity android:name=".Gallery"
-                  android:label="Face Gallery"
-                  android:theme="@android:style/Theme.Light"
-                  >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-            	<action android:name="com.cawka.FriendDetector.Gallery" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
-        
         <activity android:name=".settings.ListOfServers" 
         			android:label="Detectors"
         			android:clearTaskOnLaunch="true"
@@ -52,17 +41,39 @@
         	</intent-filter>
         </activity>
 
+ 		<activity android:name=".TrainSetGallery"
+                  android:label="Face Gallery"
+                  android:theme="@android:style/Theme.Light"
+                  >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+            	<action android:name="com.cawka.FriendDetector.TrainSetGallery" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+ 
         <activity android:name=".ContactsImageGallery"
                   android:label="Contacts"
                   android:theme="@android:style/Theme.Light"
                   >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-            	<action android:name="com.cawka.FriendDetector.Contacts" />
+            	<action android:name="com.cawka.FriendDetector.ContactsGallery" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-      
+        
+        <activity android:name=".FBGallery"
+                  android:label="Face Gallery"
+                  android:theme="@android:style/Theme.Light"
+                  >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+            	<action android:name="com.cawka.FriendDetector.FBGallery" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>      
+        
 </application>
     <uses-sdk android:minSdkVersion="7" />
 	<uses-permission android:name = "android.permission.CAMERA"/>

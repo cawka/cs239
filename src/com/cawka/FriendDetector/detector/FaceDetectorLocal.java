@@ -124,7 +124,7 @@ public class FaceDetectorLocal extends iFaceDetector implements iFaceLearner
 		
 		try { _thread.join( ); } catch( InterruptedException e ) { return ret; }
 		
-		ret.addFirst( new NamedFace(-1, _eigenface.getAverageFace(), "Average face") );
+		ret.addFirst( new NamedFace("-1", _eigenface.getAverageFace(), "Average face") );
 		return ret;
 	}
 

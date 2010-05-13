@@ -133,7 +133,7 @@ public class DBHandleEigen extends SQLiteOpenHelper
 				filename=new File( filepath, Long.toString(_temp_cursor.getLong(0))+".jpeg" );
 
 			ret.add( new NamedFace( 
-					_temp_cursor.getLong(0), 
+					Long.toString(_temp_cursor.getLong(0)), 
 					BitmapFactory.decodeFile(filename.getAbsolutePath() ), 
 					_temp_cursor.getString(1) ) );
 			_temp_cursor.moveToNext( );
@@ -164,7 +164,7 @@ public class DBHandleEigen extends SQLiteOpenHelper
 				filename=new File( filepath, Long.toString(_temp_cursor.getLong(0))+".jpeg" );
 
 			ret.add( new NamedFace( 
-					_temp_cursor.getLong(0), 
+					Long.toString(_temp_cursor.getLong(0)), 
 					BitmapFactory.decodeFile(filename.getAbsolutePath()), 
 					_temp_cursor.getString(1) ) );
 			_temp_cursor.moveToNext( );

@@ -231,7 +231,7 @@ public class Server extends PreferenceActivity
 
     	if( preference==_training_set )
         {
-    		Intent i=new Intent( ).setAction( "com.cawka.FriendDetector.Gallery" );
+    		Intent i=new Intent( ).setAction( "com.cawka.FriendDetector.TrainSetGallery" );
     		i.putExtra( "config", _config );
 			startActivity( i );
         }

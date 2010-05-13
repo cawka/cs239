@@ -22,6 +22,11 @@
 
 package com.cawka.FriendDetector.detector.eigenfaces;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -36,6 +41,7 @@ import android.graphics.ColorMatrix;
 import android.graphics.ColorMatrixColorFilter;
 import android.graphics.Paint;
 import android.graphics.Bitmap.Config;
+import android.os.Environment;
 import android.util.Log;
 
 /**
@@ -93,7 +99,7 @@ public class Eigenface
 				int r=0;
 				for( NamedFace face : faces )
 				{
-					Log.v( TAG, "next face, id: "+Long.toString( face.id ) );
+					Log.v( TAG, "next face, id: "+face.id );
 					
 					byte[] intensityImage=Utilities.bufferedImageToIntensityArray( face.bitmap ) ;
 					Log.v( TAG, "Face bitmap size: w:"+Integer.toString(face.bitmap.getWidth())+", h:"+Integer.toString(face.bitmap.getHeight( )));
@@ -316,15 +322,74 @@ public class Eigenface
 	
 	public static class NamedFace
 	{
-		public long   id;
+		public String   id;
 		public Bitmap bitmap;
 		public String name;
 		
-		public NamedFace( long _id, Bitmap _bitmap, String _name )
+		public String filename=null;
+		
+		public NamedFace( String _id, Bitmap _bitmap, String _name )
 		{
 			id=_id;
 			bitmap=_bitmap;
 			name=_name;
+		}
+		
+		public NamedFace( String _id, String _name, String path_prefix ) throws IOException
+		{
+			String status=Environment.getExternalStorageState( );
+	        if( !status.equals(Environment.MEDIA_MOUNTED) ) 
+	        {
+	        	throw new IOException( "sdcard should be mounted!!!" );
+	        }	
+	        
+	        id=_id;
+			name=_name;
+			
+			filename=Environment.getExternalStorageDirectory()+"/friendDetector/"+path_prefix+"/"+id+".jpeg";
+			Log.v( TAG, "<"+filename );
+			
+			Bitmap bmp=BitmapFactory.decodeFile( filename ); 
+			bitmap=Bitmap.createScaledBitmap( bmp, Person.FACE_WIDTH, Person.FACE_HEIGHT, false );
+			bmp.recycle( );
+		}
+		
+		public NamedFace( String _id, String _name, InputStream is, String path_prefix ) throws IOException
+		{
+			String status=Environment.getExternalStorageState( );
+	        if( !status.equals(Environment.MEDIA_MOUNTED) ) 
+	        {
+	        	throw new IOException( "sdcard should be mounted!!!" );
+	        }
+
+	        id=_id;
+			name=_name;
+			
+			//////////////////////////////////////////////////////////////////
+			File filepath=new File( Environment.getExternalStorageDirectory()+"/friendDetector/"+path_prefix );
+			filepath.mkdirs( );
+
+			File file=new File( filepath, id+".jpeg" );		
+			file.delete( );
+			file.createNewFile( );
+			
+			FileOutputStream out=new FileOutputStream( file );
+			byte [] buf=new byte[1024];
+			int read=is.read( buf, 0, 1024 );
+			while( read>0 )
+			{
+				out.write( buf, 0, read );
+				read=is.read( buf, 0, 1024 );
+			}
+			out.close( );
+			//////////////////////////////////////////////////////////////////
+			
+			filename=file.getAbsolutePath( );
+			Log.v( TAG, ">"+filename );
+			
+			Bitmap bmp=BitmapFactory.decodeFile( filename ); //inefficient, but FS caching should help
+			bitmap=Bitmap.createScaledBitmap( bmp, Person.FACE_WIDTH, Person.FACE_HEIGHT, false );
+			bmp.recycle( );
 		}
 	}
 }

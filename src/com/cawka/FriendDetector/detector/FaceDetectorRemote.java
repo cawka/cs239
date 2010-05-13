@@ -150,7 +150,7 @@ public class FaceDetectorRemote extends iFaceDetector implements iFaceLearner
 			for( FacePictureWithName face : _recognizer.getTrainSet() ) 
 			{
 				Bitmap bmp=BitmapFactory.decodeByteArray( face.jpegFileOfFace, 0, face.jpegFileOfFace.length );
-				ret.add( new NamedFace(face.id, bmp, face.name) );
+				ret.add( new NamedFace(Integer.toString(face.id), bmp, face.name) );
 			}
 
 			return ret;

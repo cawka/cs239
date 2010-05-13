@@ -49,15 +49,15 @@ public class Main extends Activity
 	private static final int MENU_SETTINGS = 4;
 	private static final int MENU_GALLERY = 5;
 	private static final int MENU_SELECT_CONTACT = 6;
+	private static final int MENU_SELECT_FB = 7;
 
 	private static final int SELECT_IMAGE = 1;
 	private static final int CHANGE_SETTINGS = 2;
 	private static final int CONTACT_IMAGE = 3;
+	private static final int FB_IMAGE = 4;
 	
 	////////////////////////////////////////////////////////////////////
-	
-	public static final int DB_VERSION=4;
-	
+		
     private ImageWithFaces _picture;
     private ListOfPeople   _names_list;
     private Cam 		   _cam;
@@ -70,6 +70,8 @@ public class Main extends Activity
     
     private List<iFaceDetector> _detectors;
     private List<iFaceLearner>  _learners;
+    
+    private String _suggestedName=null;
     
     ////////////////////////////////////////////////////////////////////
    
@@ -289,10 +291,13 @@ public class Main extends Activity
     {
     	if( _thread!=null ) return false;
     	
-        menu.add(0, MENU_SELECT, 0, "Select")
+        menu.add(0, MENU_SELECT, 0, "Gallery")
         	.setIcon( android.R.drawable.ic_menu_search );
                 
-        menu.add(0, MENU_SELECT_CONTACT, 0, "Select contact" )
+        menu.add(0, MENU_SELECT_CONTACT, 0, "Contacts" )
+    	.setIcon(  R.drawable.ic_menu_allfriends );
+
+        menu.add(0, MENU_SELECT_FB, 0, "Facebook" )
     	.setIcon(  R.drawable.ic_menu_allfriends );
 
         menu.add(0, MENU_SETTINGS, 0, "Settings" )
@@ -348,7 +353,17 @@ public class Main extends Activity
     			switchToPicture( );
     			
     			Intent i=new Intent( );
-    			i.setAction( "com.cawka.FriendDetector.Contacts" );
+    			i.setAction( "com.cawka.FriendDetector.ContactsGallery" );
+    			
+    			startActivityForResult( i, CONTACT_IMAGE );
+    			return true;
+    		}
+    		case MENU_SELECT_FB:
+    		{
+    			switchToPicture( );
+    			
+    			Intent i=new Intent( );
+    			i.setAction( "com.cawka.FriendDetector.FBGallery" );
     			
     			startActivityForResult( i, CONTACT_IMAGE );
     			return true;
@@ -382,6 +397,7 @@ public class Main extends Activity
     		{
     		case SELECT_IMAGE:
     		{
+    			_suggestedName=null;
 				_names_list.clear( );
 
     			String filename="";
@@ -409,6 +425,7 @@ public class Main extends Activity
     		}
     		case CONTACT_IMAGE:
     		{
+    			_suggestedName=data.getExtras( ).getString( "name" );
     			String filename=data.getExtras( ).getString( "file" );
     			if( !filename.equals("") ) processImage( filename, true );
     			
@@ -438,6 +455,7 @@ public class Main extends Activity
     private void retryDetection( )
     {
     	if( _thread!=null ) return;
+    	_suggestedName=null;
     	
     	Bitmap bitmap=_picture.getBitmap( );
     	if( bitmap==null ) return;
@@ -541,6 +559,8 @@ public class Main extends Activity
 		{
 			for( Person person : _faces )
 			{
+				if( _suggestedName!=null ) person.setName( _suggestedName ); //some hack
+				
 				if( !person.hasName() )
 					person.setDefaultName( Main.this.getResources().getString(R.string.unknown_person) );
 				_names_list.add( person );
@@ -605,7 +625,7 @@ public class Main extends Activity
 			
 			_handler.post( new updateUI(detector.getFaces( )) ); 
 			
-			if( detector.getFullDetection() )
+			if( _suggestedName!=null || detector.getFullDetection() )
 			{
 				detector.resetFaces( );
 				_handler.post( new releaseUI() ); 
