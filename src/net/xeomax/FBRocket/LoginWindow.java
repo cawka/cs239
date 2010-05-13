@@ -1,38 +1,71 @@
 package net.xeomax.FBRocket;
 
 import android.app.Activity;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
+import android.os.Bundle;
+import android.util.Log;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.Toast;
+
 import java.util.HashMap;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-class LoginWindow
+import com.cawka.FriendDetector.R;
+
+@SuppressWarnings( "unchecked" )
+public class LoginWindow extends Activity
 {
-	private FBRocket		fbRocket;
-	private LoginListener	callback;
-	private int				returnWindow;
-	private WebView			wv;
+	private static final String TAG = "net.xeomax.FBRocket.LoginWindow";
+	
+	private WebView		wv;
+	private String  	apiKey="";
+	
+	public static final int LOGIN_SUCCESS = 10;
+	public static final int LOGIN_FAILURE = 11;
 
-	public LoginWindow( FBRocket fbRocket, LoginListener callback,
-			int returnWindow )
+	protected void onCreate( Bundle savedInstanceState )
 	{
-		this.fbRocket=fbRocket;
-		this.callback=callback;
-		this.returnWindow=returnWindow;
-
-		this.wv=new WebView( fbRocket.getActivity( ) );
-		fbRocket.getActivity( ).setContentView( this.wv );
+		super.onCreate( savedInstanceState );
+		
+		this.wv=new WebView( this );
+		setContentView( this.wv );
+	
+//		this.wv.setBackgroundResource( R.drawable.background ); //hack
+		
 		this.wv.getSettings( ).setAllowFileAccess( true );
 		this.wv.getSettings( ).setJavaScriptEnabled( true );
 		this.wv.setWebViewClient( new CustomWebViewClient( ) );
-
+	}
+	
+	protected void onStart( )
+	{
+		super.onStart( );
+		
+		this.apiKey=getIntent().getExtras( ).getString( "api_key" );
+		if( this.apiKey.equals("") )
+		{
+			Log.v( TAG, "API_KEY has not been specified" );
+			Toast.makeText( this, "API_KEY has not been specified", Toast.LENGTH_LONG ).show( );
+			
+			setResult( LOGIN_FAILURE );
+			finish( );
+		}
+			
 		this.wv
 				.loadUrl( "http://www.facebook.com/login.php?api_key="
-						+ fbRocket.getAPIKey( )
-						+ "&connect_display=popup&v=1.0&next=http://www.facebook.com/connect/login_success.html&cancel_url=http://www.facebook.com/connect/login_failure.html&fbconnect=true&return_session=true&req_perms=read_stream,publish_stream,offline_access" );
+						+ apiKey
+						+ "&connect_display=popup&" +
+								"v=1.0&" +
+								"next=http://www.facebook.com/connect/login_success.html&" +
+								"cancel_url=http://www.facebook.com/connect/login_failure.html&" +
+								"fbconnect=true&" +
+								"return_session=true&" +
+								"req_perms=read_stream,publish_stream,offline_access" );
 	}
 
 	public static HashMap<String, String> parseQueryString( String url )
@@ -51,11 +84,6 @@ class LoginWindow
 		return values;
 	}
 
-	public void deregisterWV( )
-	{
-		this.wv.setWebViewClient( new WebViewClient( ) );
-	}
-
 	public static String getURLOnly( String url )
 	{
 		return url.split( "\\?" )[0];
@@ -63,22 +91,19 @@ class LoginWindow
 
 	private class CustomWebViewClient extends WebViewClient
 	{
-		private CustomWebViewClient( )
-		{
-		}
-
 		public void onPageFinished( WebView view, String url )
 		{
 			if( LoginWindow.getURLOnly( url ).equals(
 					"http://www.facebook.com/connect/login_failure.html" ) )
 			{
-				LoginWindow.this.callback.onLoginFail( );
-				LoginWindow.this.fbRocket.getActivity( ).setContentView(
-						LoginWindow.this.returnWindow );
-			} else if( LoginWindow.getURLOnly( url ).equals(
+				setResult( LOGIN_FAILURE );
+				finish( );			
+			}
+			else if( LoginWindow.getURLOnly( url ).equals(
 					"http://www.facebook.com/connect/login_success.html" ) )
 			{
-				LoginWindow.this.deregisterWV( );
+				Log.v( TAG, "Real login success" );
+				
 				HashMap values=LoginWindow.parseQueryString( url );
 				String sessionJSONString=Uri.decode( (String)values
 						.get( "session" ) );
@@ -87,16 +112,24 @@ class LoginWindow
 					JSONObject sessionJSON=new JSONObject( sessionJSONString );
 					String sessionKey=sessionJSON.get( "session_key" )
 							.toString( );
-					String secretKey=sessionJSON.get( "secret" ).toString( );
+					String secret=sessionJSON.get( "secret" ).toString( );
 					String uid=sessionJSON.get( "uid" ).toString( );
-					Facebook facebook=new Facebook( LoginWindow.this.fbRocket,
-							sessionKey, secretKey, uid );
-					LoginWindow.this.callback.onLoginSuccess( facebook );
-					LoginWindow.this.fbRocket.getActivity( ).setContentView(
-							LoginWindow.this.returnWindow );
-				} catch( JSONException e )
+					
+					Intent data=new Intent();
+					data.putExtra( "sessionKey", sessionKey );
+					data.putExtra( "secret",     secret );
+					data.putExtra( "uid",        uid );
+					
+					setResult( LOGIN_SUCCESS, data );
+					finish( );
+					return;
+				} 
+				catch( JSONException e )
 				{
-					e.printStackTrace( );
+					Log.e( TAG, Log.getStackTraceString(e) );
+					
+					setResult( LOGIN_FAILURE );
+					finish( );			
 				}
 			}
 		}

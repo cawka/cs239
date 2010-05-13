@@ -7,25 +7,26 @@ import java.util.List;
 
 public class Facebook
 {
-	private FBRocket	fbRocket;
+	private String      apiKey;
 	private String		sessionKey;
 	private String		secretKey;
 	private String		uid;
 
-	protected Facebook( FBRocket fbRocket, String sessionKey, String secretKey,
+	protected Facebook( String apiKey, 
+			String sessionKey, String secretKey,
 			String uid )
 	{
-		this.fbRocket=fbRocket;
+		this.apiKey    =apiKey;
 		this.sessionKey=sessionKey;
-		this.secretKey=secretKey;
-		this.uid=uid;
+		this.secretKey =secretKey;
+		this.uid       =uid;
 	}
 
 	public String getAPIKey( )
 	{
-		return this.fbRocket.getAPIKey( );
+		return this.apiKey;
 	}
-
+	
 	public String getSessionKey( )
 	{
 		return this.sessionKey;
@@ -41,24 +42,14 @@ public class Facebook
 		return this.uid;
 	}
 
-	public void save( )
-	{
-		SharedPreferences preferences=this.fbRocket.getActivity( )
-				.getSharedPreferences( this.fbRocket.getAppName( ), 0 );
-		SharedPreferences.Editor editor=preferences.edit( );
-		editor.putString( "sessionKey", this.sessionKey );
-		editor.putString( "secretKey", this.secretKey );
-		editor.putString( "uid", this.uid );
-		editor.commit( );
-	}
-
 	public boolean sessionIsValid( ) throws ServerErrorException
 	{
 		try
 		{
 			getStatus( );
 			return true;
-		} catch( ServerErrorException e )
+		} 
+		catch( ServerErrorException e )
 		{
 			if( e.notLoggedIn( ) )
 				return false;
@@ -147,6 +138,20 @@ public class Facebook
 		query.sign( );
 		return QueryProcessor.getFriendList( query );
 	}
+	
+	public List<String> getPhotos( String uid, int limit ) throws ServerErrorException 
+	{
+		Query query=new Query( this, "fql.query" );
+
+		String fqlQuery= 
+			"SELECT src FROM photo " +
+				"WHERE pid IN (SELECT pid FROM photo_tag WHERE subject="+uid+") " +
+				"LIMIT "+Integer.toString( limit );
+		query.put( "query", fqlQuery );
+		query.sign( );
+		
+		return QueryProcessor.getStringList( query );
+	}
 
 	public String getSession( ) throws ServerErrorException
 	{
@@ -160,14 +165,17 @@ public class Facebook
 	public List<Status> getStatus( int limit ) throws ServerErrorException
 	{
 		Query query=new Query( this, "status.get" );
-		query.put( "limit", limit );
+		query.put( "limit", Integer.toString(limit) );
 		query.sign( );
 		return QueryProcessor.getStatusList( query );
 	}
 
 	public Status getStatus( ) throws ServerErrorException
 	{
-		return (Status)getStatus( 1 ).get( 0 );
+		List<Status> statuses=getStatus( 1 );
+		if( statuses.size( )!=0 ) throw new ServerErrorException( "-1", "Server didn't respond properly" );
+		
+		return new Status( "OK", "NOW", "0" );
 	}
 
 	public List<Status> getAllStatus( ) throws ServerErrorException

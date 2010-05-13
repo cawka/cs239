@@ -32,8 +32,9 @@ public class FBGallery extends Activity implements LoginListener
 	private GridView _grid;
 	private ImageAdapter _adapter;
 	
+	private static int REQUEST_LOGIN = 1;
+	
 	private FBRocket _fb;
-	Facebook _facebook=null; //set in a call back function
 	
 	Handler _handler=new Handler( );
 	
@@ -41,26 +42,39 @@ public class FBGallery extends Activity implements LoginListener
 	FBDBHandler _dbHandler;
 	
 	private static final String TAG="FriendDetector.FacebookPlugin";
+
+	private static final String API_KEY="56e0dc5f9c7e6aa9a86c3f2cfd4550f8";
 	
 	protected void onCreate( Bundle savedInstanceState )
 	{
 		super.onCreate( savedInstanceState );
+		this.setContentView( R.layout.gallery );
+		
+		_grid=(GridView)findViewById( R.id.grid );
+		
+        _adapter=new ImageAdapter( getBaseContext() );
+    	_grid.setAdapter( _adapter );
+    	
+    	registerForContextMenu( _grid );
 		
 		_dbHandler=new FBDBHandler( this );
 		
-    	_fb = new FBRocket( this, "FriendDetection", "56e0dc5f9c7e6aa9a86c3f2cfd4550f8" );
-
-    	// Determine whether there exists a previously-saved Facebook:
-		if( _fb.existsSavedFacebook( ) )
-		{
-			_fb.loadFacebook( this );
-		} 
-		else
-		{
-			_fb.login( R.layout.gallery );
-		}
+		////////////////////////////////////////////////////////////////////////
+		
+    	_fb = new FBRocket( getBaseContext(), "FriendDetection", API_KEY, this );
 	}
 
+	protected void onStart( )
+	{
+		super.onStart( );
+		
+    	// Determine whether there exists a previously-saved Facebook:
+    	if( !_fb.trySavedLogin() )
+    	{
+    		_fb.requestLoginActivity( this, REQUEST_LOGIN );
+    	}
+	}
+	
 	protected void onDestroy( )
 	{
 		if( _thread!=null )
@@ -88,37 +102,29 @@ public class FBGallery extends Activity implements LoginListener
 		i.putExtra( "name", person.name );
 		setResult( RESULT_OK, i );
 		
-		finish( );
+		finish( );	
+	}
+	
+	protected void onActivityResult( int requestCode, int resultCode, Intent data )
+	{
+		if( requestCode==REQUEST_LOGIN )
+			_fb.onLoginActivityReturn( resultCode, data );
+		
+		// other crazy shit
 	}
 	
 	public void onLoginFail( )
 	{
-		_fb.displayToast( "Login failed!" );
+		Toast.makeText( this, "Login failed!", Toast.LENGTH_SHORT ).show( );
 	}
 
-	public void onLoginSuccess( Facebook facebook )
+	public void onLoginSuccess( )
 	{
-		_facebook=facebook;
+		Toast.makeText( this, "Login success!", Toast.LENGTH_SHORT ).show( );
 		
-		new Handler().postDelayed( new Hack(), 1000 );
+    	_thread=new Thread( new FriendsLoader() );
+    	_thread.start( );
 	}
-	
-	private class Hack implements Runnable
-	{
-		public void run( )
-		{
-			_grid=(GridView)findViewById( R.id.grid );
-			
-	        _adapter=new ImageAdapter( getBaseContext() );
-	    	_grid.setAdapter( _adapter );
-	    	
-	    	registerForContextMenu( _grid );
-	    	
-	    	_thread=new Thread( new FriendsLoader() );
-	    	_thread.start( );
-		}
-	}
-	
 	
 	private class FriendsLoader implements Runnable
 	{
@@ -126,7 +132,7 @@ public class FBGallery extends Activity implements LoginListener
 		{
 			try
 			{
-				List<String> uids=_facebook.getFriendUIDs( );
+				List<String> uids=_fb.getFacebook( ).getFriendUIDs( );
 				for( String uid : uids )
 				{
 					if( Thread.interrupted() ) 
@@ -145,8 +151,13 @@ public class FBGallery extends Activity implements LoginListener
 							continue;
 						}
 						
-						Friend friend=_facebook.getFriend( uid );
+						Friend friend=_fb.getFacebook( ).getFriend( uid );
 						friend.pic=friend.pic.replace( "_s.jpg", "_n.jpg" );
+						
+//						List<String> photos=_fb.getFacebook( ).getPhotos( uid, 1 );
+//						if( photos.size()==0 ) continue; 
+//						
+//						friend.pic=photos.get( 0 ).replace( "{src:", "" ).replace( "}", "" );
 						
 						URL url=new URL( friend.pic );
 						
