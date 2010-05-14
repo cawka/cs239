@@ -138,6 +138,12 @@ public class ImageWithFaces extends View
 	private void makeDrawableBitmap( )
 	{
 		if( _image.equals("") ) return;
+		if( getMeasuredWidth()==0 ) 
+		{
+			// Log.v
+			return;
+		}
+		
 		Log.v( TAG, "resample: "+Float.toString(_resample)+"width: "+Integer.toString(_bmp.getWidth())+", height: "+Integer.toString(_bmp.getHeight()) );
 		
 		_ratio=calculateResizeRatio( _bmp, getMeasuredWidth()-8, getMeasuredHeight()-8, 0 );
@@ -175,8 +181,8 @@ public class ImageWithFaces extends View
         	break;
         }
 		
-		if( input.getWidth()>maxWidth ) 
-			ratio=1.0f*maxWidth/input.getWidth();
+//		if( input.getWidth()>maxWidth ) 
+		ratio=1.0f*maxWidth/input.getWidth();
 
 		if( ratio*input.getHeight()>maxHeight )
 			ratio=1.0f*maxHeight/input.getHeight();

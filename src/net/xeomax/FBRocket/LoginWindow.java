@@ -34,9 +34,7 @@ public class LoginWindow extends Activity
 		
 		this.wv=new WebView( this );
 		setContentView( this.wv );
-	
-//		this.wv.setBackgroundResource( R.drawable.background ); //hack
-		
+			
 		this.wv.getSettings( ).setAllowFileAccess( true );
 		this.wv.getSettings( ).setJavaScriptEnabled( true );
 		this.wv.setWebViewClient( new CustomWebViewClient( ) );

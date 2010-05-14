@@ -33,26 +33,37 @@ public class ContactsImageGallery extends Activity
 	protected void onCreate( Bundle savedInstanceState )
 	{
 		super.onCreate( savedInstanceState );
-		
 		setContentView( R.layout.gallery );
+		
+		SavedState state=(SavedState)getLastNonConfigurationInstance( );
 		
 		_grid=(GridView)findViewById( R.id.grid );
 		
-        _adapter=new ImageAdapter( getBaseContext() );
+		if( state==null )
+			_adapter=new ImageAdapter( getBaseContext() );
+		else
+			_adapter=state.adapter;
+		
     	_grid.setAdapter( _adapter );
 	
 		registerForContextMenu( _grid );
 		
 		// asynchronously load all contacts
-		new Thread( new ContactsLoader() ).start( );
+		if( state==null )
+			new Thread( new ContactsLoader() ).start( );
 	}
 	
 	protected void onDestroy( )
 	{
-		_adapter.clear( );
+//		_adapter.clear( );
 		
 		super.onDestroy();
 	}
+	
+	public Object onRetainNonConfigurationInstance( ) 
+	{
+		return new SavedState( );
+	}	
 	
 	public void onCreateContextMenu( ContextMenu menu, View v, ContextMenuInfo menuInfo )
 	{
@@ -83,6 +94,18 @@ public class ContactsImageGallery extends Activity
 		catch( IOException e )
 		{
 			//ignore
+		}
+	}	
+	
+	private class SavedState //implements Serializable
+	{
+		//private static final long	serialVersionUID	=658779515116443999L;
+
+		public ImageAdapter adapter;
+
+		public SavedState( ) //Bitmap face, ListAdapter adapter )
+		{
+			adapter=_adapter;
 		}
 	}	
 	

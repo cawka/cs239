@@ -1,14 +1,10 @@
 package com.cawka.FriendDetector;
 
-import java.util.LinkedList;
-import java.util.List;
-
 import com.cawka.FriendDetector.detector.FaceDetectorLocal;
 import com.cawka.FriendDetector.detector.FaceDetectorRemote;
 import com.cawka.FriendDetector.detector.iFaceLearner;
 import com.cawka.FriendDetector.detector.eigenfaces.Eigenface.NamedFace;
 import com.cawka.FriendDetector.gui.ImageAdapter;
-import com.cawka.FriendDetector.gui.ListOfPeople;
 import com.cawka.FriendDetector.settings.Server;
 import com.cawka.FriendDetector.settings.Server.Config;
 
@@ -37,33 +33,43 @@ public class TrainSetGallery extends Activity
         super.onCreate( savedInstanceState );
         setContentView( R.layout.gallery );
         
+        SavedState state=(SavedState)getLastNonConfigurationInstance( );
+        
         _grid=(GridView)findViewById( R.id.grid );
         
         registerForContextMenu( _grid );
         
-        Config config=(Config)getIntent().getSerializableExtra( "config" );
-        if( config==null || config.type==Server.LOCAL )
-    	{
-        	_learner=new FaceDetectorLocal( this );
-    	}
-        else if( config.type==Server.REMOTE )
-    	{
-    		try
-    		{
-    			_learner=new FaceDetectorRemote(
-					config.hostname,
-					Integer.toString(config.port),
-					config.timeout
-				);
-    		}
-    		catch( NoClassDefFoundError e )
-    		{
-    			Log.v( TAG, "Ice library wasn't enabled during the compilation. Terminating face gallery" );
-    			finish( );
-    		}
-    	}
+        if( state==null )
+        {
+	        Config config=(Config)getIntent().getSerializableExtra( "config" );
+	        if( config==null || config.type==Server.LOCAL )
+	    	{
+	        	_learner=new FaceDetectorLocal( this );
+	    	}
+	        else if( config.type==Server.REMOTE )
+	    	{
+	    		try
+	    		{
+	    			_learner=new FaceDetectorRemote(
+						config.hostname,
+						Integer.toString(config.port),
+						config.timeout
+					);
+	    		}
+	    		catch( NoClassDefFoundError e )
+	    		{
+	    			Log.v( TAG, "Ice library wasn't enabled during the compilation. Terminating face gallery" );
+	    			finish( );
+	    		}
+	    	}
+	        _adapter=new ImageAdapter( getBaseContext() );
+        }
+        else
+        {
+        	_learner=state.learner;
+        	_adapter=state.adapter;
+        }
         
-        _adapter=new ImageAdapter( getBaseContext() );
     	_grid.setAdapter( _adapter );
     	
     	new Thread( new TrainSetLoader() ).start( );
@@ -71,9 +77,14 @@ public class TrainSetGallery extends Activity
 
 	protected void onDestroy( )
 	{
-		_adapter.clear( );
+//		_adapter.clear( );
 		
 		super.onDestroy();
+	}
+
+	public Object onRetainNonConfigurationInstance( ) 
+	{
+		return new SavedState( );
 	}
 	
 	public void onCreateContextMenu( ContextMenu menu, View v, ContextMenuInfo menuInfo )
@@ -106,6 +117,20 @@ public class TrainSetGallery extends Activity
 		  
 		alert.show();		
 	}	
+
+	private class SavedState //implements Serializable
+	{
+		//private static final long	serialVersionUID	=658779515116443999L;
+
+		public ImageAdapter adapter;
+		public iFaceLearner learner;
+
+		public SavedState( ) //Bitmap face, ListAdapter adapter )
+		{
+			adapter=_adapter;
+			learner=_learner;
+		}
+	}
 	
 	private class TrainSetLoader implements Runnable
 	{

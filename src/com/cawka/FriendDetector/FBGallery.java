@@ -1,15 +1,11 @@
 package com.cawka.FriendDetector;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.Serializable;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.List;
 
-import org.json.JSONException;
-
 import net.xeomax.FBRocket.FBRocket;
-import net.xeomax.FBRocket.Facebook;
 import net.xeomax.FBRocket.Friend;
 import net.xeomax.FBRocket.LoginListener;
 import net.xeomax.FBRocket.ServerErrorException;
@@ -30,7 +26,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.widget.GridView;
-import android.widget.ListAdapter;
 import android.widget.Toast;
 import android.widget.AdapterView.AdapterContextMenuInfo;
 
@@ -102,7 +97,7 @@ public class FBGallery extends Activity implements LoginListener
 			
 			try{ _thread.join( ); } catch( Exception e ) { }
 		}
-		if( _adapter!=null ) _adapter.clear( );
+//		if( _adapter!=null ) _adapter.clear( );
 		
 		super.onDestroy();
 	}
