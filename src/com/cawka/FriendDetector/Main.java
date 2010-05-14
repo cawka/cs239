@@ -680,7 +680,7 @@ public class Main extends Activity
     {
 		if( _thread!=null ) return super.onKeyDown(keyCode, event);
      
-        if (keyCode == 80) 
+	    if( keyCode == KeyEvent.KEYCODE_FOCUS || keyCode==KeyEvent.KEYCODE_SEARCH ) 
             {
             if( _cam.getVisibility() != View.VISIBLE)
             {

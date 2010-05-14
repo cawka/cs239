@@ -126,6 +126,7 @@ public class FBGallery extends Activity implements LoginListener
     	{
 	        case MENU_LOGOUT:
 	        	_fb.logout( );
+	        	_dbHandler.deleteAll( );
 	        	finish( );
 	            return true;
     	}

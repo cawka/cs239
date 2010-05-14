@@ -89,4 +89,12 @@ public class FBDBHandler extends SQLiteOpenHelper
 		db.insert( TABLE, null, values );
 		db.close( );		
 	}
+	
+	public void deleteAll( )
+	{
+		SQLiteDatabase db=getWritableDatabase( );
+		
+		db.delete( TABLE, null, null );
+		db.close( );		
+	}
 }

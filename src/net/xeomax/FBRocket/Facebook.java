@@ -3,6 +3,7 @@ package net.xeomax.FBRocket;
 import android.app.Activity;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
+import android.util.Log;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -154,6 +155,7 @@ public class Facebook
 				"LIMIT "+Integer.toString( limit )+" "+
 				"OFFSET "+Integer.toString( offset )
 				;
+		Log.v( "Facebook", fqlQuery );
 		query.put( "query", fqlQuery );
 		query.sign( );
 		

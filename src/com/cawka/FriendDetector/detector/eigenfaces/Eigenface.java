@@ -347,7 +347,7 @@ public class Eigenface
 	        id=_id;
 			name=_name;
 			
-			filename=Environment.getExternalStorageDirectory()+"/friendDetector/"+path_prefix+"/"+id+".jpeg";
+			filename=Environment.getExternalStorageDirectory()+"/friendDetector/"+path_prefix+"/"+id+"_0.jpeg";
 			Log.v( TAG, "<"+filename );
 			
 			Bitmap bmp=BitmapFactory.decodeFile( filename ); 
