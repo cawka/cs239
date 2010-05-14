@@ -69,6 +69,8 @@ public class FBRocket
 
 	public boolean trySavedLogin( )
 	{
+		if( this.facebook!=null ) return true;
+		
 		SharedPreferences preferences=this.context.getSharedPreferences( this.appName, Activity.MODE_PRIVATE );
 
 		String sessionKey=preferences.getString( "sessionKey", "" );

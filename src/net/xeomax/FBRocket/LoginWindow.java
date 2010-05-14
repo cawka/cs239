@@ -78,7 +78,7 @@ public class LoginWindow extends Activity
 			for( String kvPair : kvPairs )
 			{
 				String[] kvSplit=kvPair.split( "=" );
-				values.put( kvSplit[0], kvSplit[1] );
+				if( kvSplit.length>1 ) values.put( kvSplit[0], kvSplit[1] );
 			}
 		}
 		return values;

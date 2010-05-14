@@ -6,6 +6,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+@SuppressWarnings( "unchecked" )
 class QueryProcessor
 {
 	public static boolean getBoolean( Query query ) throws ServerErrorException
@@ -58,6 +59,24 @@ class QueryProcessor
 				stringList.add( jsonArray.get( i ).toString( ).replaceAll(
 						"\"", "" ) );
 		} catch( JSONException e )
+		{
+			e.printStackTrace( );
+		}
+		return stringList;
+	}
+	
+	public static List<String> getSrcList( Query query, String field ) throws ServerErrorException
+	{
+		String serverResponse=HTTPManager.getResponse( query );
+		errorCheck( serverResponse );
+		List stringList=new ArrayList( );
+		try
+		{
+			JSONArray jsonArray=new JSONArray( serverResponse );
+			for( int i=0; i < jsonArray.length( ); ++i )
+				stringList.add( jsonArray.getJSONObject( i ).get( field ).toString( ).replaceAll( "\"", "" ) );
+		} 
+		catch( JSONException e )
 		{
 			e.printStackTrace( );
 		}

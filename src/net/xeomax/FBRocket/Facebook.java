@@ -3,7 +3,12 @@ package net.xeomax.FBRocket;
 import android.app.Activity;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
+
+import java.util.LinkedList;
 import java.util.List;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class Facebook
 {
@@ -139,18 +144,20 @@ public class Facebook
 		return QueryProcessor.getFriendList( query );
 	}
 	
-	public List<String> getPhotos( String uid, int limit ) throws ServerErrorException 
+	public List<String> getPhotos( String uid, int limit, int offset ) throws ServerErrorException
 	{
 		Query query=new Query( this, "fql.query" );
 
 		String fqlQuery= 
-			"SELECT src FROM photo " +
+			"SELECT src_big FROM photo " +
 				"WHERE pid IN (SELECT pid FROM photo_tag WHERE subject="+uid+") " +
-				"LIMIT "+Integer.toString( limit );
+				"LIMIT "+Integer.toString( limit )+" "+
+				"OFFSET "+Integer.toString( offset )
+				;
 		query.put( "query", fqlQuery );
 		query.sign( );
 		
-		return QueryProcessor.getStringList( query );
+		return QueryProcessor.getSrcList( query, "src_big" );
 	}
 
 	public String getSession( ) throws ServerErrorException

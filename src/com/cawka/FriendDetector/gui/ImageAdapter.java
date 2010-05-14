@@ -20,10 +20,10 @@ import android.widget.ImageView.ScaleType;
 
 public class ImageAdapter extends BaseAdapter
 {
-	List<NamedFace> _faces=new LinkedList<NamedFace>();
-	Context 		_context;
+	LinkedList<NamedFace> _faces=new LinkedList<NamedFace>();
+	Context 			  _context;
 	
-	Handler			_handler=new Handler();
+	Handler				  _handler=new Handler();
 	
 	public ImageAdapter( Context context )
 	{
@@ -70,6 +70,13 @@ public class ImageAdapter extends BaseAdapter
 	public void add( NamedFace face )
 	{
 		_faces.add( face );
+		
+		_handler.post( new UpdateUI() );
+	}
+	
+	public void add( int position, NamedFace face )
+	{
+		_faces.add( position, face );
 		
 		_handler.post( new UpdateUI() );
 	}

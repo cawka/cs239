@@ -322,11 +322,12 @@ public class Eigenface
 	
 	public static class NamedFace
 	{
-		public String   id;
+		public String id;
 		public Bitmap bitmap;
 		public String name;
 		
 		public String filename=null;
+		public String extra;
 		
 		public NamedFace( String _id, Bitmap _bitmap, String _name )
 		{
@@ -354,7 +355,7 @@ public class Eigenface
 			bmp.recycle( );
 		}
 		
-		public NamedFace( String _id, String _name, InputStream is, String path_prefix ) throws IOException
+		public NamedFace( String _id, String _name, InputStream is, String path_prefix, String _extra ) throws IOException
 		{
 			String status=Environment.getExternalStorageState( );
 	        if( !status.equals(Environment.MEDIA_MOUNTED) ) 
@@ -364,12 +365,13 @@ public class Eigenface
 
 	        id=_id;
 			name=_name;
+			extra=_extra;
 			
 			//////////////////////////////////////////////////////////////////
 			File filepath=new File( Environment.getExternalStorageDirectory()+"/friendDetector/"+path_prefix );
 			filepath.mkdirs( );
 
-			File file=new File( filepath, id+".jpeg" );		
+			File file=new File( filepath, id+(extra.equals("")?"":"_"+extra)+".jpeg" );		
 			file.delete( );
 			file.createNewFile( );
 			
