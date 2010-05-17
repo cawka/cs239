@@ -6,6 +6,7 @@ import java.util.List;
 
 import com.cawka.FriendDetector.Main;
 import com.cawka.FriendDetector.detector.eigenfaces.Eigenface.NamedFace;
+import com.cawka.FriendDetector.gui.ImageAdapter;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -110,6 +111,14 @@ public class DBHandleEigen extends SQLiteOpenHelper
 //			return null;
 //		}
 //	}
+	
+	public void getAllFaces( ImageAdapter adapter )
+	{
+		for( NamedFace face : getAllFaces() )
+		{
+			adapter.add( face );
+		}
+	}
 	
 	public List<NamedFace> getAllFaces( )
 	{

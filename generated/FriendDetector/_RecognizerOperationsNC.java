@@ -21,7 +21,9 @@ public interface _RecognizerOperationsNC
 
     void learn(byte[] jpegFileOfFace, String name);
 
-    FacePictureWithName[] getTrainSet();
+    int getTrainSetSize();
+
+    FacePictureWithName getTrainSetFace(int num);
 
     void unLearn(int id);
 }

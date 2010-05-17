@@ -11,6 +11,7 @@ import com.cawka.FriendDetector.Person;
 import com.cawka.FriendDetector.detector.eigenfaces.DBHandleEigen;
 import com.cawka.FriendDetector.detector.eigenfaces.Eigenface;
 import com.cawka.FriendDetector.detector.eigenfaces.Eigenface.NamedFace;
+import com.cawka.FriendDetector.gui.ImageAdapter;
 
 import android.app.Activity;
 import android.content.Context;
@@ -118,14 +119,12 @@ public class FaceDetectorLocal extends iFaceDetector implements iFaceLearner
 		return true;
 	}
 
-	public List<NamedFace> getTrainSet( ) 
+	public void getTrainSet( ImageAdapter adapter ) 
 	{
-		LinkedList<NamedFace> ret=(LinkedList<NamedFace>)new DBHandleEigen( _context ).getAllFaces( );
+		try { _thread.join( ); } catch( InterruptedException e ) { return; }
+		adapter.add( new NamedFace("-1", _eigenface.getAverageFace(), "Average face") );
 		
-		try { _thread.join( ); } catch( InterruptedException e ) { return ret; }
-		
-		ret.addFirst( new NamedFace("-1", _eigenface.getAverageFace(), "Average face") );
-		return ret;
+		new DBHandleEigen( _context ).getAllFaces( adapter );
 	}
 
 	public void unLearn( long id )

@@ -138,10 +138,7 @@ public class TrainSetGallery extends Activity
 		{
 	        if( _learner!=null ) 
 	        {
-	        	for( NamedFace face : _learner.getTrainSet( ) )
-	        	{
-	        		_adapter.add( face );
-	        	}
+	        	_learner.getTrainSet( _adapter );
 	        }
 		}
 	}

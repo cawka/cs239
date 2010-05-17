@@ -97,21 +97,21 @@ public final class RecognizerPrxHelper extends Ice.ObjectPrxHelperBase implement
         }
     }
 
-    public FacePictureWithName[]
-    getTrainSet()
+    public FacePictureWithName
+    getTrainSetFace(int num)
     {
-        return getTrainSet(null, false);
+        return getTrainSetFace(num, null, false);
     }
 
-    public FacePictureWithName[]
-    getTrainSet(java.util.Map<String, String> __ctx)
+    public FacePictureWithName
+    getTrainSetFace(int num, java.util.Map<String, String> __ctx)
     {
-        return getTrainSet(__ctx, true);
+        return getTrainSetFace(num, __ctx, true);
     }
 
     @SuppressWarnings("unchecked")
-    private FacePictureWithName[]
-    getTrainSet(java.util.Map<String, String> __ctx, boolean __explicitCtx)
+    private FacePictureWithName
+    getTrainSetFace(int num, java.util.Map<String, String> __ctx, boolean __explicitCtx)
     {
         if(__explicitCtx && __ctx == null)
         {
@@ -123,10 +123,52 @@ public final class RecognizerPrxHelper extends Ice.ObjectPrxHelperBase implement
             Ice._ObjectDel __delBase = null;
             try
             {
-                __checkTwowayOnly("getTrainSet");
+                __checkTwowayOnly("getTrainSetFace");
                 __delBase = __getDelegate(false);
                 _RecognizerDel __del = (_RecognizerDel)__delBase;
-                return __del.getTrainSet(__ctx);
+                return __del.getTrainSetFace(num, __ctx);
+            }
+            catch(IceInternal.LocalExceptionWrapper __ex)
+            {
+                __handleExceptionWrapper(__delBase, __ex, null);
+            }
+            catch(Ice.LocalException __ex)
+            {
+                __cnt = __handleException(__delBase, __ex, null, __cnt);
+            }
+        }
+    }
+
+    public int
+    getTrainSetSize()
+    {
+        return getTrainSetSize(null, false);
+    }
+
+    public int
+    getTrainSetSize(java.util.Map<String, String> __ctx)
+    {
+        return getTrainSetSize(__ctx, true);
+    }
+
+    @SuppressWarnings("unchecked")
+    private int
+    getTrainSetSize(java.util.Map<String, String> __ctx, boolean __explicitCtx)
+    {
+        if(__explicitCtx && __ctx == null)
+        {
+            __ctx = _emptyContext;
+        }
+        int __cnt = 0;
+        while(true)
+        {
+            Ice._ObjectDel __delBase = null;
+            try
+            {
+                __checkTwowayOnly("getTrainSetSize");
+                __delBase = __getDelegate(false);
+                _RecognizerDel __del = (_RecognizerDel)__delBase;
+                return __del.getTrainSetSize(__ctx);
             }
             catch(IceInternal.LocalExceptionWrapper __ex)
             {

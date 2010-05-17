@@ -109,11 +109,60 @@ public final class _RecognizerDelM extends Ice._ObjectDelM implements _Recognize
         }
     }
 
-    public FacePictureWithName[]
-    getTrainSet(java.util.Map<String, String> __ctx)
+    public FacePictureWithName
+    getTrainSetFace(int num, java.util.Map<String, String> __ctx)
         throws IceInternal.LocalExceptionWrapper
     {
-        IceInternal.Outgoing __og = __handler.getOutgoing("getTrainSet", Ice.OperationMode.Normal, __ctx);
+        IceInternal.Outgoing __og = __handler.getOutgoing("getTrainSetFace", Ice.OperationMode.Normal, __ctx);
+        try
+        {
+            try
+            {
+                IceInternal.BasicStream __os = __og.os();
+                __os.writeInt(num);
+            }
+            catch(Ice.LocalException __ex)
+            {
+                __og.abort(__ex);
+            }
+            boolean __ok = __og.invoke();
+            try
+            {
+                if(!__ok)
+                {
+                    try
+                    {
+                        __og.throwUserException();
+                    }
+                    catch(Ice.UserException __ex)
+                    {
+                        throw new Ice.UnknownUserException(__ex.ice_name());
+                    }
+                }
+                IceInternal.BasicStream __is = __og.is();
+                __is.startReadEncaps();
+                FacePictureWithName __ret;
+                __ret = new FacePictureWithName();
+                __ret.__read(__is);
+                __is.endReadEncaps();
+                return __ret;
+            }
+            catch(Ice.LocalException __ex)
+            {
+                throw new IceInternal.LocalExceptionWrapper(__ex, false);
+            }
+        }
+        finally
+        {
+            __handler.reclaimOutgoing(__og);
+        }
+    }
+
+    public int
+    getTrainSetSize(java.util.Map<String, String> __ctx)
+        throws IceInternal.LocalExceptionWrapper
+    {
+        IceInternal.Outgoing __og = __handler.getOutgoing("getTrainSetSize", Ice.OperationMode.Normal, __ctx);
         try
         {
             boolean __ok = __og.invoke();
@@ -132,8 +181,8 @@ public final class _RecognizerDelM extends Ice._ObjectDelM implements _Recognize
                 }
                 IceInternal.BasicStream __is = __og.is();
                 __is.startReadEncaps();
-                FacePictureWithName[] __ret;
-                __ret = FacePicturesWithNamesHelper.read(__is);
+                int __ret;
+                __ret = __is.readInt();
                 __is.endReadEncaps();
                 return __ret;
             }

@@ -6,6 +6,7 @@ import java.util.List;
 
 import com.cawka.FriendDetector.Person;
 import com.cawka.FriendDetector.detector.eigenfaces.Eigenface.NamedFace;
+import com.cawka.FriendDetector.gui.ImageAdapter;
 
 import FriendDetector.Face;
 import FriendDetector.FacePictureWithName;
@@ -140,20 +141,19 @@ public class FaceDetectorRemote extends iFaceDetector implements iFaceLearner
 	}
 
 
-	public List<NamedFace> getTrainSet( )
+	public void getTrainSet( ImageAdapter adapter )
 	{
-		List<NamedFace> ret=new LinkedList<NamedFace>();
 		try
 		{
 			if( _recognizer==null ) tryConnect( );
 			
-			for( FacePictureWithName face : _recognizer.getTrainSet() ) 
+			int trainSetSize=_recognizer.getTrainSetSize( );
+			for( int i=0; i<trainSetSize; i++ )
 			{
+				FacePictureWithName face=_recognizer.getTrainSetFace( i );
 				Bitmap bmp=BitmapFactory.decodeByteArray( face.jpegFileOfFace, 0, face.jpegFileOfFace.length );
-				ret.add( new NamedFace(Integer.toString(face.id), bmp, face.name) );
+				adapter.add( new NamedFace(Integer.toString(face.id), bmp, face.name) );
 			}
-
-			return ret;
 		}
 		catch( Exception e ) //Ice.LocalException e
 		{
@@ -162,7 +162,6 @@ public class FaceDetectorRemote extends iFaceDetector implements iFaceLearner
 			Log.v( TAG, (e.getMessage()!=null)?e.getMessage():"unknown error" );
 			Log.v( TAG, Log.getStackTraceString(e) );
 		}
-		return ret;
 	}
 
 	public void unLearn( long id )

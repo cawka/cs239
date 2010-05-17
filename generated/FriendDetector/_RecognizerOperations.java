@@ -21,7 +21,9 @@ public interface _RecognizerOperations
 
     void learn(byte[] jpegFileOfFace, String name, Ice.Current __current);
 
-    FacePictureWithName[] getTrainSet(Ice.Current __current);
+    int getTrainSetSize(Ice.Current __current);
+
+    FacePictureWithName getTrainSetFace(int num, Ice.Current __current);
 
     void unLearn(int id, Ice.Current __current);
 }

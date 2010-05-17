@@ -80,10 +80,16 @@ public abstract class _RecognizerDisp extends Ice.ObjectImpl implements Recogniz
         return findFacesAndRecognizePeople(jpegFile, null);
     }
 
-    public final FacePictureWithName[]
-    getTrainSet()
+    public final FacePictureWithName
+    getTrainSetFace(int num)
     {
-        return getTrainSet(null);
+        return getTrainSetFace(num, null);
+    }
+
+    public final int
+    getTrainSetSize()
+    {
+        return getTrainSetSize(null);
     }
 
     public final void
@@ -165,13 +171,28 @@ public abstract class _RecognizerDisp extends Ice.ObjectImpl implements Recogniz
     }
 
     public static Ice.DispatchStatus
-    ___getTrainSet(Recognizer __obj, IceInternal.Incoming __inS, Ice.Current __current)
+    ___getTrainSetSize(Recognizer __obj, IceInternal.Incoming __inS, Ice.Current __current)
     {
         __checkMode(Ice.OperationMode.Normal, __current.mode);
         __inS.is().skipEmptyEncaps();
         IceInternal.BasicStream __os = __inS.os();
-        FacePictureWithName[] __ret = __obj.getTrainSet(__current);
-        FacePicturesWithNamesHelper.write(__os, __ret);
+        int __ret = __obj.getTrainSetSize(__current);
+        __os.writeInt(__ret);
+        return Ice.DispatchStatus.DispatchOK;
+    }
+
+    public static Ice.DispatchStatus
+    ___getTrainSetFace(Recognizer __obj, IceInternal.Incoming __inS, Ice.Current __current)
+    {
+        __checkMode(Ice.OperationMode.Normal, __current.mode);
+        IceInternal.BasicStream __is = __inS.is();
+        __is.startReadEncaps();
+        int num;
+        num = __is.readInt();
+        __is.endReadEncaps();
+        IceInternal.BasicStream __os = __inS.os();
+        FacePictureWithName __ret = __obj.getTrainSetFace(num, __current);
+        __ret.__write(__os);
         return Ice.DispatchStatus.DispatchOK;
     }
 
@@ -192,7 +213,8 @@ public abstract class _RecognizerDisp extends Ice.ObjectImpl implements Recogniz
     {
         "findFaces",
         "findFacesAndRecognizePeople",
-        "getTrainSet",
+        "getTrainSetFace",
+        "getTrainSetSize",
         "ice_id",
         "ice_ids",
         "ice_isA",
@@ -223,33 +245,37 @@ public abstract class _RecognizerDisp extends Ice.ObjectImpl implements Recogniz
             }
             case 2:
             {
-                return ___getTrainSet(this, in, __current);
+                return ___getTrainSetFace(this, in, __current);
             }
             case 3:
             {
-                return ___ice_id(this, in, __current);
+                return ___getTrainSetSize(this, in, __current);
             }
             case 4:
             {
-                return ___ice_ids(this, in, __current);
+                return ___ice_id(this, in, __current);
             }
             case 5:
             {
-                return ___ice_isA(this, in, __current);
+                return ___ice_ids(this, in, __current);
             }
             case 6:
             {
-                return ___ice_ping(this, in, __current);
+                return ___ice_isA(this, in, __current);
             }
             case 7:
             {
-                return ___learn(this, in, __current);
+                return ___ice_ping(this, in, __current);
             }
             case 8:
             {
-                return ___recognizeFace(this, in, __current);
+                return ___learn(this, in, __current);
             }
             case 9:
+            {
+                return ___recognizeFace(this, in, __current);
+            }
+            case 10:
             {
                 return ___unLearn(this, in, __current);
             }

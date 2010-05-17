@@ -25,8 +25,11 @@ public interface RecognizerPrx extends Ice.ObjectPrx
     public void learn(byte[] jpegFileOfFace, String name);
     public void learn(byte[] jpegFileOfFace, String name, java.util.Map<String, String> __ctx);
 
-    public FacePictureWithName[] getTrainSet();
-    public FacePictureWithName[] getTrainSet(java.util.Map<String, String> __ctx);
+    public int getTrainSetSize();
+    public int getTrainSetSize(java.util.Map<String, String> __ctx);
+
+    public FacePictureWithName getTrainSetFace(int num);
+    public FacePictureWithName getTrainSetFace(int num, java.util.Map<String, String> __ctx);
 
     public void unLearn(int id);
     public void unLearn(int id, java.util.Map<String, String> __ctx);
