@@ -148,12 +148,15 @@ public class FBGallery extends Activity implements LoginListener
         .setPositiveButton("Use photo for training",  new DialogInterface.OnClickListener(){
 			public void onClick( DialogInterface dialog, int which )
 			{
-				Intent i=new Intent( );
+				Intent i=new Intent( "com.cawka.FriendDetector.Detect" );
 				i.putExtra( "file", person.filename );
 				i.putExtra( "name", person.name );
-				setResult( RESULT_OK, i );
 				
-				finish( );				}
+				startActivity( i );
+//				setResult( RESULT_OK, i );
+//				
+//				finish( );				
+			}
 		} )
         .setNeutralButton("Get more photos", new DialogInterface.OnClickListener(){
 			public void onClick( DialogInterface dialog, int which )
@@ -180,12 +183,12 @@ public class FBGallery extends Activity implements LoginListener
 	
 	public void onLoginFail( )
 	{
-		Toast.makeText( this, "Login failed!", Toast.LENGTH_SHORT ).show( );
+//		Toast.makeText( this, "Login failed!", Toast.LENGTH_SHORT ).show( );
 	}
 
 	public void onLoginSuccess( )
 	{
-		Toast.makeText( this, "Login success!", Toast.LENGTH_SHORT ).show( );
+//		Toast.makeText( this, "Login success!", Toast.LENGTH_SHORT ).show( );
 		
     	_thread=new Thread( new FriendsLoader() );
     	_thread.start( );
@@ -202,6 +205,23 @@ public class FBGallery extends Activity implements LoginListener
 		{
 			adapter=_adapter;
 			fb=_fb;
+		}
+	}
+	
+	private class FriendData
+	{
+		public int     id;				// unique id of the current photo
+		public Integer total_loaded;    // shared count of # photos loaded
+		
+		public FriendData( int id, Integer total_loaded )
+		{
+			this.id=id;
+			this.total_loaded=total_loaded;
+		}
+		
+		public String toString( )
+		{
+			return Integer.toString( id );
 		}
 	}
 	
@@ -226,7 +246,7 @@ public class FBGallery extends Activity implements LoginListener
 						NamedFace face=_dbHandler.getNamedFace( uid );
 						if( face!=null )
 						{
-							face.extra="0";
+							face.extra=new FriendData( 0, new Integer(0) );
 							_adapter.add( face );
 							continue;
 						}
@@ -239,7 +259,7 @@ public class FBGallery extends Activity implements LoginListener
 						Log.v( TAG, friend.pic );
 						InputStream is = (InputStream)url.getContent( );
 						
-						face=new NamedFace( uid, friend.name, is, "facebook", "0" );
+						face=new NamedFace( uid, friend.name, is, "facebook", new FriendData( 0, new Integer(0) ) );
 						
 						_adapter.add( face );
 						_dbHandler.saveNamedFace( face );
@@ -268,6 +288,17 @@ public class FBGallery extends Activity implements LoginListener
 			catch( ServerErrorException e )
 			{
 				Log.v( TAG, "ServerErrorException: "+e.getMessage( ) );
+				
+				_handler.post( 
+						new Runnable()
+						{
+							public void run()
+							{
+								Toast.makeText(getBaseContext(), 
+										"Some facebook error. " +
+										"Try logout/login if error persists", Toast.LENGTH_SHORT ).show();
+							};
+						} );
 			}
 			
 			_thread=null;
@@ -289,11 +320,23 @@ public class FBGallery extends Activity implements LoginListener
 		{
 			try
 			{
-				int offset=Integer.parseInt( person.extra );
-				List<String> photos=_fb.getFacebook( ).getPhotos( person.id, 5, offset );
+				FriendData data=(FriendData)person.extra;
+				
+				final List<String> photos=_fb.getFacebook( ).getPhotos( person.id, 5, data.total_loaded );
 				Log.v( TAG, "Request for extra photos returned "+Integer.toString(photos.size())+" items" );
 				
+				_handler.post( 
+						new Runnable()
+						{
+							public void run()
+							{
+								Toast.makeText(getBaseContext(), "Got "+Integer.toString(photos.size())+" photos", Toast.LENGTH_SHORT ).show();
+							};
+						} );
+				
 				int i=1;
+				int max_id=data.total_loaded;
+				data.total_loaded+=photos.size( );
 				for( String photo : photos )
 				{
 					URL url=new URL( photo );
@@ -301,7 +344,7 @@ public class FBGallery extends Activity implements LoginListener
 					Log.v( TAG, "Extra photo: "+photo );
 					InputStream is = (InputStream)url.getContent( );				
 					
-					NamedFace newface=new NamedFace( person.id, person.name, is, "facebook", Integer.toString( offset+i ) );
+					NamedFace newface=new NamedFace( person.id, person.name, is, "facebook", new FriendData(max_id+i,data.total_loaded) );
 					_adapter.add( position+i, newface );
 					
 					i++;

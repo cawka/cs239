@@ -110,6 +110,15 @@ public class Main extends Activity
 				}
         	} );
         restoreSettings( );
+        
+		if( getIntent().getAction().equals("com.cawka.FriendDetector.Detect") )
+		{
+//			_picture.setImage( getIntent().getExtras( ).getString("file"),false );
+//			// run detection
+			_suggestedName =getIntent().getExtras( ).getString( "name" );
+			String filename=getIntent().getExtras( ).getString( "file" );
+			if( !filename.equals("") ) processImage( filename, false );
+		}		        
     }
 	
 	protected void onStart( )
@@ -172,7 +181,7 @@ public class Main extends Activity
 		SavedState state=(SavedState)getLastNonConfigurationInstance( );
 		if( state == null )
 			state=(SavedState)savedInstanceState.getSerializable( "state" );
-
+		
 		if( state != null )
 		{
 			if( !state._image.equals( "" ) )

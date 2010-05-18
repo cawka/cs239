@@ -63,7 +63,7 @@ public class LoginWindow extends Activity
 								"cancel_url=http://www.facebook.com/connect/login_failure.html&" +
 								"fbconnect=true&" +
 								"return_session=true&" +
-								"req_perms=read_stream,publish_stream,offline_access" );
+								"req_perms=read_stream,publish_stream,offline_access,user_photos,friends_photos" );
 	}
 
 	public static HashMap<String, String> parseQueryString( String url )

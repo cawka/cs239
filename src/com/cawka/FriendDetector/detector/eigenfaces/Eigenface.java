@@ -327,7 +327,7 @@ public class Eigenface
 		public String name;
 		
 		public String filename=null;
-		public String extra;
+		public Object extra;
 		
 		public NamedFace( String _id, Bitmap _bitmap, String _name )
 		{
@@ -355,7 +355,7 @@ public class Eigenface
 			bmp.recycle( );
 		}
 		
-		public NamedFace( String _id, String _name, InputStream is, String path_prefix, String _extra ) throws IOException
+		public NamedFace( String _id, String _name, InputStream is, String path_prefix, Object _extra ) throws IOException
 		{
 			String status=Environment.getExternalStorageState( );
 	        if( !status.equals(Environment.MEDIA_MOUNTED) ) 

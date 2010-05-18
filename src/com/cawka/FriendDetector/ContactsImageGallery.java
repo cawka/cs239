@@ -83,13 +83,12 @@ public class ContactsImageGallery extends Activity
 			FileOutputStream out=new FileOutputStream( temp );
 			person.bitmap.compress( CompressFormat.JPEG, 80, out );
 			out.close( );			
-			
-			Intent i=new Intent( );
+
+			Intent i=new Intent( "com.cawka.FriendDetector.Detect" );
 			i.putExtra( "file", temp.getAbsolutePath( ) );
 			i.putExtra( "name", person.name );
-			setResult( RESULT_OK, i );
 			
-			finish( );
+			startActivity( i );
 		}
 		catch( IOException e )
 		{

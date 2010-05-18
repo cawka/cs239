@@ -43,7 +43,7 @@ public class Cam extends SurfaceView implements SurfaceHolder.Callback, PreviewC
 	public Cam( Context context, AttributeSet attrs, int defStyle )
 	{
 		super( context, attrs, defStyle );
-        }
+	}
 
     public void init( Main main, ImageWithFaces picture ) 
     {

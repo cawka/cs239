@@ -10,12 +10,17 @@
       	
         <activity android:name=".Main"
                   android:label="@string/app_name"
-                  android:clearTaskOnLaunch="true"
                   android:theme="@android:style/Theme.Light"
                   >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-                 <category android:name="android.intent.category.LAUNCHER" /> 
+                <category android:name="android.intent.category.LAUNCHER" /> 
+            </intent-filter>
+            
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+            	<action android:name="com.cawka.FriendDetector.Detect" />
+                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
         
@@ -86,7 +91,7 @@
        	</activity>  
         
 </application>
-    <uses-sdk android:minSdkVersion="7" />
+    <uses-sdk android:minSdkVersion="6" />
 	<uses-permission android:name = "android.permission.CAMERA"/>
 	<uses-permission android:name = "android.permission.INTERNET" />
 	<uses-permission android:name = "android.permission.WRITE_EXTERNAL_STORAGE" />
