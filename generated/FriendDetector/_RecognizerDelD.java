@@ -14,7 +14,7 @@ package FriendDetector;
 public final class _RecognizerDelD extends Ice._ObjectDelD implements _RecognizerDel
 {
     public Face[]
-    findFaces(final byte[] jpegFile, java.util.Map<String, String> __ctx)
+    findFaces(final byte[] jpegFile, final UID userid, java.util.Map<String, String> __ctx)
         throws IceInternal.LocalExceptionWrapper
     {
         final Ice.Current __current = new Ice.Current();
@@ -36,7 +36,7 @@ public final class _RecognizerDelD extends Ice._ObjectDelD implements _Recognize
                     {
                         throw new Ice.OperationNotExistException(__current.id, __current.facet, __current.operation);
                     }
-                    __result.value = __servant.findFaces(jpegFile, __current);
+                    __result.value = __servant.findFaces(jpegFile, userid, __current);
                     return Ice.DispatchStatus.DispatchOK;
                 }
             };
@@ -67,7 +67,7 @@ public final class _RecognizerDelD extends Ice._ObjectDelD implements _Recognize
     }
 
     public Face[]
-    findFacesAndRecognizePeople(final byte[] jpegFile, java.util.Map<String, String> __ctx)
+    findFacesAndRecognizePeople(final byte[] jpegFile, final UID userid, java.util.Map<String, String> __ctx)
         throws IceInternal.LocalExceptionWrapper
     {
         final Ice.Current __current = new Ice.Current();
@@ -89,7 +89,7 @@ public final class _RecognizerDelD extends Ice._ObjectDelD implements _Recognize
                     {
                         throw new Ice.OperationNotExistException(__current.id, __current.facet, __current.operation);
                     }
-                    __result.value = __servant.findFacesAndRecognizePeople(jpegFile, __current);
+                    __result.value = __servant.findFacesAndRecognizePeople(jpegFile, userid, __current);
                     return Ice.DispatchStatus.DispatchOK;
                 }
             };
@@ -120,7 +120,7 @@ public final class _RecognizerDelD extends Ice._ObjectDelD implements _Recognize
     }
 
     public FacePictureWithName
-    getTrainSetFace(final int num, java.util.Map<String, String> __ctx)
+    getTrainSetFace(final int num, final UID userid, java.util.Map<String, String> __ctx)
         throws IceInternal.LocalExceptionWrapper
     {
         final Ice.Current __current = new Ice.Current();
@@ -142,7 +142,7 @@ public final class _RecognizerDelD extends Ice._ObjectDelD implements _Recognize
                     {
                         throw new Ice.OperationNotExistException(__current.id, __current.facet, __current.operation);
                     }
-                    __result.value = __servant.getTrainSetFace(num, __current);
+                    __result.value = __servant.getTrainSetFace(num, userid, __current);
                     return Ice.DispatchStatus.DispatchOK;
                 }
             };
@@ -173,7 +173,7 @@ public final class _RecognizerDelD extends Ice._ObjectDelD implements _Recognize
     }
 
     public int
-    getTrainSetSize(java.util.Map<String, String> __ctx)
+    getTrainSetSize(final UID userid, java.util.Map<String, String> __ctx)
         throws IceInternal.LocalExceptionWrapper
     {
         final Ice.Current __current = new Ice.Current();
@@ -195,7 +195,7 @@ public final class _RecognizerDelD extends Ice._ObjectDelD implements _Recognize
                     {
                         throw new Ice.OperationNotExistException(__current.id, __current.facet, __current.operation);
                     }
-                    __result.value = __servant.getTrainSetSize(__current);
+                    __result.value = __servant.getTrainSetSize(userid, __current);
                     return Ice.DispatchStatus.DispatchOK;
                 }
             };
@@ -226,7 +226,7 @@ public final class _RecognizerDelD extends Ice._ObjectDelD implements _Recognize
     }
 
     public void
-    learn(final byte[] jpegFileOfFace, final String name, java.util.Map<String, String> __ctx)
+    learn(final byte[] jpegFileOfFace, final String name, final UID userid, java.util.Map<String, String> __ctx)
         throws IceInternal.LocalExceptionWrapper
     {
         final Ice.Current __current = new Ice.Current();
@@ -247,7 +247,7 @@ public final class _RecognizerDelD extends Ice._ObjectDelD implements _Recognize
                     {
                         throw new Ice.OperationNotExistException(__current.id, __current.facet, __current.operation);
                     }
-                    __servant.learn(jpegFileOfFace, name, __current);
+                    __servant.learn(jpegFileOfFace, name, userid, __current);
                     return Ice.DispatchStatus.DispatchOK;
                 }
             };
@@ -276,7 +276,7 @@ public final class _RecognizerDelD extends Ice._ObjectDelD implements _Recognize
     }
 
     public String
-    recognizeFace(final byte[] jpegFileOfFace, java.util.Map<String, String> __ctx)
+    recognizeFace(final byte[] jpegFileOfFace, final UID userid, java.util.Map<String, String> __ctx)
         throws IceInternal.LocalExceptionWrapper
     {
         final Ice.Current __current = new Ice.Current();
@@ -298,7 +298,7 @@ public final class _RecognizerDelD extends Ice._ObjectDelD implements _Recognize
                     {
                         throw new Ice.OperationNotExistException(__current.id, __current.facet, __current.operation);
                     }
-                    __result.value = __servant.recognizeFace(jpegFileOfFace, __current);
+                    __result.value = __servant.recognizeFace(jpegFileOfFace, userid, __current);
                     return Ice.DispatchStatus.DispatchOK;
                 }
             };
@@ -329,7 +329,7 @@ public final class _RecognizerDelD extends Ice._ObjectDelD implements _Recognize
     }
 
     public void
-    unLearn(final int id, java.util.Map<String, String> __ctx)
+    unLearn(final int id, final UID userid, java.util.Map<String, String> __ctx)
         throws IceInternal.LocalExceptionWrapper
     {
         final Ice.Current __current = new Ice.Current();
@@ -350,7 +350,7 @@ public final class _RecognizerDelD extends Ice._ObjectDelD implements _Recognize
                     {
                         throw new Ice.OperationNotExistException(__current.id, __current.facet, __current.operation);
                     }
-                    __servant.unLearn(id, __current);
+                    __servant.unLearn(id, userid, __current);
                     return Ice.DispatchStatus.DispatchOK;
                 }
             };

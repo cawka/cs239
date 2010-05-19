@@ -13,24 +13,24 @@ package FriendDetector;
 
 public interface _RecognizerDel extends Ice._ObjectDel
 {
-    Face[] findFacesAndRecognizePeople(byte[] jpegFile, java.util.Map<String, String> __ctx)
+    Face[] findFacesAndRecognizePeople(byte[] jpegFile, UID userid, java.util.Map<String, String> __ctx)
         throws IceInternal.LocalExceptionWrapper;
 
-    Face[] findFaces(byte[] jpegFile, java.util.Map<String, String> __ctx)
+    Face[] findFaces(byte[] jpegFile, UID userid, java.util.Map<String, String> __ctx)
         throws IceInternal.LocalExceptionWrapper;
 
-    String recognizeFace(byte[] jpegFileOfFace, java.util.Map<String, String> __ctx)
+    String recognizeFace(byte[] jpegFileOfFace, UID userid, java.util.Map<String, String> __ctx)
         throws IceInternal.LocalExceptionWrapper;
 
-    void learn(byte[] jpegFileOfFace, String name, java.util.Map<String, String> __ctx)
+    void learn(byte[] jpegFileOfFace, String name, UID userid, java.util.Map<String, String> __ctx)
         throws IceInternal.LocalExceptionWrapper;
 
-    int getTrainSetSize(java.util.Map<String, String> __ctx)
+    int getTrainSetSize(UID userid, java.util.Map<String, String> __ctx)
         throws IceInternal.LocalExceptionWrapper;
 
-    FacePictureWithName getTrainSetFace(int num, java.util.Map<String, String> __ctx)
+    FacePictureWithName getTrainSetFace(int num, UID userid, java.util.Map<String, String> __ctx)
         throws IceInternal.LocalExceptionWrapper;
 
-    void unLearn(int id, java.util.Map<String, String> __ctx)
+    void unLearn(int id, UID userid, java.util.Map<String, String> __ctx)
         throws IceInternal.LocalExceptionWrapper;
 }

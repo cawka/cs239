@@ -14,7 +14,7 @@ package FriendDetector;
 public final class _RecognizerDelM extends Ice._ObjectDelM implements _RecognizerDel
 {
     public Face[]
-    findFaces(byte[] jpegFile, java.util.Map<String, String> __ctx)
+    findFaces(byte[] jpegFile, UID userid, java.util.Map<String, String> __ctx)
         throws IceInternal.LocalExceptionWrapper
     {
         IceInternal.Outgoing __og = __handler.getOutgoing("findFaces", Ice.OperationMode.Normal, __ctx);
@@ -24,6 +24,7 @@ public final class _RecognizerDelM extends Ice._ObjectDelM implements _Recognize
             {
                 IceInternal.BasicStream __os = __og.os();
                 FileHelper.write(__os, jpegFile);
+                userid.__write(__os);
             }
             catch(Ice.LocalException __ex)
             {
@@ -62,7 +63,7 @@ public final class _RecognizerDelM extends Ice._ObjectDelM implements _Recognize
     }
 
     public Face[]
-    findFacesAndRecognizePeople(byte[] jpegFile, java.util.Map<String, String> __ctx)
+    findFacesAndRecognizePeople(byte[] jpegFile, UID userid, java.util.Map<String, String> __ctx)
         throws IceInternal.LocalExceptionWrapper
     {
         IceInternal.Outgoing __og = __handler.getOutgoing("findFacesAndRecognizePeople", Ice.OperationMode.Normal, __ctx);
@@ -72,6 +73,7 @@ public final class _RecognizerDelM extends Ice._ObjectDelM implements _Recognize
             {
                 IceInternal.BasicStream __os = __og.os();
                 FileHelper.write(__os, jpegFile);
+                userid.__write(__os);
             }
             catch(Ice.LocalException __ex)
             {
@@ -110,7 +112,7 @@ public final class _RecognizerDelM extends Ice._ObjectDelM implements _Recognize
     }
 
     public FacePictureWithName
-    getTrainSetFace(int num, java.util.Map<String, String> __ctx)
+    getTrainSetFace(int num, UID userid, java.util.Map<String, String> __ctx)
         throws IceInternal.LocalExceptionWrapper
     {
         IceInternal.Outgoing __og = __handler.getOutgoing("getTrainSetFace", Ice.OperationMode.Normal, __ctx);
@@ -120,6 +122,7 @@ public final class _RecognizerDelM extends Ice._ObjectDelM implements _Recognize
             {
                 IceInternal.BasicStream __os = __og.os();
                 __os.writeInt(num);
+                userid.__write(__os);
             }
             catch(Ice.LocalException __ex)
             {
@@ -159,12 +162,21 @@ public final class _RecognizerDelM extends Ice._ObjectDelM implements _Recognize
     }
 
     public int
-    getTrainSetSize(java.util.Map<String, String> __ctx)
+    getTrainSetSize(UID userid, java.util.Map<String, String> __ctx)
         throws IceInternal.LocalExceptionWrapper
     {
         IceInternal.Outgoing __og = __handler.getOutgoing("getTrainSetSize", Ice.OperationMode.Normal, __ctx);
         try
         {
+            try
+            {
+                IceInternal.BasicStream __os = __og.os();
+                userid.__write(__os);
+            }
+            catch(Ice.LocalException __ex)
+            {
+                __og.abort(__ex);
+            }
             boolean __ok = __og.invoke();
             try
             {
@@ -198,7 +210,7 @@ public final class _RecognizerDelM extends Ice._ObjectDelM implements _Recognize
     }
 
     public void
-    learn(byte[] jpegFileOfFace, String name, java.util.Map<String, String> __ctx)
+    learn(byte[] jpegFileOfFace, String name, UID userid, java.util.Map<String, String> __ctx)
         throws IceInternal.LocalExceptionWrapper
     {
         IceInternal.Outgoing __og = __handler.getOutgoing("learn", Ice.OperationMode.Normal, __ctx);
@@ -209,6 +221,7 @@ public final class _RecognizerDelM extends Ice._ObjectDelM implements _Recognize
                 IceInternal.BasicStream __os = __og.os();
                 FileHelper.write(__os, jpegFileOfFace);
                 __os.writeString(name);
+                userid.__write(__os);
             }
             catch(Ice.LocalException __ex)
             {
@@ -245,7 +258,7 @@ public final class _RecognizerDelM extends Ice._ObjectDelM implements _Recognize
     }
 
     public String
-    recognizeFace(byte[] jpegFileOfFace, java.util.Map<String, String> __ctx)
+    recognizeFace(byte[] jpegFileOfFace, UID userid, java.util.Map<String, String> __ctx)
         throws IceInternal.LocalExceptionWrapper
     {
         IceInternal.Outgoing __og = __handler.getOutgoing("recognizeFace", Ice.OperationMode.Normal, __ctx);
@@ -255,6 +268,7 @@ public final class _RecognizerDelM extends Ice._ObjectDelM implements _Recognize
             {
                 IceInternal.BasicStream __os = __og.os();
                 FileHelper.write(__os, jpegFileOfFace);
+                userid.__write(__os);
             }
             catch(Ice.LocalException __ex)
             {
@@ -293,7 +307,7 @@ public final class _RecognizerDelM extends Ice._ObjectDelM implements _Recognize
     }
 
     public void
-    unLearn(int id, java.util.Map<String, String> __ctx)
+    unLearn(int id, UID userid, java.util.Map<String, String> __ctx)
         throws IceInternal.LocalExceptionWrapper
     {
         IceInternal.Outgoing __og = __handler.getOutgoing("unLearn", Ice.OperationMode.Normal, __ctx);
@@ -303,6 +317,7 @@ public final class _RecognizerDelM extends Ice._ObjectDelM implements _Recognize
             {
                 IceInternal.BasicStream __os = __og.os();
                 __os.writeInt(id);
+                userid.__write(__os);
             }
             catch(Ice.LocalException __ex)
             {

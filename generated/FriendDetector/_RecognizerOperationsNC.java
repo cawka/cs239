@@ -13,17 +13,17 @@ package FriendDetector;
 
 public interface _RecognizerOperationsNC
 {
-    Face[] findFacesAndRecognizePeople(byte[] jpegFile);
+    Face[] findFacesAndRecognizePeople(byte[] jpegFile, UID userid);
 
-    Face[] findFaces(byte[] jpegFile);
+    Face[] findFaces(byte[] jpegFile, UID userid);
 
-    String recognizeFace(byte[] jpegFileOfFace);
+    String recognizeFace(byte[] jpegFileOfFace, UID userid);
 
-    void learn(byte[] jpegFileOfFace, String name);
+    void learn(byte[] jpegFileOfFace, String name, UID userid);
 
-    int getTrainSetSize();
+    int getTrainSetSize(UID userid);
 
-    FacePictureWithName getTrainSetFace(int num);
+    FacePictureWithName getTrainSetFace(int num, UID userid);
 
-    void unLearn(int id);
+    void unLearn(int id, UID userid);
 }

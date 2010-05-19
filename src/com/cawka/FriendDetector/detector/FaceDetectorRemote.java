@@ -12,6 +12,7 @@ import FriendDetector.Face;
 import FriendDetector.FacePictureWithName;
 import FriendDetector.RecognizerPrx;
 import FriendDetector.RecognizerPrxHelper;
+import FriendDetector.UID;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Log;
@@ -66,9 +67,9 @@ public class FaceDetectorRemote extends iFaceDetector implements iFaceLearner
 
 			Face[] faces;
 			if( _fullDetection )
-				faces=_recognizer.findFacesAndRecognizePeople( os.toByteArray() );
+				faces=_recognizer.findFacesAndRecognizePeople( os.toByteArray(), new UID("000001") );
 			else
-				faces=_recognizer.findFaces( os.toByteArray() );
+				faces=_recognizer.findFaces( os.toByteArray(), new UID("000001") );
 		
 			for( Face face : faces )
 			{
@@ -97,7 +98,7 @@ public class FaceDetectorRemote extends iFaceDetector implements iFaceLearner
 			ByteArrayOutputStream os=new ByteArrayOutputStream( );
 			person.getFace( ).compress( Bitmap.CompressFormat.JPEG, 100, os );
 
-			String name=_recognizer.recognizeFace( os.toByteArray() );
+			String name=_recognizer.recognizeFace( os.toByteArray(), new UID("000001") );
 			if( name!="" ) person.setName( name );
 		}
 		catch( Exception e ) //Ice.LocalException e
@@ -125,7 +126,7 @@ public class FaceDetectorRemote extends iFaceDetector implements iFaceLearner
 			ByteArrayOutputStream os=new ByteArrayOutputStream( );
 			bitmap.compress( Bitmap.CompressFormat.JPEG, 100, os );
 
-			_recognizer.learn( os.toByteArray(), name );
+			_recognizer.learn( os.toByteArray(), name, new UID("000001") );
 			
 			return true;
 		}
@@ -147,10 +148,10 @@ public class FaceDetectorRemote extends iFaceDetector implements iFaceLearner
 		{
 			if( _recognizer==null ) tryConnect( );
 			
-			int trainSetSize=_recognizer.getTrainSetSize( );
+			int trainSetSize=_recognizer.getTrainSetSize( new UID("000001") );
 			for( int i=0; i<trainSetSize; i++ )
 			{
-				FacePictureWithName face=_recognizer.getTrainSetFace( i );
+				FacePictureWithName face=_recognizer.getTrainSetFace( i, new UID("000001") );
 				Bitmap bmp=BitmapFactory.decodeByteArray( face.jpegFileOfFace, 0, face.jpegFileOfFace.length );
 				adapter.add( new NamedFace(Integer.toString(face.id), bmp, face.name) );
 			}
@@ -170,7 +171,7 @@ public class FaceDetectorRemote extends iFaceDetector implements iFaceLearner
 		{
 			if( _recognizer==null ) tryConnect( );
 			
-			_recognizer.unLearn( (int)id );
+			_recognizer.unLearn( (int)id, new UID("000001") );
 		}
 		catch( Exception e ) //Ice.LocalException e
 		{

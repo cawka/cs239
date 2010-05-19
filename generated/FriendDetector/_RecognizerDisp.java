@@ -69,45 +69,45 @@ public abstract class _RecognizerDisp extends Ice.ObjectImpl implements Recogniz
     }
 
     public final Face[]
-    findFaces(byte[] jpegFile)
+    findFaces(byte[] jpegFile, UID userid)
     {
-        return findFaces(jpegFile, null);
+        return findFaces(jpegFile, userid, null);
     }
 
     public final Face[]
-    findFacesAndRecognizePeople(byte[] jpegFile)
+    findFacesAndRecognizePeople(byte[] jpegFile, UID userid)
     {
-        return findFacesAndRecognizePeople(jpegFile, null);
+        return findFacesAndRecognizePeople(jpegFile, userid, null);
     }
 
     public final FacePictureWithName
-    getTrainSetFace(int num)
+    getTrainSetFace(int num, UID userid)
     {
-        return getTrainSetFace(num, null);
+        return getTrainSetFace(num, userid, null);
     }
 
     public final int
-    getTrainSetSize()
+    getTrainSetSize(UID userid)
     {
-        return getTrainSetSize(null);
+        return getTrainSetSize(userid, null);
     }
 
     public final void
-    learn(byte[] jpegFileOfFace, String name)
+    learn(byte[] jpegFileOfFace, String name, UID userid)
     {
-        learn(jpegFileOfFace, name, null);
+        learn(jpegFileOfFace, name, userid, null);
     }
 
     public final String
-    recognizeFace(byte[] jpegFileOfFace)
+    recognizeFace(byte[] jpegFileOfFace, UID userid)
     {
-        return recognizeFace(jpegFileOfFace, null);
+        return recognizeFace(jpegFileOfFace, userid, null);
     }
 
     public final void
-    unLearn(int id)
+    unLearn(int id, UID userid)
     {
-        unLearn(id, null);
+        unLearn(id, userid, null);
     }
 
     public static Ice.DispatchStatus
@@ -118,9 +118,12 @@ public abstract class _RecognizerDisp extends Ice.ObjectImpl implements Recogniz
         __is.startReadEncaps();
         byte[] jpegFile;
         jpegFile = FileHelper.read(__is);
+        UID userid;
+        userid = new UID();
+        userid.__read(__is);
         __is.endReadEncaps();
         IceInternal.BasicStream __os = __inS.os();
-        Face[] __ret = __obj.findFacesAndRecognizePeople(jpegFile, __current);
+        Face[] __ret = __obj.findFacesAndRecognizePeople(jpegFile, userid, __current);
         FacesHelper.write(__os, __ret);
         return Ice.DispatchStatus.DispatchOK;
     }
@@ -133,9 +136,12 @@ public abstract class _RecognizerDisp extends Ice.ObjectImpl implements Recogniz
         __is.startReadEncaps();
         byte[] jpegFile;
         jpegFile = FileHelper.read(__is);
+        UID userid;
+        userid = new UID();
+        userid.__read(__is);
         __is.endReadEncaps();
         IceInternal.BasicStream __os = __inS.os();
-        Face[] __ret = __obj.findFaces(jpegFile, __current);
+        Face[] __ret = __obj.findFaces(jpegFile, userid, __current);
         FacesHelper.write(__os, __ret);
         return Ice.DispatchStatus.DispatchOK;
     }
@@ -148,9 +154,12 @@ public abstract class _RecognizerDisp extends Ice.ObjectImpl implements Recogniz
         __is.startReadEncaps();
         byte[] jpegFileOfFace;
         jpegFileOfFace = FileHelper.read(__is);
+        UID userid;
+        userid = new UID();
+        userid.__read(__is);
         __is.endReadEncaps();
         IceInternal.BasicStream __os = __inS.os();
-        String __ret = __obj.recognizeFace(jpegFileOfFace, __current);
+        String __ret = __obj.recognizeFace(jpegFileOfFace, userid, __current);
         __os.writeString(__ret);
         return Ice.DispatchStatus.DispatchOK;
     }
@@ -165,8 +174,11 @@ public abstract class _RecognizerDisp extends Ice.ObjectImpl implements Recogniz
         jpegFileOfFace = FileHelper.read(__is);
         String name;
         name = __is.readString();
+        UID userid;
+        userid = new UID();
+        userid.__read(__is);
         __is.endReadEncaps();
-        __obj.learn(jpegFileOfFace, name, __current);
+        __obj.learn(jpegFileOfFace, name, userid, __current);
         return Ice.DispatchStatus.DispatchOK;
     }
 
@@ -174,9 +186,14 @@ public abstract class _RecognizerDisp extends Ice.ObjectImpl implements Recogniz
     ___getTrainSetSize(Recognizer __obj, IceInternal.Incoming __inS, Ice.Current __current)
     {
         __checkMode(Ice.OperationMode.Normal, __current.mode);
-        __inS.is().skipEmptyEncaps();
+        IceInternal.BasicStream __is = __inS.is();
+        __is.startReadEncaps();
+        UID userid;
+        userid = new UID();
+        userid.__read(__is);
+        __is.endReadEncaps();
         IceInternal.BasicStream __os = __inS.os();
-        int __ret = __obj.getTrainSetSize(__current);
+        int __ret = __obj.getTrainSetSize(userid, __current);
         __os.writeInt(__ret);
         return Ice.DispatchStatus.DispatchOK;
     }
@@ -189,9 +206,12 @@ public abstract class _RecognizerDisp extends Ice.ObjectImpl implements Recogniz
         __is.startReadEncaps();
         int num;
         num = __is.readInt();
+        UID userid;
+        userid = new UID();
+        userid.__read(__is);
         __is.endReadEncaps();
         IceInternal.BasicStream __os = __inS.os();
-        FacePictureWithName __ret = __obj.getTrainSetFace(num, __current);
+        FacePictureWithName __ret = __obj.getTrainSetFace(num, userid, __current);
         __ret.__write(__os);
         return Ice.DispatchStatus.DispatchOK;
     }
@@ -204,8 +224,11 @@ public abstract class _RecognizerDisp extends Ice.ObjectImpl implements Recogniz
         __is.startReadEncaps();
         int id;
         id = __is.readInt();
+        UID userid;
+        userid = new UID();
+        userid.__read(__is);
         __is.endReadEncaps();
-        __obj.unLearn(id, __current);
+        __obj.unLearn(id, userid, __current);
         return Ice.DispatchStatus.DispatchOK;
     }
 

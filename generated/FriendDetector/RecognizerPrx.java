@@ -13,24 +13,24 @@ package FriendDetector;
 
 public interface RecognizerPrx extends Ice.ObjectPrx
 {
-    public Face[] findFacesAndRecognizePeople(byte[] jpegFile);
-    public Face[] findFacesAndRecognizePeople(byte[] jpegFile, java.util.Map<String, String> __ctx);
+    public Face[] findFacesAndRecognizePeople(byte[] jpegFile, UID userid);
+    public Face[] findFacesAndRecognizePeople(byte[] jpegFile, UID userid, java.util.Map<String, String> __ctx);
 
-    public Face[] findFaces(byte[] jpegFile);
-    public Face[] findFaces(byte[] jpegFile, java.util.Map<String, String> __ctx);
+    public Face[] findFaces(byte[] jpegFile, UID userid);
+    public Face[] findFaces(byte[] jpegFile, UID userid, java.util.Map<String, String> __ctx);
 
-    public String recognizeFace(byte[] jpegFileOfFace);
-    public String recognizeFace(byte[] jpegFileOfFace, java.util.Map<String, String> __ctx);
+    public String recognizeFace(byte[] jpegFileOfFace, UID userid);
+    public String recognizeFace(byte[] jpegFileOfFace, UID userid, java.util.Map<String, String> __ctx);
 
-    public void learn(byte[] jpegFileOfFace, String name);
-    public void learn(byte[] jpegFileOfFace, String name, java.util.Map<String, String> __ctx);
+    public void learn(byte[] jpegFileOfFace, String name, UID userid);
+    public void learn(byte[] jpegFileOfFace, String name, UID userid, java.util.Map<String, String> __ctx);
 
-    public int getTrainSetSize();
-    public int getTrainSetSize(java.util.Map<String, String> __ctx);
+    public int getTrainSetSize(UID userid);
+    public int getTrainSetSize(UID userid, java.util.Map<String, String> __ctx);
 
-    public FacePictureWithName getTrainSetFace(int num);
-    public FacePictureWithName getTrainSetFace(int num, java.util.Map<String, String> __ctx);
+    public FacePictureWithName getTrainSetFace(int num, UID userid);
+    public FacePictureWithName getTrainSetFace(int num, UID userid, java.util.Map<String, String> __ctx);
 
-    public void unLearn(int id);
-    public void unLearn(int id, java.util.Map<String, String> __ctx);
+    public void unLearn(int id, UID userid);
+    public void unLearn(int id, UID userid, java.util.Map<String, String> __ctx);
 }

@@ -14,20 +14,20 @@ package FriendDetector;
 public final class RecognizerPrxHelper extends Ice.ObjectPrxHelperBase implements RecognizerPrx
 {
     public Face[]
-    findFaces(byte[] jpegFile)
+    findFaces(byte[] jpegFile, UID userid)
     {
-        return findFaces(jpegFile, null, false);
+        return findFaces(jpegFile, userid, null, false);
     }
 
     public Face[]
-    findFaces(byte[] jpegFile, java.util.Map<String, String> __ctx)
+    findFaces(byte[] jpegFile, UID userid, java.util.Map<String, String> __ctx)
     {
-        return findFaces(jpegFile, __ctx, true);
+        return findFaces(jpegFile, userid, __ctx, true);
     }
 
     @SuppressWarnings("unchecked")
     private Face[]
-    findFaces(byte[] jpegFile, java.util.Map<String, String> __ctx, boolean __explicitCtx)
+    findFaces(byte[] jpegFile, UID userid, java.util.Map<String, String> __ctx, boolean __explicitCtx)
     {
         if(__explicitCtx && __ctx == null)
         {
@@ -42,7 +42,7 @@ public final class RecognizerPrxHelper extends Ice.ObjectPrxHelperBase implement
                 __checkTwowayOnly("findFaces");
                 __delBase = __getDelegate(false);
                 _RecognizerDel __del = (_RecognizerDel)__delBase;
-                return __del.findFaces(jpegFile, __ctx);
+                return __del.findFaces(jpegFile, userid, __ctx);
             }
             catch(IceInternal.LocalExceptionWrapper __ex)
             {
@@ -56,20 +56,20 @@ public final class RecognizerPrxHelper extends Ice.ObjectPrxHelperBase implement
     }
 
     public Face[]
-    findFacesAndRecognizePeople(byte[] jpegFile)
+    findFacesAndRecognizePeople(byte[] jpegFile, UID userid)
     {
-        return findFacesAndRecognizePeople(jpegFile, null, false);
+        return findFacesAndRecognizePeople(jpegFile, userid, null, false);
     }
 
     public Face[]
-    findFacesAndRecognizePeople(byte[] jpegFile, java.util.Map<String, String> __ctx)
+    findFacesAndRecognizePeople(byte[] jpegFile, UID userid, java.util.Map<String, String> __ctx)
     {
-        return findFacesAndRecognizePeople(jpegFile, __ctx, true);
+        return findFacesAndRecognizePeople(jpegFile, userid, __ctx, true);
     }
 
     @SuppressWarnings("unchecked")
     private Face[]
-    findFacesAndRecognizePeople(byte[] jpegFile, java.util.Map<String, String> __ctx, boolean __explicitCtx)
+    findFacesAndRecognizePeople(byte[] jpegFile, UID userid, java.util.Map<String, String> __ctx, boolean __explicitCtx)
     {
         if(__explicitCtx && __ctx == null)
         {
@@ -84,7 +84,7 @@ public final class RecognizerPrxHelper extends Ice.ObjectPrxHelperBase implement
                 __checkTwowayOnly("findFacesAndRecognizePeople");
                 __delBase = __getDelegate(false);
                 _RecognizerDel __del = (_RecognizerDel)__delBase;
-                return __del.findFacesAndRecognizePeople(jpegFile, __ctx);
+                return __del.findFacesAndRecognizePeople(jpegFile, userid, __ctx);
             }
             catch(IceInternal.LocalExceptionWrapper __ex)
             {
@@ -98,20 +98,20 @@ public final class RecognizerPrxHelper extends Ice.ObjectPrxHelperBase implement
     }
 
     public FacePictureWithName
-    getTrainSetFace(int num)
+    getTrainSetFace(int num, UID userid)
     {
-        return getTrainSetFace(num, null, false);
+        return getTrainSetFace(num, userid, null, false);
     }
 
     public FacePictureWithName
-    getTrainSetFace(int num, java.util.Map<String, String> __ctx)
+    getTrainSetFace(int num, UID userid, java.util.Map<String, String> __ctx)
     {
-        return getTrainSetFace(num, __ctx, true);
+        return getTrainSetFace(num, userid, __ctx, true);
     }
 
     @SuppressWarnings("unchecked")
     private FacePictureWithName
-    getTrainSetFace(int num, java.util.Map<String, String> __ctx, boolean __explicitCtx)
+    getTrainSetFace(int num, UID userid, java.util.Map<String, String> __ctx, boolean __explicitCtx)
     {
         if(__explicitCtx && __ctx == null)
         {
@@ -126,7 +126,7 @@ public final class RecognizerPrxHelper extends Ice.ObjectPrxHelperBase implement
                 __checkTwowayOnly("getTrainSetFace");
                 __delBase = __getDelegate(false);
                 _RecognizerDel __del = (_RecognizerDel)__delBase;
-                return __del.getTrainSetFace(num, __ctx);
+                return __del.getTrainSetFace(num, userid, __ctx);
             }
             catch(IceInternal.LocalExceptionWrapper __ex)
             {
@@ -140,20 +140,20 @@ public final class RecognizerPrxHelper extends Ice.ObjectPrxHelperBase implement
     }
 
     public int
-    getTrainSetSize()
+    getTrainSetSize(UID userid)
     {
-        return getTrainSetSize(null, false);
+        return getTrainSetSize(userid, null, false);
     }
 
     public int
-    getTrainSetSize(java.util.Map<String, String> __ctx)
+    getTrainSetSize(UID userid, java.util.Map<String, String> __ctx)
     {
-        return getTrainSetSize(__ctx, true);
+        return getTrainSetSize(userid, __ctx, true);
     }
 
     @SuppressWarnings("unchecked")
     private int
-    getTrainSetSize(java.util.Map<String, String> __ctx, boolean __explicitCtx)
+    getTrainSetSize(UID userid, java.util.Map<String, String> __ctx, boolean __explicitCtx)
     {
         if(__explicitCtx && __ctx == null)
         {
@@ -168,7 +168,7 @@ public final class RecognizerPrxHelper extends Ice.ObjectPrxHelperBase implement
                 __checkTwowayOnly("getTrainSetSize");
                 __delBase = __getDelegate(false);
                 _RecognizerDel __del = (_RecognizerDel)__delBase;
-                return __del.getTrainSetSize(__ctx);
+                return __del.getTrainSetSize(userid, __ctx);
             }
             catch(IceInternal.LocalExceptionWrapper __ex)
             {
@@ -182,20 +182,20 @@ public final class RecognizerPrxHelper extends Ice.ObjectPrxHelperBase implement
     }
 
     public void
-    learn(byte[] jpegFileOfFace, String name)
+    learn(byte[] jpegFileOfFace, String name, UID userid)
     {
-        learn(jpegFileOfFace, name, null, false);
+        learn(jpegFileOfFace, name, userid, null, false);
     }
 
     public void
-    learn(byte[] jpegFileOfFace, String name, java.util.Map<String, String> __ctx)
+    learn(byte[] jpegFileOfFace, String name, UID userid, java.util.Map<String, String> __ctx)
     {
-        learn(jpegFileOfFace, name, __ctx, true);
+        learn(jpegFileOfFace, name, userid, __ctx, true);
     }
 
     @SuppressWarnings("unchecked")
     private void
-    learn(byte[] jpegFileOfFace, String name, java.util.Map<String, String> __ctx, boolean __explicitCtx)
+    learn(byte[] jpegFileOfFace, String name, UID userid, java.util.Map<String, String> __ctx, boolean __explicitCtx)
     {
         if(__explicitCtx && __ctx == null)
         {
@@ -209,7 +209,7 @@ public final class RecognizerPrxHelper extends Ice.ObjectPrxHelperBase implement
             {
                 __delBase = __getDelegate(false);
                 _RecognizerDel __del = (_RecognizerDel)__delBase;
-                __del.learn(jpegFileOfFace, name, __ctx);
+                __del.learn(jpegFileOfFace, name, userid, __ctx);
                 return;
             }
             catch(IceInternal.LocalExceptionWrapper __ex)
@@ -224,20 +224,20 @@ public final class RecognizerPrxHelper extends Ice.ObjectPrxHelperBase implement
     }
 
     public String
-    recognizeFace(byte[] jpegFileOfFace)
+    recognizeFace(byte[] jpegFileOfFace, UID userid)
     {
-        return recognizeFace(jpegFileOfFace, null, false);
+        return recognizeFace(jpegFileOfFace, userid, null, false);
     }
 
     public String
-    recognizeFace(byte[] jpegFileOfFace, java.util.Map<String, String> __ctx)
+    recognizeFace(byte[] jpegFileOfFace, UID userid, java.util.Map<String, String> __ctx)
     {
-        return recognizeFace(jpegFileOfFace, __ctx, true);
+        return recognizeFace(jpegFileOfFace, userid, __ctx, true);
     }
 
     @SuppressWarnings("unchecked")
     private String
-    recognizeFace(byte[] jpegFileOfFace, java.util.Map<String, String> __ctx, boolean __explicitCtx)
+    recognizeFace(byte[] jpegFileOfFace, UID userid, java.util.Map<String, String> __ctx, boolean __explicitCtx)
     {
         if(__explicitCtx && __ctx == null)
         {
@@ -252,7 +252,7 @@ public final class RecognizerPrxHelper extends Ice.ObjectPrxHelperBase implement
                 __checkTwowayOnly("recognizeFace");
                 __delBase = __getDelegate(false);
                 _RecognizerDel __del = (_RecognizerDel)__delBase;
-                return __del.recognizeFace(jpegFileOfFace, __ctx);
+                return __del.recognizeFace(jpegFileOfFace, userid, __ctx);
             }
             catch(IceInternal.LocalExceptionWrapper __ex)
             {
@@ -266,20 +266,20 @@ public final class RecognizerPrxHelper extends Ice.ObjectPrxHelperBase implement
     }
 
     public void
-    unLearn(int id)
+    unLearn(int id, UID userid)
     {
-        unLearn(id, null, false);
+        unLearn(id, userid, null, false);
     }
 
     public void
-    unLearn(int id, java.util.Map<String, String> __ctx)
+    unLearn(int id, UID userid, java.util.Map<String, String> __ctx)
     {
-        unLearn(id, __ctx, true);
+        unLearn(id, userid, __ctx, true);
     }
 
     @SuppressWarnings("unchecked")
     private void
-    unLearn(int id, java.util.Map<String, String> __ctx, boolean __explicitCtx)
+    unLearn(int id, UID userid, java.util.Map<String, String> __ctx, boolean __explicitCtx)
     {
         if(__explicitCtx && __ctx == null)
         {
@@ -293,7 +293,7 @@ public final class RecognizerPrxHelper extends Ice.ObjectPrxHelperBase implement
             {
                 __delBase = __getDelegate(false);
                 _RecognizerDel __del = (_RecognizerDel)__delBase;
-                __del.unLearn(id, __ctx);
+                __del.unLearn(id, userid, __ctx);
                 return;
             }
             catch(IceInternal.LocalExceptionWrapper __ex)
