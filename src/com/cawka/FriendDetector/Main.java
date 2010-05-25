@@ -481,51 +481,16 @@ public class Main extends Activity
     	if( _thread!=null ) return;
     	_picture.setImage( filename,invalidate );
     	
-    	FileWriter fop = null;
-		try {
-			fop = new FileWriter(new File("/sdcard/DCIM/Test.run"));
-		} catch (IOException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-    	
-    	for(int i=0; i<_number_runs; i++)
-    	{    		
-			_names_list.clear( );
-					
-			if( _progress2==null )
-			{
-				_progress2 =(ProgressBar) findViewById( R.id.progress_bar_image );
-			}
-			_progress2.setVisibility( View.VISIBLE );
-			
-			_thread=new Thread( new FaceDetection( _picture.getBitmap( )) );
-			long StartTime = new Date().getTime();
-			int OldPowerLevel = PowerLevel;
-			_thread.start( );
-			try {
+		_names_list.clear( );
 				
-				fop.write("" + i + " " + StartTime + " " + new Date().getTime() + " " + OldPowerLevel + " " + PowerLevel + "\n");
-				Log.v("Karthik :","" + i + " " + StartTime + " " + new Date().getTime() + " " + OldPowerLevel + " " + PowerLevel);
-				_thread.join();
-				Thread.sleep(5000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (FileNotFoundException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-    	}
-    	try {
-			fop.close();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		if( _progress2==null )
+		{
+			_progress2 =(ProgressBar) findViewById( R.id.progress_bar_image );
 		}
+		_progress2.setVisibility( View.VISIBLE );
+		
+		_thread=new Thread( new FaceDetection( _picture.getBitmap( )) );
+		_thread.start( );
     }
     
     private void retryDetection( )
@@ -533,20 +498,65 @@ public class Main extends Activity
     	if( _thread!=null ) return;
     	_suggestedName=null;
     	
-    	Bitmap bitmap=_picture.getBitmap( );
-    	if( bitmap==null ) return;
-    	
-    	if( _progress2==null )
-    	{
-    		_progress2 =(ProgressBar) findViewById( R.id.progress_bar_image );
-    	}
-    	_progress2.setVisibility( View.VISIBLE );
-    	
-    	_names_list.clear( );
-		_thread=new Thread( new FaceDetection( bitmap ) );
-		
-		_thread.start( );
+    	new Thread( new PerformTests() ).start( );
+//    	Bitmap bitmap=_picture.getBitmap( );
+//    	if( bitmap==null ) return;
+//    	
+//    	if( _progress2==null )
+//    	{
+//    		_progress2 =(ProgressBar) findViewById( R.id.progress_bar_image );
+//    	}
+//    	_progress2.setVisibility( View.VISIBLE );
+//    	
+//    	_names_list.clear( );
+//		_thread=new Thread( new FaceDetection( bitmap ) );
+//		
+//		_thread.start( );
     }
+    
+    private class PerformTests implements Runnable
+    {
+    	public void run( )
+    	{
+        	FileWriter fop = null;
+    		try 
+    		{
+    			fop = new FileWriter(new File("/sdcard/DCIM/Test.run"));
+    		
+	    		for( int i=0; i<_number_runs; i++ )
+	    		{
+	    			_handler.post( new Runnable(){ public void run(){_names_list.clear( );} } );
+	    			
+		    	   	Bitmap bitmap=_picture.getBitmap( );
+		        	if( bitmap==null ) return;
+		        	
+//		        	if( _progress2==null )
+//		        	{
+//		        		_progress2 =(ProgressBar) findViewById( R.id.progress_bar_image );
+//		        	}
+//		        	_progress2.setVisibility( View.VISIBLE );
+		        	
+		    		_thread=new Thread( new FaceDetection( bitmap ) );
+
+					long StartTime = new Date().getTime();
+					int OldPowerLevel = PowerLevel;
+
+		    		_thread.start( );
+		    		_thread.join( );
+		    		
+					fop.write( StartTime + "\t" + i + "\t" + new Date().getTime() + "\t" + OldPowerLevel + "\t" + PowerLevel + "\n" );
+					Log.v("Karthik :","" + i + " " + StartTime + " " + new Date().getTime() + " " + OldPowerLevel + " " + PowerLevel);
+	    		}
+    		} 
+    		catch( InterruptedException e2 )
+    		{
+    		}
+    		catch( IOException e1 )
+			{
+			}
+    	}
+    }
+    
     
     protected String getRealPathFromURI( Uri contentUri ) 
     {
@@ -640,6 +650,7 @@ public class Main extends Activity
 				
 				if( !person.hasName() )
 					person.setDefaultName( Main.this.getResources().getString(R.string.unknown_person) );
+				Log.v( "TEST", "add person" );
 				_names_list.add( person );
 				person.setParent( _names_list );
 			}
@@ -761,16 +772,16 @@ public class Main extends Activity
 		
 		Log.v("Karthik","code " + keyCode);
 		
-		if(keyCode == 24)
-		{
-			_cam.setZoom(-1);
-			return true;
-		}
-		else if(keyCode == 25)
-		{
-			_cam.setZoom(1);
-			return true;
-		}
+//		if(keyCode == 24)
+//		{
+//			_cam.setZoom(-1);
+//			return true;
+//		}
+//		else if(keyCode == 25)
+//		{
+//			_cam.setZoom(1);
+//			return true;
+//		}
      
 	    if( keyCode == KeyEvent.KEYCODE_FOCUS || keyCode==KeyEvent.KEYCODE_SEARCH ) 
             {

@@ -146,6 +146,7 @@ public class ListOfPeople extends ListView
 	
 	public void clear( )
 	{
+		Log.v( "TEST", "adapter clear" );
 		_adapter.clear( );
 		_adapter.notifyDataSetChanged( );
 	}

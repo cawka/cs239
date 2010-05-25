@@ -6,6 +6,7 @@ import java.util.List;
 import com.cawka.FriendDetector.Person;
 
 import android.graphics.Bitmap;
+import android.util.Log;
 
 public abstract class iFaceDetector 
 {
@@ -23,6 +24,7 @@ public abstract class iFaceDetector
 	
 	public void resetFaces( )
 	{
+		Log.v( "TEST", "resetFaces" );
 		_faces=new LinkedList<Person>( );
 	}
 	
