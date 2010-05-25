@@ -1,17 +1,27 @@
 package com.cawka.FriendDetector;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Timer;
 
 import android.app.Activity;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.graphics.Region.Op;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -42,6 +52,7 @@ import com.cawka.FriendDetector.settings.Server;
 public class Main extends Activity 
 {
 	private static final String TAG="FriendDetector";
+	private static final int _number_runs = 3;
 	
 	private static final int MENU_SELECT = 1;
 //	private static final int MENU_ROTATE = 2;
@@ -72,6 +83,24 @@ public class Main extends Activity
     private List<iFaceLearner>  _learners;
     
     private String _suggestedName=null;
+    
+    private int PowerLevel = -1;
+    
+    BroadcastReceiver mReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+           int rawlevel = intent.getIntExtra("level", -1);
+           int scale = intent.getIntExtra("scale", -1);
+           int status = intent.getIntExtra("status", -1);
+           int health = intent.getIntExtra("health", -1);
+           int level = -1;  // percentage, or -1 for unknown
+           if (rawlevel >= 0 && scale > 0) {
+              level = (rawlevel * 100) / scale;
+           PowerLevel = rawlevel;
+           }
+        }
+     };
+
     
     ////////////////////////////////////////////////////////////////////
    
@@ -137,6 +166,8 @@ public class Main extends Activity
 	{
 		Log.v( TAG, "onResume" );
 		super.onResume( );
+		IntentFilter battFilter = new IntentFilter(Intent.ACTION_BATTERY_CHANGED); 
+		registerReceiver(mReceiver, battFilter);
 	}
 	
 	protected void onPause( )
@@ -165,6 +196,7 @@ public class Main extends Activity
 		try
 		{
 			if( _thread!=null ) _thread.join( );
+			unregisterReceiver(mReceiver);
 			System.gc( );
 		}
 		catch( Exception e )
@@ -447,18 +479,53 @@ public class Main extends Activity
     public void processImage( String filename, boolean invalidate )
     {
     	if( _thread!=null ) return;
-    	
-    	_names_list.clear( );
     	_picture.setImage( filename,invalidate );
-
-    	if( _progress2==null )
-    	{
-    		_progress2 =(ProgressBar) findViewById( R.id.progress_bar_image );
-    	}
-    	_progress2.setVisibility( View.VISIBLE );
     	
-		_thread=new Thread( new FaceDetection( _picture.getBitmap( )) );
-		_thread.start( );   	
+    	FileWriter fop = null;
+		try {
+			fop = new FileWriter(new File("/sdcard/DCIM/Test.run"));
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+    	
+    	for(int i=0; i<_number_runs; i++)
+    	{    		
+			_names_list.clear( );
+					
+			if( _progress2==null )
+			{
+				_progress2 =(ProgressBar) findViewById( R.id.progress_bar_image );
+			}
+			_progress2.setVisibility( View.VISIBLE );
+			
+			_thread=new Thread( new FaceDetection( _picture.getBitmap( )) );
+			long StartTime = new Date().getTime();
+			int OldPowerLevel = PowerLevel;
+			_thread.start( );
+			try {
+				
+				fop.write("" + i + " " + StartTime + " " + new Date().getTime() + " " + OldPowerLevel + " " + PowerLevel + "\n");
+				Log.v("Karthik :","" + i + " " + StartTime + " " + new Date().getTime() + " " + OldPowerLevel + " " + PowerLevel);
+				_thread.join();
+				Thread.sleep(5000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+    	}
+    	try {
+			fop.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     }
     
     private void retryDetection( )
@@ -477,6 +544,7 @@ public class Main extends Activity
     	
     	_names_list.clear( );
 		_thread=new Thread( new FaceDetection( bitmap ) );
+		
 		_thread.start( );
     }
     
@@ -661,7 +729,9 @@ public class Main extends Activity
 			detector.resetFaces( );
 			
 			_handler.post( new releaseUI() ); 
+			
 		}
+		
     }
 	
 	private class FaceLearning implements Runnable
@@ -688,6 +758,19 @@ public class Main extends Activity
 	public boolean onKeyDown(int keyCode, KeyEvent event)
     {
 		if( _thread!=null ) return super.onKeyDown(keyCode, event);
+		
+		Log.v("Karthik","code " + keyCode);
+		
+		if(keyCode == 24)
+		{
+			_cam.setZoom(-1);
+			return true;
+		}
+		else if(keyCode == 25)
+		{
+			_cam.setZoom(1);
+			return true;
+		}
      
 	    if( keyCode == KeyEvent.KEYCODE_FOCUS || keyCode==KeyEvent.KEYCODE_SEARCH ) 
             {
