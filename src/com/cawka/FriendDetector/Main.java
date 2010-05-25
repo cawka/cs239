@@ -760,17 +760,6 @@ public class Main extends Activity
 		if( _thread!=null ) return super.onKeyDown(keyCode, event);
 		
 		Log.v("Karthik","code " + keyCode);
-		
-		if(keyCode == 24)
-		{
-			_cam.setZoom(-1);
-			return true;
-		}
-		else if(keyCode == 25)
-		{
-			_cam.setZoom(1);
-			return true;
-		}
      
 	    if( keyCode == KeyEvent.KEYCODE_FOCUS || keyCode==KeyEvent.KEYCODE_SEARCH ) 
             {
