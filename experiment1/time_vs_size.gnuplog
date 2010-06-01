@@ -1,0 +1,29 @@
+set terminal pdf
+
+set title "Face detection and recognition times versus different partition schemes"
+#set auto x
+#set yrange [0:300000]
+
+set style data histogram
+set style histogram cluster gap 1
+set style fill solid border -1
+
+#set boxwidth 0.9
+#set xtic out rotate by -45 
+#offset 0,-1.5
+
+set key left
+
+set xlabel "Image size"
+set ylabel "Time, sec"
+
+#set bmargin 10 
+plot '< cat total.txt | grep FullLocal' using ($3/1000):xtic(1) title "Full Local", \
+	 '< cat total.txt | grep Local3G'   using ($3/1000):xtic(1) title "Local detector / remote recognizer (3G)", \
+	 '< cat total.txt | grep LocalWifi' using ($3/1000):xtic(1) title "Local detector / remote recognizer (Wifi)", \
+	 '< cat total.txt | grep Full3G'    using ($3/1000):xtic(1) title "Full 3G", \
+	 '< cat total.txt | grep FullWifi'  using ($3/1000):xtic(1) title "Full Wifi"
+
+#, '' u 12 ti col, '' u 13 ti col, '' u 14 ti col
+#
+

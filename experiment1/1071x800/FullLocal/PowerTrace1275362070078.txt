@@ -1,0 +1,3884 @@
+System usage = 53.6815659424091
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading0.0
+Audio state = false
+----------1275361846862------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 232.9135783109246
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:559.4281791654169
+------------------------------------------------
+Phone service is in service
+Phone network is unknown
+Phone call state is idleData is disconnectedSystem usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading0.0
+Audio state = false
+----------1275361847865------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+System usage = 44.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading0.0
+Audio state = false
+----------1275361848866------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 150.3436
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:476.8582008544922
+------------------------------------------------
+System usage = 47.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading0.0
+Audio state = false
+----------1275361849866------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 160.5943
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:487.10890085449216
+------------------------------------------------
+System usage = 68.68686868686869
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading0.0
+Audio state = false
+----------1275361850866------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 298.0185858585859
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:624.5331867130781
+------------------------------------------------
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading0.0
+Audio state = false
+----------1275361851866------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading0.0
+Audio state = false
+----------1275361852866------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading0.0
+Audio state = false
+----------1275361853867------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading0.0
+Audio state = false
+----------1275361854868------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading0.0
+Audio state = false
+----------1275361855867------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+Active Application   31.60%  (mich.PowerTutor)
+Active Application   29.50%  (system_server)
+Active Application   1.00%  (logcat)
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading1.0
+Audio state = false
+----------1275361856868------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading1.0
+Audio state = false
+----------1275361857869------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading0.0
+Audio state = false
+----------1275361858868------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading0.0
+Audio state = false
+----------1275361859868------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading0.0
+Audio state = false
+----------1275361860869------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading0.0
+Audio state = false
+----------1275361861869------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading0.0
+Audio state = false
+----------1275361862869------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading0.0
+Audio state = false
+----------1275361863870------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading0.0
+Audio state = false
+----------1275361864871------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading0.0
+Audio state = false
+----------1275361865870------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+Active Application   53.80%  (.FriendDetector)
+Active Application   17.60%  (system_server)
+Active Application   11.20%  (mich.PowerTutor)
+Active Application   0.40%  (events/0)
+Active Application   0.30%  (dsi)
+Active Application   0.30%  (wpa_supplicant)
+Active Application   0.20%  (omap2_mcspi)
+Active Application   0.20%  (putmethod.voice)
+Active Application   0.20%  (pvrflip/0)
+Active Application   0.10%  (adbd)
+Active Application   0.10%  (battd)
+Active Application   0.10%  (cpcap_irq/0)
+Active Application   0.10%  (mediaserver)
+Active Application   0.10%  (qtouch_obp_ts_w)
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading0.0
+Audio state = false
+----------1275361866871------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading0.0
+Audio state = false
+----------1275361867872------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading0.0
+Audio state = false
+----------1275361868871------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading0.0
+Audio state = false
+----------1275361869872------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading0.0
+Audio state = false
+----------1275361870873------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading0.0
+Audio state = false
+----------1275361871872------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading1.0
+Audio state = false
+----------1275361872873------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading1.0
+Audio state = false
+----------1275361873874------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading0.0
+Audio state = false
+----------1275361874873------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading0.0
+Audio state = false
+----------1275361875874------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+Active Application   81.20%  (.FriendDetector)
+Active Application   9.80%  (mich.PowerTutor)
+Active Application   6.70%  (system_server)
+Active Application   0.40%  (d.process.media)
+Active Application   0.20%  (battd)
+Active Application   0.20%  (events/0)
+Active Application   0.20%  (m.android.phone)
+Active Application   0.20%  (omap2_mcspi)
+Active Application   0.10%  (cpcap_irq/0)
+Active Application   0.10%  (tiwlan_wq)
+Active Application   0.10%  (wpa_supplicant)
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading0.0
+Audio state = false
+----------1275361876875------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading5.0
+Audio state = false
+----------1275361877874------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading0.0
+Audio state = false
+----------1275361878875------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading0.0
+Audio state = false
+----------1275361879875------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading0.0
+Audio state = false
+----------1275361880875------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading0.0
+Audio state = false
+----------1275361881876------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading0.0
+Audio state = false
+----------1275361882876------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading1.0
+Audio state = false
+----------1275361883876------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading1.0
+Audio state = false
+----------1275361884875------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading0.0
+Audio state = false
+----------1275361885876------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+Active Application   83.70%  (.FriendDetector)
+Active Application   9.60%  (mich.PowerTutor)
+Active Application   5.10%  (system_server)
+Active Application   0.30%  (ndroid.settings)
+Active Application   0.20%  (battd)
+Active Application   0.10%  (adbd)
+Active Application   0.10%  (cpcap_irq/0)
+Active Application   0.10%  (d.process.media)
+Active Application   0.10%  (logcat)
+Active Application   0.10%  (omap2_mcspi)
+Active Application   0.10%  (wpa_supplicant)
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading0.0
+Audio state = false
+----------1275361886876------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading0.0
+Audio state = false
+----------1275361887876------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading2.0
+Audio state = false
+----------1275361888875------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading0.0
+Audio state = false
+----------1275361889876------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading0.0
+Audio state = false
+----------1275361890877------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading0.0
+Audio state = false
+----------1275361891876------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading0.0
+Audio state = false
+----------1275361892877------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading0.0
+Audio state = false
+----------1275361893878------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading0.0
+Audio state = false
+----------1275361894877------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading0.0
+Audio state = false
+----------1275361895878------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+Active Application   84.00%  (.FriendDetector)
+Active Application   9.20%  (mich.PowerTutor)
+Active Application   4.20%  (system_server)
+Active Application   0.20%  (battd)
+Active Application   0.20%  (cpcap_irq/0)
+Active Application   0.20%  (ndroid.settings)
+Active Application   0.20%  (omap2_mcspi)
+Active Application   0.20%  (tiwlan_wq)
+Active Application   0.20%  (wpa_supplicant)
+Active Application   0.10%  (adbd)
+Active Application   0.10%  (mediaserver)
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading0.0
+Audio state = false
+----------1275361896941------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading0.0
+Audio state = false
+----------1275361897941------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading0.0
+Audio state = false
+----------1275361898942------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading0.0
+Audio state = false
+----------1275361899942------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading0.0
+Audio state = false
+----------1275361900941------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading0.0
+Audio state = false
+----------1275361901942------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading1.0
+Audio state = false
+----------1275361902943------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading0.0
+Audio state = false
+----------1275361903942------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading0.0
+Audio state = false
+----------1275361904943------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading1.0
+Audio state = false
+----------1275361905942------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+Active Application   83.40%  (.FriendDetector)
+Active Application   10.00%  (mich.PowerTutor)
+Active Application   3.50%  (system_server)
+Active Application   0.40%  (d.process.acore)
+Active Application   0.30%  (e.process.gapps)
+Active Application   0.20%  (battd)
+Active Application   0.10%  (logcat)
+Active Application   0.10%  (tiwlan_wq)
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading0.0
+Audio state = false
+----------1275361906942------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading0.0
+Audio state = false
+----------1275361907942------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading0.0
+Audio state = false
+----------1275361908943------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading1.0
+Audio state = false
+----------1275361909944------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading1.0
+Audio state = false
+----------1275361910943------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading1.0
+Audio state = false
+----------1275361911944------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading0.0
+Audio state = false
+----------1275361912945------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading0.0
+Audio state = false
+----------1275361913945------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading0.0
+Audio state = false
+----------1275361914945------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading1.0
+Audio state = false
+----------1275361915946------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+Active Application   84.60%  (.FriendDetector)
+Active Application   9.50%  (mich.PowerTutor)
+Active Application   3.90%  (system_server)
+Active Application   0.40%  (events/0)
+Active Application   0.20%  (battd)
+Active Application   0.20%  (omap2_mcspi)
+Active Application   0.10%  (adbd)
+Active Application   0.10%  (logcat)
+Active Application   0.10%  (m.android.phone)
+Active Application   0.10%  (tiwlan_wq)
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading2.0
+Audio state = false
+----------1275361917006------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading2.0
+Audio state = false
+----------1275361917998------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading0.0
+Audio state = false
+----------1275361918998------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading0.0
+Audio state = false
+----------1275361919999------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading1.0
+Audio state = false
+----------1275361921000------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading0.0
+Audio state = false
+----------1275361921999------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading0.0
+Audio state = false
+----------1275361923000------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading0.0
+Audio state = false
+----------1275361924000------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading0.0
+Audio state = false
+----------1275361925000------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading0.0
+Audio state = false
+----------1275361926001------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+Active Application   85.20%  (.FriendDetector)
+Active Application   8.70%  (mich.PowerTutor)
+Active Application   4.50%  (system_server)
+Active Application   0.20%  (battd)
+Active Application   0.20%  (omap2_mcspi)
+Active Application   0.10%  (adbd)
+Active Application   0.10%  (m.android.phone)
+Active Application   0.10%  (tiwlan_wq)
+Active Application   0.10%  (wpa_supplicant)
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading0.0
+Audio state = false
+----------1275361927002------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading0.0
+Audio state = false
+----------1275361928003------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading0.0
+Audio state = false
+----------1275361929002------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading0.0
+Audio state = false
+----------1275361930003------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading0.0
+Audio state = false
+----------1275361931004------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading1.0
+Audio state = false
+----------1275361932004------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading3.0
+Audio state = false
+----------1275361933004------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading0.0
+Audio state = false
+----------1275361934004------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading1.0
+Audio state = false
+----------1275361935005------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading0.0
+Audio state = false
+----------1275361936004------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+Active Application   83.80%  (.FriendDetector)
+Active Application   10.10%  (mich.PowerTutor)
+Active Application   3.50%  (system_server)
+Active Application   0.20%  (battd)
+Active Application   0.10%  (omap2_mcspi)
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading0.0
+Audio state = false
+----------1275361937078------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading1.0
+Audio state = false
+----------1275361938069------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading1.0
+Audio state = false
+----------1275361939069------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading0.0
+Audio state = false
+----------1275361940070------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading0.0
+Audio state = false
+----------1275361941071------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading0.0
+Audio state = false
+----------1275361942092------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading0.0
+Audio state = false
+----------1275361943080------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading0.0
+Audio state = false
+----------1275361944080------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading0.0
+Audio state = false
+----------1275361945079------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading0.0
+Audio state = false
+----------1275361946080------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+Active Application   84.50%  (.FriendDetector)
+Active Application   10.00%  (mich.PowerTutor)
+Active Application   4.80%  (system_server)
+Active Application   0.30%  (cpcap_irq/0)
+Active Application   0.20%  (adbd)
+Active Application   0.20%  (battd)
+Active Application   0.20%  (wpa_supplicant)
+Active Application   0.10%  (tiwlan_wq)
+Active Application   0.10%  (usb_mass_storag)
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading0.0
+Audio state = false
+----------1275361947081------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading0.0
+Audio state = false
+----------1275361948080------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading1.0
+Audio state = false
+----------1275361949081------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading0.0
+Audio state = false
+----------1275361950082------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading4.0
+Audio state = false
+----------1275361951082------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading0.0
+Audio state = false
+----------1275361952081------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading0.0
+Audio state = false
+----------1275361953082------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading0.0
+Audio state = false
+----------1275361954083------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading0.0
+Audio state = false
+----------1275361955083------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading0.0
+Audio state = false
+----------1275361956083------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+Active Application   85.00%  (.FriendDetector)
+Active Application   9.90%  (mich.PowerTutor)
+Active Application   3.40%  (system_server)
+Active Application   0.40%  (battd)
+Active Application   0.20%  (adbd)
+Active Application   0.10%  (wpa_supplicant)
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading0.0
+Audio state = false
+----------1275361957083------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading0.0
+Audio state = false
+----------1275361958084------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading0.0
+Audio state = false
+----------1275361959085------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading0.0
+Audio state = false
+----------1275361960086------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading0.0
+Audio state = false
+----------1275361961087------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading0.0
+Audio state = false
+----------1275361962087------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading0.0
+Audio state = false
+----------1275361963086------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading0.0
+Audio state = false
+----------1275361964087------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading2.0
+Audio state = false
+----------1275361965088------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading1.0
+Audio state = false
+----------1275361966088------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+Active Application   84.60%  (.FriendDetector)
+Active Application   9.20%  (mich.PowerTutor)
+Active Application   4.50%  (system_server)
+Active Application   0.40%  (tiwlan_wq)
+Active Application   0.30%  (omap2_mcspi)
+Active Application   0.10%  (adbd)
+Active Application   0.10%  (battd)
+Active Application   0.10%  (cpcap_irq/0)
+Active Application   0.10%  (wpa_supplicant)
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading0.0
+Audio state = false
+----------1275361967088------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading0.0
+Audio state = false
+----------1275361968089------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading0.0
+Audio state = false
+----------1275361969089------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading0.0
+Audio state = false
+----------1275361970088------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading0.0
+Audio state = false
+----------1275361971089------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading0.0
+Audio state = false
+----------1275361972090------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading1.0
+Audio state = false
+----------1275361973089------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading4.0
+Audio state = false
+----------1275361974090------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading0.0
+Audio state = false
+----------1275361975091------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading5.0
+Audio state = false
+----------1275361976092------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+Active Application   83.60%  (.FriendDetector)
+Active Application   10.60%  (mich.PowerTutor)
+Active Application   3.80%  (system_server)
+Active Application   0.40%  (battd)
+Active Application   0.10%  (adbd)
+Active Application   0.10%  (wpa_supplicant)
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading2.0
+Audio state = false
+----------1275361977097------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading0.0
+Audio state = false
+----------1275361978099------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading2.0
+Audio state = false
+----------1275361979099------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading3.0
+Audio state = false
+----------1275361980100------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading3.0
+Audio state = false
+----------1275361981101------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading0.0
+Audio state = false
+----------1275361982100------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading0.0
+Audio state = false
+----------1275361983101------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading0.0
+Audio state = false
+----------1275361984102------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading0.0
+Audio state = false
+----------1275361985103------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading0.0
+Audio state = false
+----------1275361986103------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+Active Application   84.70%  (.FriendDetector)
+Active Application   9.90%  (mich.PowerTutor)
+Active Application   3.70%  (system_server)
+Active Application   0.30%  (e.process.gapps)
+Active Application   0.20%  (battd)
+Active Application   0.20%  (d.process.acore)
+Active Application   0.20%  (tiwlan_wq)
+Active Application   0.10%  (cpcap_irq/0)
+Active Application   0.10%  (events/0)
+Active Application   0.10%  (omap2_mcspi)
+Active Application   0.10%  (wpa_supplicant)
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading0.0
+Audio state = false
+----------1275361987103------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading0.0
+Audio state = false
+----------1275361988104------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading0.0
+Audio state = false
+----------1275361989104------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading0.0
+Audio state = false
+----------1275361990103------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading0.0
+Audio state = false
+----------1275361991103------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading1.0
+Audio state = false
+----------1275361992104------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading0.0
+Audio state = false
+----------1275361993105------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading0.0
+Audio state = false
+----------1275361994104------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading0.0
+Audio state = false
+----------1275361995105------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading0.0
+Audio state = false
+----------1275361996106------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+Active Application   84.60%  (.FriendDetector)
+Active Application   9.20%  (mich.PowerTutor)
+Active Application   4.60%  (system_server)
+Active Application   0.20%  (battd)
+Active Application   0.20%  (omap2_mcspi)
+Active Application   0.10%  (events/0)
+Active Application   0.10%  (tiwlan_wq)
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading0.0
+Audio state = false
+----------1275361997106------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading0.0
+Audio state = false
+----------1275361998106------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading0.0
+Audio state = false
+----------1275361999105------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading0.0
+Audio state = false
+----------1275362000106------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading0.0
+Audio state = false
+----------1275362001107------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading0.0
+Audio state = false
+----------1275362002108------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading0.0
+Audio state = false
+----------1275362003109------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading0.0
+Audio state = false
+----------1275362004108------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading0.0
+Audio state = false
+----------1275362005109------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading0.0
+Audio state = false
+----------1275362006110------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+Active Application   85.00%  (.FriendDetector)
+Active Application   10.30%  (mich.PowerTutor)
+Active Application   3.50%  (system_server)
+Active Application   0.40%  (battd)
+Active Application   0.20%  (adbd)
+Active Application   0.20%  (tiwlan_wq)
+Active Application   0.10%  (logcat)
+Active Application   0.10%  (wpa_supplicant)
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading0.0
+Audio state = false
+----------1275362007169------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading0.0
+Audio state = false
+----------1275362008164------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading0.0
+Audio state = false
+----------1275362009164------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading0.0
+Audio state = false
+----------1275362010164------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading0.0
+Audio state = false
+----------1275362011165------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading0.0
+Audio state = false
+----------1275362012170------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading0.0
+Audio state = false
+----------1275362013166------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading0.0
+Audio state = false
+----------1275362014167------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading0.0
+Audio state = false
+----------1275362015167------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading0.0
+Audio state = false
+----------1275362016166------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+Active Application   83.90%  (.FriendDetector)
+Active Application   10.40%  (mich.PowerTutor)
+Active Application   3.80%  (system_server)
+Active Application   0.20%  (omap2_mcspi)
+Active Application   0.10%  (dsi)
+Active Application   0.10%  (logcat)
+Active Application   0.10%  (mediaserver)
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading0.0
+Audio state = false
+----------1275362017167------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading0.0
+Audio state = false
+----------1275362018168------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading1.0
+Audio state = false
+----------1275362019169------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading1.0
+Audio state = false
+----------1275362020169------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading0.0
+Audio state = false
+----------1275362021168------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading0.0
+Audio state = false
+----------1275362022233------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading0.0
+Audio state = false
+----------1275362023234------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading0.0
+Audio state = false
+----------1275362024235------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading0.0
+Audio state = false
+----------1275362025236------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading0.0
+Audio state = false
+----------1275362026236------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+Active Application   85.30%  (.FriendDetector)
+Active Application   9.20%  (mich.PowerTutor)
+Active Application   4.20%  (system_server)
+Active Application   0.30%  (adbd)
+Active Application   0.30%  (battd)
+Active Application   0.20%  (wpa_supplicant)
+Active Application   0.10%  (logcat)
+Active Application   0.10%  (omap2_mcspi)
+Active Application   0.10%  (usb_mass_storag)
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading0.0
+Audio state = false
+----------1275362027236------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading0.0
+Audio state = false
+----------1275362028236------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading0.0
+Audio state = false
+----------1275362029237------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading0.0
+Audio state = false
+----------1275362030238------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading0.0
+Audio state = false
+----------1275362031237------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading0.0
+Audio state = false
+----------1275362032238------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading0.0
+Audio state = false
+----------1275362033239------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading0.0
+Audio state = false
+----------1275362034240------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading0.0
+Audio state = false
+----------1275362035240------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading0.0
+Audio state = false
+----------1275362036240------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+Active Application   84.90%  (.FriendDetector)
+Active Application   8.90%  (mich.PowerTutor)
+Active Application   4.40%  (system_server)
+Active Application   0.20%  (battd)
+Active Application   0.20%  (tiwlan_wq)
+Active Application   0.10%  (dsi)
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading0.0
+Audio state = false
+----------1275362037241------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading0.0
+Audio state = false
+----------1275362038241------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading0.0
+Audio state = false
+----------1275362039241------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading0.0
+Audio state = false
+----------1275362040241------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading0.0
+Audio state = false
+----------1275362041241------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading0.0
+Audio state = false
+----------1275362042241------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading0.0
+Audio state = false
+----------1275362043242------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading0.0
+Audio state = false
+----------1275362044249------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading0.0
+Audio state = false
+----------1275362045250------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading1.0
+Audio state = false
+----------1275362046250------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+Active Application   85.60%  (.FriendDetector)
+Active Application   8.30%  (mich.PowerTutor)
+Active Application   4.40%  (system_server)
+Active Application   0.30%  (battd)
+Active Application   0.20%  (omap2_mcspi)
+Active Application   0.10%  (adbd)
+Active Application   0.10%  (cpcap_irq/0)
+Active Application   0.10%  (m.android.phone)
+Active Application   0.10%  (wpa_supplicant)
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading4.0
+Audio state = false
+----------1275362047250------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading2.0
+Audio state = false
+----------1275362048250------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading2.0
+Audio state = false
+----------1275362049249------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading0.0
+Audio state = false
+----------1275362050250------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading0.0
+Audio state = false
+----------1275362051251------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading0.0
+Audio state = false
+----------1275362052250------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading0.0
+Audio state = false
+----------1275362053251------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading2.0
+Audio state = false
+----------1275362054251------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading0.0
+Audio state = false
+----------1275362055250------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading0.0
+Audio state = false
+----------1275362056251------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+Active Application   81.20%  (.FriendDetector)
+Active Application   10.50%  (mich.PowerTutor)
+Active Application   7.80%  (system_server)
+Active Application   0.40%  (battd)
+Active Application   0.10%  (adbd)
+Active Application   0.10%  (tiwlan_wq)
+Active Application   0.10%  (wpa_supplicant)
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading0.0
+Audio state = false
+----------1275362057252------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading0.0
+Audio state = false
+----------1275362058253------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading0.0
+Audio state = false
+----------1275362059252------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading0.0
+Audio state = false
+----------1275362060253------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+System usage = 100.0
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading0.0
+Audio state = false
+----------1275362061254------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 433.88
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:760.3946008544922
+------------------------------------------------
+System usage = 27.61904761904762
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading0.0
+Audio state = false
+----------1275362062255------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 119.83352380952381
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:446.348124664016
+------------------------------------------------
+System usage = 12.745098039215685
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading0.0
+Audio state = false
+----------1275362063256------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 43.54872549019608
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:370.0633263446883
+------------------------------------------------
+System usage = 12.121212121212121
+GPS stats = null
+Sattelite number = 0
+LCD brightness = 0		Screen is on true
+Wifi state = 3	packagerate:0
+Wifi linkspeed = 54	uplinkrate:0.0	reading0.0
+Audio state = false
+----------1275362064257------------
+-----------Power Estimation-----------
+LCD power: 287.9606
+CPU power: 41.416969696969694
+Wifi power: 38.55400085449219
+threeg power: 0.0
+Audio power: 0.0
+GPS power: 0.0
+Total power consumption is:367.9315705514619
+------------------------------------------------
