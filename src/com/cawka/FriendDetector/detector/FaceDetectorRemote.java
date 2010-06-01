@@ -62,7 +62,7 @@ public class FaceDetectorRemote extends iFaceDetector implements iFaceLearner
 			if( _recognizer==null ) tryConnect( );
 
 			ByteArrayOutputStream os=new ByteArrayOutputStream( );
-			bitmap.compress( Bitmap.CompressFormat.JPEG, 100, os );
+			bitmap.compress( Bitmap.CompressFormat.JPEG, 80, os );
 
 			Face[] faces;
 			if( _fullDetection )
@@ -95,7 +95,7 @@ public class FaceDetectorRemote extends iFaceDetector implements iFaceLearner
 			if( _recognizer==null ) tryConnect( );
 			
 			ByteArrayOutputStream os=new ByteArrayOutputStream( );
-			person.getFace( ).compress( Bitmap.CompressFormat.JPEG, 100, os );
+			person.getFace( ).compress( Bitmap.CompressFormat.JPEG, 80, os );
 
 			String name=_recognizer.recognizeFace( os.toByteArray() );
 			if( name!="" ) person.setName( name );
@@ -123,7 +123,7 @@ public class FaceDetectorRemote extends iFaceDetector implements iFaceLearner
 			if( _recognizer==null ) tryConnect( );
 			
 			ByteArrayOutputStream os=new ByteArrayOutputStream( );
-			bitmap.compress( Bitmap.CompressFormat.JPEG, 100, os );
+			bitmap.compress( Bitmap.CompressFormat.JPEG, 80, os );
 
 			_recognizer.learn( os.toByteArray(), name );
 			

@@ -46,7 +46,7 @@ public class DBHandleEigen extends SQLiteOpenHelper
 		
 	public DBHandleEigen( Context context ) 
 	{
-		super( context, DB_NAME, null, 1 );
+		super( context, DB_NAME, null, 2 );
 		getWritableDatabase( ).close( ); // to initialize database if necessary
 		
 //		SQLiteDatabase db=getWritableDatabase( );

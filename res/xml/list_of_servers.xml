@@ -11,6 +11,20 @@
     		android:title="List of detectors"
     />
     
+    <PreferenceCategory
+    	android:key="other"
+    	android:title="Other"
+    >
+    	<EditTextPreference
+	        android:key="max_size"
+	        android:title="Image size"
+	        android:summary="Minimum length dimension will be converted to this size"
+	        android:dialogTitle="Image size"
+	        android:singleLine="true"
+	        android:persistent="true"
+     	/>
+    </PreferenceCategory>
+    
     <!--<PreferenceCategory
     		android:key=""
     		android:title="Stuff"

@@ -5,6 +5,7 @@ import java.io.IOException;
 import com.cawka.FriendDetector.Person;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -13,6 +14,7 @@ import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.BitmapFactory.Options;
 import android.media.ExifInterface;
+import android.preference.PreferenceManager;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
@@ -22,7 +24,7 @@ public class ImageWithFaces extends View
 	private Bitmap _bmp=null; //to optimize performance and limit number of times an image should be decoded
 	private String _image="";
 	private int    _orientation=0;
-	private int    _resample=1;
+	private Double _resample=1.0;
 	
 	private Bitmap _drawableBitmap=null;
 	private Paint  _paint;
@@ -34,20 +36,29 @@ public class ImageWithFaces extends View
 	private int   _offsetX;
 	private int   _offsetY;
 	
-
-	private static int MAX_SIZE = 800;
+	private static int MAX_SIZE = 300;
     
 	private static final String TAG="FriendDetector.ImageWithFaces";
 	
 	///////////////////////////////////////////////////////////////////////
 
+	private Context _context; 
+	
 	public ImageWithFaces( Context context, AttributeSet attrs )
 	{
 		super( context, attrs );
 		
+		_context=context;
 		_drawableBitmap=BitmapFactory.decodeResource( getContext().getResources( ), android.R.drawable.ic_menu_search );
 		
 		init();
+	}
+	
+	public void updatePreferences( )
+	{
+		SharedPreferences prefs=PreferenceManager.getDefaultSharedPreferences( _context );
+		MAX_SIZE = Integer.parseInt( prefs.getString("max_size", "300") );
+//		prefs.getInt( "max_size", 300 );
 	}
 
 	protected void init( )
@@ -77,9 +88,7 @@ public class ImageWithFaces extends View
 	{
 		_image=image;
 		_orientation=0;
-		_resample=1;
-		
-		Log.v("Karthik",image);
+		_resample=1.0;
 		
 		try
 		{
@@ -91,7 +100,9 @@ public class ImageWithFaces extends View
 			
 			if( Math.max(width, height)>MAX_SIZE )
 			{
-				_resample=(int)Math.round( 1.0*Math.max(width, height)/MAX_SIZE+0.5 );
+				//_resample=(int)Math.round( 1.0*Math.max(width, height)/MAX_SIZE+0.5 );
+//				_resample=MAX_SIZE/(1.0*Math.max(width, height));
+				_resample=MAX_SIZE/(1.0*Math.min(width, height));
 			}
 		}
 		catch( IOException ex )
@@ -110,10 +121,10 @@ public class ImageWithFaces extends View
 		Log.v( TAG, _image );
 		
 		Log.v( TAG, "beforeDecode" );
-		Options opts=new Options();
-		opts.inSampleSize=_resample;
-		Bitmap bmp=BitmapFactory.decodeFile( _image, opts );
-		_bmp=resizeBitmap( bmp, 1.0f, _orientation );
+//		Options opts=new Options();
+//		opts.inSampleSize=_resample;
+		Bitmap bmp=BitmapFactory.decodeFile( _image );//, opts );
+		_bmp=resizeBitmap( bmp, _resample.floatValue( )/*1.0f*/, _orientation );
 		Log.v(  TAG, "afterDecode" );
 
 		
@@ -144,7 +155,7 @@ public class ImageWithFaces extends View
 			return;
 		}
 		
-		Log.v( TAG, "resample: "+Float.toString(_resample)+"width: "+Integer.toString(_bmp.getWidth())+", height: "+Integer.toString(_bmp.getHeight()) );
+		Log.v( TAG, "resample: "+Double.toString(_resample)+", width: "+Integer.toString(_bmp.getWidth())+", height: "+Integer.toString(_bmp.getHeight()) );
 		
 		_ratio=calculateResizeRatio( _bmp, getMeasuredWidth()-8, getMeasuredHeight()-8, 0 );
 		

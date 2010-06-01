@@ -7,13 +7,16 @@ import com.cawka.FriendDetector.detector.eigenfaces.DBHandleEigen;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.preference.EditTextPreference;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceCategory;
 import android.preference.PreferenceScreen;
+import android.preference.Preference.OnPreferenceChangeListener;
+import android.text.method.DigitsKeyListener;
 import android.widget.Toast;
 
-public class ListOfServers extends PreferenceActivity 
+public class ListOfServers extends PreferenceActivity implements OnPreferenceChangeListener
 {
 	private static final String KEY_ADD  = "add_server";
 	private static final String KEY_LIST = "list_of_servers";
@@ -27,6 +30,7 @@ public class ListOfServers extends PreferenceActivity
 	
 	private Preference	_add_server;
 	private PreferenceCategory	_list_of_servers;
+	private EditTextPreference _max_size;
 //	private Preference  _reset_eignefaces;
 	
 
@@ -41,7 +45,15 @@ public class ListOfServers extends PreferenceActivity
         _list_of_servers=(PreferenceCategory)findPreference( KEY_LIST );
         _list_of_servers.setOrderingAsAdded( true );
         
+        PreferenceScreen prefSet = getPreferenceScreen();
 //        _reset_eignefaces=findPreference( KEY_RESET );
+        
+        _max_size=(EditTextPreference)findPreference( "max_size" );
+        _max_size.setText( prefSet.getSharedPreferences().getString("max_size","300") );
+        _max_size.setSummary( prefSet.getSharedPreferences().getString("max_size","300") );
+        _max_size.getEditText().setKeyListener( DigitsKeyListener.getInstance(false,true) ); 
+        
+        _max_size.setOnPreferenceChangeListener( this );
         
         _dbHandler = new DBHandle( this );
         displayAllServers( ); 
@@ -79,6 +91,16 @@ public class ListOfServers extends PreferenceActivity
         
         return true;
     }
+   
+	public boolean onPreferenceChange( Preference preference, Object newValue )
+	{
+		if( preference == _max_size )
+		{
+			( (EditTextPreference)preference ).setSummary( (String)newValue );
+			return true;
+		}
+		return false;
+	}
     
 	protected void onActivityResult( int requestCode, int resultCode,
 			Intent data )

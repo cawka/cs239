@@ -8,12 +8,14 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Timer;
 
+import FriendDetector.FacePosition;
 import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -21,11 +23,13 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.graphics.Rect;
 import android.graphics.Region.Op;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.provider.MediaStore.Images;
+import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.ContextMenu;
 import android.view.KeyEvent;
@@ -52,7 +56,7 @@ import com.cawka.FriendDetector.settings.Server;
 public class Main extends Activity 
 {
 	private static final String TAG="FriendDetector";
-	private static final int _number_runs = 3;
+	private static final int _number_runs = 10;
 	
 	private static final int MENU_SELECT = 1;
 //	private static final int MENU_ROTATE = 2;
@@ -75,6 +79,7 @@ public class Main extends Activity
     
     private Handler _handler = new Handler(); //to handle UI updates
     private Thread _thread;
+    private Thread _thread2;
     
     private ProgressBar    _progress2;
     private Object _progress_lock=new Object();
@@ -84,22 +89,26 @@ public class Main extends Activity
     
     private String _suggestedName=null;
     
-    private int PowerLevel = -1;
+    volatile private double PowerLevel = -1;
     
-    BroadcastReceiver mReceiver = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-           int rawlevel = intent.getIntExtra("level", -1);
-           int scale = intent.getIntExtra("scale", -1);
-           int status = intent.getIntExtra("status", -1);
-           int health = intent.getIntExtra("health", -1);
-           int level = -1;  // percentage, or -1 for unknown
-           if (rawlevel >= 0 && scale > 0) {
-              level = (rawlevel * 100) / scale;
-           PowerLevel = rawlevel;
-           }
-        }
-     };
+	BroadcastReceiver mReceiver = new BroadcastReceiver() 
+	{
+		public void onReceive( Context context, Intent intent )
+		{
+			int rawlevel=intent.getIntExtra( "level", -1 );
+			int scale=intent.getIntExtra( "scale", -1 );
+//			int status=intent.getIntExtra( "status", -1 );
+//			int health=intent.getIntExtra( "health", -1 );
+//			int level=-1; // percentage, or -1 for unknown
+			PowerLevel=-1;
+			if( rawlevel >= 0 && scale > 0 )
+			{
+				PowerLevel=( rawlevel * 100.0 ) / scale;
+//				PowerLevel=rawlevel;
+			}
+			Log.v( TAG, "Battery level changed: "+Double.toString(PowerLevel) );
+		}
+	};
 
     
     ////////////////////////////////////////////////////////////////////
@@ -195,7 +204,8 @@ public class Main extends Activity
 		
 		try
 		{
-			if( _thread!=null ) _thread.join( );
+			if( _thread2!=null ) _thread2.interrupt( );
+			if( _thread!=null ) { _thread.interrupt( ); _thread.join( ); }
 			unregisterReceiver(mReceiver);
 			System.gc( );
 		}
@@ -253,6 +263,8 @@ public class Main extends Activity
         _detectors=new LinkedList<iFaceDetector>( );
         _learners =new LinkedList<iFaceLearner>( );
 
+        _picture.updatePreferences( );
+        
         int count_remote=0;
         int count_local =0;
         for( Server.Config config : new DBHandle(this).getAllConfigs() )
@@ -498,7 +510,9 @@ public class Main extends Activity
     	if( _thread!=null ) return;
     	_suggestedName=null;
     	
-    	new Thread( new PerformTests() ).start( );
+    	Log.v( TAG, "startTesting" );
+    	_thread2=new Thread( new PerformTests() );
+    	_thread2.start( );
 //    	Bitmap bitmap=_picture.getBitmap( );
 //    	if( bitmap==null ) return;
 //    	
@@ -521,38 +535,61 @@ public class Main extends Activity
         	FileWriter fop = null;
     		try 
     		{
-    			fop = new FileWriter(new File("/sdcard/DCIM/Test.run"));
+    			SimpleDateFormat formatter=new SimpleDateFormat( "yyyy-MM-dd'T'HH-mm-ss.SSS" );
+//    			new Date().
+    			File file=new File("/sdcard/test-"+formatter.format(new Date())+".txt");
+    			if( !file.exists() ) file.createNewFile( );
+    			fop = new FileWriter( file );
     		
 	    		for( int i=0; i<_number_runs; i++ )
 	    		{
-	    			_handler.post( new Runnable(){ public void run(){_names_list.clear( );} } );
+	    			if( Thread.interrupted( ) ) return;
 	    			
-		    	   	Bitmap bitmap=_picture.getBitmap( );
+		    	   	final Bitmap bitmap=_picture.getBitmap( );
+		    	   	final int run=i;
 		        	if( bitmap==null ) return;
-		        	
-//		        	if( _progress2==null )
-//		        	{
-//		        		_progress2 =(ProgressBar) findViewById( R.id.progress_bar_image );
-//		        	}
-//		        	_progress2.setVisibility( View.VISIBLE );
-		        	
-		    		_thread=new Thread( new FaceDetection( bitmap ) );
 
-					long StartTime = new Date().getTime();
-					int OldPowerLevel = PowerLevel;
+		        	_handler.post( new Runnable()
+	    				{ 
+	    					public void run()
+	    					{
+	    						_names_list.clear( );
+	    						_names_list.add( Person.createPerson(bitmap, new FacePosition(0,0,10,10), 
+	    								Integer.toString(run)+" of "+Integer.toString(_number_runs)) );
+	    					} 
+	    				} );
 
-		    		_thread.start( );
-		    		_thread.join( );
+		        	_handler.post( new Runnable(){ 
+		        		public void run(){
+				        	if( _progress2==null )
+				        	{
+				        		_progress2 =(ProgressBar) findViewById( R.id.progress_bar_image );
+				        	}
+				        	_progress2.setVisibility( View.VISIBLE );
+		        		} } );
+		        	
+		        	Thread t=new Thread( new FaceDetection( bitmap ) );
+		    		_thread=t;
 		    		
-					fop.write( StartTime + "\t" + i + "\t" + new Date().getTime() + "\t" + OldPowerLevel + "\t" + PowerLevel + "\n" );
-					Log.v("Karthik :","" + i + " " + StartTime + " " + new Date().getTime() + " " + OldPowerLevel + " " + PowerLevel);
+					Date StartTime = new Date();
+					double OldPowerLevel = PowerLevel;
+
+		    		t.start( );
+		    		t.join( );
+		    		
+					fop.write( formatter.format(StartTime) + "\t" + i + "\t" + (new Date().getTime()-StartTime.getTime( )) + "\t" + OldPowerLevel + "\t" + PowerLevel + "\n" );
+					Log.v( TAG, formatter.format(StartTime) + "\t" + i + "\t" + (new Date().getTime()-StartTime.getTime( )) + "\t" + OldPowerLevel + "\t" + PowerLevel );
 	    		}
+	    		
+	    		fop.close( );
     		} 
     		catch( InterruptedException e2 )
     		{
+    			e2.printStackTrace( );
     		}
     		catch( IOException e1 )
 			{
+    			e1.printStackTrace( );
 			}
     	}
     }

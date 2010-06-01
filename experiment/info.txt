@@ -1,0 +1,29 @@
+--- Successful detection ---
+
+Image: 968 x 1296
+Local: ~6 seconds
+
+Image: 598 x 800
+Local: ~2.4 sec
+
+Image: 448 x 600
+Local: ~1.4 sec
+
+Image: 400 x 536
+Local: ~1.1 sec
+
+Image: 300 x 402
+Local: ~0.6 sec
+
+Image: 400 x 300
+Local: ~0.6 sec
+
+
+!!! Android SDK (local) detector does not try to detect faces if at least one dimension of the image is less than 300 pixels!
+--- Failed detection --- 
+
+Image: 299 x 400
+Local: < 50ms
+
+
+!!! Lowest resolution when remote detector was able to detect face on the same image is 150x201
